@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>9º Ano B</title>
 
     <style>
+
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
 
         * {
@@ -137,6 +139,7 @@
         }
 
         @keyframes aparecer {
+
             from {
                 opacity: 0;
                 transform: translateY(8px);
@@ -146,6 +149,7 @@
                 opacity: 1;
                 transform: translateY(0);
             }
+
         }
 
         .inicio {
@@ -318,21 +322,31 @@
             box-shadow: 0 0 0 3px rgba(255,255,255,.05);
         }
 
+
+        /* ==================================================
+           CAMPO
+           ================================================== */
+
         .campo {
             position: relative;
-            width: 100%;
-            max-width: 800px;
+            width: min(800px, 100%);
             margin: 35px auto;
             aspect-ratio: 2 / 1;
+
             background:
                 linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
                 #176b35;
+
             background-size: 25px 25px;
-            border: 4px solid white;
-            border-radius: 14px;
+
+            border: clamp(2px, .45vw, 4px) solid white;
+            border-radius: clamp(8px, 1.5vw, 14px);
+
             overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0,0,0,.45);
+
+            box-shadow:
+                0 25px 60px rgba(0,0,0,.45);
         }
 
         .campo::before {
@@ -350,7 +364,7 @@
             position: absolute;
             width: 15%;
             aspect-ratio: 1;
-            border: 2px solid rgba(255,255,255,.85);
+            border: clamp(1px, .3vw, 2px) solid rgba(255,255,255,.85);
             border-radius: 50%;
             left: 50%;
             top: 50%;
@@ -361,7 +375,7 @@
             position: absolute;
             width: 12%;
             height: 22%;
-            border: 3px solid white;
+            border: clamp(2px, .35vw, 3px) solid white;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -376,28 +390,63 @@
             border-bottom: none;
         }
 
+
+        /* ==================================================
+           POSIÇÕES DOS JOGADORES
+           ================================================== */
+
         .posicao {
             position: absolute;
-            width: 80px;
-            height: 80px;
-            background: rgba(12,12,12,.92);
-            border: 3px solid white;
+
+            /*
+                O tamanho agora acompanha a tela.
+                Nunca fica menor que 50px
+                e nunca maior que 80px.
+            */
+            width: clamp(50px, 8vw, 80px);
+            height: clamp(50px, 8vw, 80px);
+
+            background: rgba(12,12,12,.94);
+
+            border:
+                clamp(2px, .35vw, 3px)
+                solid white;
+
             border-radius: 50%;
+
             display: flex;
             align-items: center;
             justify-content: center;
+
             text-align: center;
-            font-size: 11px;
+
+            font-size: clamp(8px, 1.2vw, 11px);
+
             font-weight: 800;
+
             z-index: 2;
+
             padding: 5px;
-            box-shadow: 0 8px 20px rgba(0,0,0,.35);
-            transition: .2s;
+
+            box-shadow:
+                0 8px 20px rgba(0,0,0,.35);
+
+            transition:
+                box-shadow .2s,
+                background .2s;
         }
 
         .posicao:hover {
-            transform: translateY(-2px) scale(1.04);
+            box-shadow:
+                0 10px 28px rgba(0,0,0,.55);
+
+            background: rgba(25,25,25,.98);
         }
+
+
+        /* ==================================================
+           POSIÇÕES PADRÃO
+           ================================================== */
 
         #goleiro {
             bottom: 5%;
@@ -427,6 +476,11 @@
             transform: translateX(50%);
         }
 
+
+        /* ==================================================
+           3x1 - DIAMANTE
+           ================================================== */
+
         .formacao-3x1 #goleiro {
             bottom: 5%;
             left: 50%;
@@ -442,6 +496,7 @@
         .formacao-3x1 #ala-esquerda {
             top: 20%;
             left: 25%;
+            transform: none;
         }
 
         .formacao-3x1 #ala-direita {
@@ -452,8 +507,14 @@
         .formacao-3x1 #pivo {
             top: 8%;
             left: 50%;
+            right: auto;
             transform: translateX(-50%);
         }
+
+
+        /* ==================================================
+           2x2 - QUADRADO
+           ================================================== */
 
         .formacao-2x2 #goleiro {
             bottom: 5%;
@@ -470,17 +531,27 @@
             top: 45%;
             right: 30%;
             left: auto;
+            transform: none;
         }
 
         .formacao-2x2 #ala-direita {
             top: 20%;
             left: 35%;
+            transform: none;
         }
 
         .formacao-2x2 #pivo {
             top: 20%;
             right: 35%;
+            left: auto;
+            transform: none;
         }
+
+
+        /* ==================================================
+           4x0
+           MANTIDO EXATAMENTE COMO DEFINIDO
+           ================================================== */
 
         .formacao-4x0 #goleiro {
             bottom: 5%;
@@ -496,17 +567,26 @@
         .formacao-4x0 #ala-esquerda {
             top: 20%;
             left: 35%;
+            transform: none;
         }
 
         .formacao-4x0 #ala-direita {
             top: 20%;
             right: 35%;
+            transform: none;
         }
 
         .formacao-4x0 #pivo {
             top: 42%;
             right: 10%;
+            left: auto;
+            transform: none;
         }
+
+
+        /* ==================================================
+           3x2 - GOLEIRO LINHA
+           ================================================== */
 
         .formacao-3x2 #goleiro {
             bottom: 5%;
@@ -522,17 +602,26 @@
         .formacao-3x2 #ala-esquerda {
             top: 20%;
             left: 25%;
+            transform: none;
         }
 
         .formacao-3x2 #ala-direita {
             top: 20%;
             right: 25%;
+            transform: none;
         }
 
         .formacao-3x2 #pivo {
             top: 45%;
             right: 20%;
+            left: auto;
+            transform: none;
         }
+
+
+        /* ==================================================
+           1x3 - Y
+           ================================================== */
 
         .formacao-1x3 #goleiro {
             bottom: 5%;
@@ -549,37 +638,58 @@
         .formacao-1x3 #ala-esquerda {
             top: 20%;
             left: 20%;
+            transform: none;
         }
 
         .formacao-1x3 #ala-direita {
             top: 20%;
             right: 20%;
+            transform: none;
         }
 
         .formacao-1x3 #pivo {
             top: 8%;
             left: 50%;
+            right: auto;
             transform: translateX(-50%);
         }
 
+
+        /* ==================================================
+           LISTA DE JOGADORES
+           ================================================== */
+
         .lista-jogadores {
-            max-width: 800px;
+            width: min(800px, 100%);
             margin: 30px auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            grid-template-columns: repeat(
+                auto-fit,
+                minmax(130px, 1fr)
+            );
             gap: 9px;
         }
 
         .jogador {
-            background: linear-gradient(145deg, #1c1c1c, #141414);
+            background:
+                linear-gradient(145deg, #1c1c1c, #141414);
+
             border: 1px solid #333;
+
             padding: 13px;
+
             border-radius: 9px;
+
             cursor: grab;
+
             user-select: none;
+
             color: #ddd;
+
             font-size: 13px;
+
             font-weight: 600;
+
             transition: .2s;
         }
 
@@ -593,14 +703,27 @@
             transform: scale(.98);
         }
 
+
+        /* ==================================================
+           GERENCIAMENTO
+           ================================================== */
+
         .area-gerenciar {
             display: none;
-            background: linear-gradient(145deg, #191919, #111);
+
+            background:
+                linear-gradient(145deg, #191919, #111);
+
             border: 1px solid #333;
+
             border-radius: 14px;
+
             padding: 25px;
+
             margin-top: 45px;
-            box-shadow: 0 20px 50px rgba(0,0,0,.25);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.25);
         }
 
         .area-gerenciar.ativa {
@@ -617,13 +740,21 @@
 
         .botao {
             padding: 11px 15px;
+
             border: 1px solid #444;
+
             background: #242424;
+
             color: white;
+
             border-radius: 9px;
+
             cursor: pointer;
+
             font-family: inherit;
+
             font-weight: 600;
+
             transition: .2s;
         }
 
@@ -635,8 +766,12 @@
 
         .lista-interclasse {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(160px, 1fr));
+
             gap: 9px;
+
             margin-top: 20px;
         }
 
@@ -645,19 +780,29 @@
             justify-content: space-between;
             align-items: center;
             gap: 8px;
+
             background: #101010;
+
             border: 1px solid #2d2d2d;
+
             padding: 10px;
+
             border-radius: 9px;
         }
 
         .remover {
             background: #401616;
+
             color: #eee;
+
             border: 1px solid #652323;
+
             padding: 6px 9px;
+
             border-radius: 6px;
+
             cursor: pointer;
+
             transition: .2s;
         }
 
@@ -667,13 +812,22 @@
 
         .mensagem-personalizada {
             display: none;
+
             text-align: center;
-            background: linear-gradient(145deg, #1c1c1c, #111);
+
+            background:
+                linear-gradient(145deg, #1c1c1c, #111);
+
             border: 1px solid #333;
+
             padding: 15px;
+
             margin: 20px auto;
+
             border-radius: 10px;
+
             max-width: 600px;
+
             color: #bbb;
         }
 
@@ -681,68 +835,120 @@
             display: block;
         }
 
+
+        /* ==================================================
+           CONTATO
+           ================================================== */
+
         .contato {
             max-width: 760px;
+
             margin: 55px auto 0;
+
             padding: 28px;
+
             text-align: center;
-            background: linear-gradient(145deg, #1b1b1b, #101010);
+
+            background:
+                linear-gradient(145deg, #1b1b1b, #101010);
+
             border: 1px solid #303030;
+
             border-radius: 16px;
-            box-shadow: 0 20px 50px rgba(0,0,0,.25);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,.25);
         }
 
         .contato h3 {
             margin: 0 0 8px;
+
             font-family: "Bebas Neue", sans-serif;
+
             font-size: 32px;
+
             letter-spacing: 1.5px;
         }
 
         .contato p {
             margin: 0 0 22px;
+
             color: #999;
+
             font-size: 14px;
+
             line-height: 1.6;
         }
 
         .botoes-contato {
             display: flex;
+
             justify-content: center;
+
             gap: 10px;
+
             flex-wrap: wrap;
         }
 
         .botao-contato {
             min-width: 150px;
+
             padding: 12px 18px;
+
             border: 1px solid #3e3e3e;
+
             background: #222;
+
             color: white;
+
             border-radius: 10px;
+
             text-decoration: none;
+
             font-family: inherit;
+
             font-size: 13px;
+
             font-weight: 700;
+
             cursor: pointer;
+
             transition: .2s;
         }
 
         .botao-contato:hover {
             background: white;
+
             color: #111;
+
             transform: translateY(-2px);
         }
 
+
+        /* ==================================================
+           RODAPÉ
+           ================================================== */
+
         footer {
             text-align: center;
+
             padding: 35px 20px;
+
             color: #666;
+
             border-top: 1px solid #252525;
+
             margin-top: 30px;
+
             font-size: 12px;
+
             letter-spacing: 1px;
         }
+
+
+        /* ==================================================
+           MODO CLARO
+           ================================================== */
 
         body.claro {
             background: #f0f0f0;
@@ -848,7 +1054,13 @@
             border-color: #ccc;
         }
 
+
+        /* ==================================================
+           CELULAR
+           ================================================== */
+
         @media (max-width: 600px) {
+
             header {
                 padding-top: 70px;
             }
@@ -878,6 +1090,8 @@
 
             .pagina {
                 padding-top: 40px;
+                padding-left: 12px;
+                padding-right: 12px;
             }
 
             .inicio h2,
@@ -886,43 +1100,136 @@
                 font-size: 40px;
             }
 
-            .posicao {
-                width: 60px;
-                height: 60px;
-                font-size: 9px;
+            /*
+                No celular o campo continua mantendo
+                exatamente a proporção 2:1.
+            */
+            .campo {
+                width: 100%;
+                aspect-ratio: 2 / 1;
+                margin: 30px auto;
             }
 
-            .campo {
-                border-width: 3px;
-                border-radius: 10px;
+            /*
+                Bolinhas menores no celular,
+                mas sem ficarem minúsculas.
+            */
+            .posicao {
+                width: clamp(48px, 13vw, 60px);
+                height: clamp(48px, 13vw, 60px);
+                font-size: 8px;
+                padding: 3px;
             }
 
             .alunos {
                 grid-template-columns: repeat(2, 1fr);
             }
+
+            .lista-jogadores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contato {
+                margin-left: 12px;
+                margin-right: 12px;
+                padding: 24px 16px;
+            }
+
         }
+
+
+        /* ==================================================
+           CELULARES MUITO PEQUENOS
+           ================================================== */
+
+        @media (max-width: 380px) {
+
+            .posicao {
+                width: 45px;
+                height: 45px;
+                font-size: 7px;
+                border-width: 2px;
+            }
+
+            .inicio h2,
+            #informacoes > h2,
+            .interclasse h2 {
+                font-size: 35px;
+            }
+
+            nav button {
+                padding: 9px 8px;
+                font-size: 10px;
+            }
+
+        }
+
+
+        /* ==================================================
+           TELAS GRANDES
+           ================================================== */
+
+        @media (min-width: 1200px) {
+
+            .campo {
+                max-width: 800px;
+            }
+
+            .posicao {
+                width: 80px;
+                height: 80px;
+            }
+
+        }
+
     </style>
 </head>
+
 
 <body>
 
     <header>
-        <button class="botao-tema" onclick="alternarTema()">Modo claro</button>
+
+        <button
+            class="botao-tema"
+            onclick="alternarTema()">
+            Modo claro
+        </button>
 
         <h1>9º Ano B</h1>
 
         <p>Uma turma que eu considero incrível.</p>
+
     </header>
 
+
     <nav>
-        <button onclick="mostrarPagina('inicio')">Início</button>
-        <button onclick="mostrarPagina('informacoes')">Informações</button>
-        <button onclick="pedirSenha()">Escalação do Interclasse</button>
+
+        <button onclick="mostrarPagina('inicio')">
+            Início
+        </button>
+
+        <button onclick="mostrarPagina('informacoes')">
+            Informações
+        </button>
+
+        <button onclick="pedirSenha()">
+            Escalação do Interclasse
+        </button>
+
     </nav>
+
 
     <main>
 
-        <section id="inicio" class="pagina ativa">
+
+        <!-- ============================
+             INÍCIO
+             ============================ -->
+
+        <section
+            id="inicio"
+            class="pagina ativa">
 
             <div class="inicio">
 
@@ -941,20 +1248,27 @@
                     e representar a nossa turma.
                 </p>
 
-                <img src="nonoano.jpg"
-                     alt="Logo do 9º Ano B"
-                     class="logo-9b">
+                <img
+                    src="nonoano.jpg"
+                    alt="Logo do 9º Ano B"
+                    class="logo-9b">
 
-                <h3>Aqui é 9º B. Quem conhece, sabe.</h3>
+                <h3>
+                    Aqui é 9º B. Quem conhece, sabe.
+                </h3>
+
 
                 <div class="instagram">
 
                     <p>Nosso Instagram</p>
 
-                    <a href="https://instagram.com/formandos_9b.2026/"
-                       target="_blank"
-                       rel="noopener noreferrer">
+                    <a
+                        href="https://instagram.com/formandos_9b.2026/"
+                        target="_blank"
+                        rel="noopener noreferrer">
+
                         @formandos_9b.2026
+
                     </a>
 
                 </div>
@@ -963,25 +1277,42 @@
 
         </section>
 
-        <section id="informacoes" class="pagina">
+
+        <!-- ============================
+             INFORMAÇÕES
+             ============================ -->
+
+        <section
+            id="informacoes"
+            class="pagina">
 
             <h2>Informações da Turma</h2>
+
 
             <div class="cartoes">
 
                 <div class="cartao">
+
                     <h3>Representante</h3>
+
                     <p>Kaio</p>
+
                 </div>
 
+
                 <div class="cartao">
+
                     <h3>Vice-representante</h3>
+
                     <p>Livia</p>
+
                 </div>
 
             </div>
 
+
             <h2>Alunos</h2>
+
 
             <div class="alunos">
 
@@ -1013,7 +1344,10 @@
 
             </div>
 
-            <div id="gerenciar" class="area-gerenciar">
+
+            <div
+                id="gerenciar"
+                class="area-gerenciar">
 
                 <h2>Gerenciar Interclasse</h2>
 
@@ -1022,46 +1356,71 @@
                     Aqui você pode escolher quem participa do Interclasse.
                 </p>
 
+
                 <div class="adicionar">
 
-                    <input type="text"
-                           id="novoAluno"
-                           placeholder="Nome do aluno">
+                    <input
+                        type="text"
+                        id="novoAluno"
+                        placeholder="Nome do aluno">
 
-                    <button class="botao"
-                            onclick="adicionarAluno()">
+
+                    <button
+                        class="botao"
+                        onclick="adicionarAluno()">
+
                         Adicionar ao Interclasse
+
                     </button>
 
                 </div>
 
-                <h3>Participantes do Interclasse</h3>
 
-                <div id="listaInterclasse"
-                     class="lista-interclasse">
+                <h3>
+                    Participantes do Interclasse
+                </h3>
+
+
+                <div
+                    id="listaInterclasse"
+                    class="lista-interclasse">
                 </div>
 
             </div>
 
         </section>
 
-        <section id="interclasse" class="pagina">
+
+        <!-- ============================
+             INTERCLASSE
+             ============================ -->
+
+        <section
+            id="interclasse"
+            class="pagina">
 
             <div class="interclasse">
 
-                <h2>Escalação do Interclasse</h2>
+                <h2>
+                    Escalação do Interclasse
+                </h2>
 
-                <div id="mensagemPersonalizada"
-                     class="mensagem-personalizada">
+
+                <div
+                    id="mensagemPersonalizada"
+                    class="mensagem-personalizada">
                 </div>
+
 
                 <p>
                     Escolha a formação e arraste os jogadores
                     para as posições.
                 </p>
 
-                <select id="formacao"
-                        onchange="mudarFormacao()">
+
+                <select
+                    id="formacao"
+                    onchange="mudarFormacao()">
 
                     <option value="formacao-3x1">
                         3x1 - Diamante
@@ -1085,48 +1444,67 @@
 
                 </select>
 
-                <div id="campo"
-                     class="campo formacao-3x1">
+
+                <div
+                    id="campo"
+                    class="campo formacao-3x1">
+
 
                     <div class="gol gol-cima"></div>
+
                     <div class="gol gol-baixo"></div>
 
-                    <div class="posicao"
-                         id="goleiro"
-                         data-jogador="">
+
+                    <div
+                        class="posicao"
+                        id="goleiro"
+                        data-jogador="">
                         Goleiro
                     </div>
 
-                    <div class="posicao"
-                         id="fixo"
-                         data-jogador="">
+
+                    <div
+                        class="posicao"
+                        id="fixo"
+                        data-jogador="">
                         Fixo
                     </div>
 
-                    <div class="posicao"
-                         id="ala-esquerda"
-                         data-jogador="">
+
+                    <div
+                        class="posicao"
+                        id="ala-esquerda"
+                        data-jogador="">
                         Ala Esq.
                     </div>
 
-                    <div class="posicao"
-                         id="ala-direita"
-                         data-jogador="">
+
+                    <div
+                        class="posicao"
+                        id="ala-direita"
+                        data-jogador="">
                         Ala Dir.
                     </div>
 
-                    <div class="posicao"
-                         id="pivo"
-                         data-jogador="">
+
+                    <div
+                        class="posicao"
+                        id="pivo"
+                        data-jogador="">
                         Pivô
                     </div>
 
                 </div>
 
-                <h3>Jogadores do Interclasse</h3>
 
-                <div id="listaJogadores"
-                     class="lista-jogadores">
+                <h3>
+                    Jogadores do Interclasse
+                </h3>
+
+
+                <div
+                    id="listaJogadores"
+                    class="lista-jogadores">
                 </div>
 
             </div>
@@ -1134,6 +1512,11 @@
         </section>
 
     </main>
+
+
+    <!-- ============================
+         CONTATO
+         ============================ -->
 
     <section class="contato">
 
@@ -1143,31 +1526,44 @@
             Contate-me para dúvidas ou ideias novas.
         </p>
 
+
         <div class="botoes-contato">
 
-            <a class="botao-contato"
-               href="#"
-               onclick="abrirWhatsApp(); return false;">
+            <a
+                class="botao-contato"
+                href="#"
+                onclick="abrirWhatsApp(); return false;">
+
                 WhatsApp
+
             </a>
 
-            <a class="botao-contato"
-               href="#"
-               onclick="abrirGmail(); return false;">
+
+            <a
+                class="botao-contato"
+                href="#"
+                onclick="abrirGmail(); return false;">
+
                 Gmail
+
             </a>
 
         </div>
 
     </section>
 
+
     <footer>
+
         Site criado por: Fabio S. · 9º Ano B — 2026
+
     </footer>
+
 
     <script>
 
         const senhaCorreta = "1425762";
+
 
         // ============================
         // DADOS DE CONTATO
@@ -1175,7 +1571,8 @@
 
         const whatsappNumero = "5531973440938";
 
-        const emailContato = "fabiosmprofissional@gmail.com";
+        const emailContato =
+            "fabiosmprofissional@gmail.com";
 
 
         // ============================
@@ -1255,7 +1652,9 @@
 
         let jogadoresInterclasse =
             JSON.parse(
-                localStorage.getItem("jogadoresInterclasse")
+                localStorage.getItem(
+                    "jogadoresInterclasse"
+                )
             );
 
 
@@ -1345,7 +1744,9 @@
 
 
                 let nome =
-                    localStorage.getItem("nomeUsuario");
+                    localStorage.getItem(
+                        "nomeUsuario"
+                    );
 
 
                 if (!nome) {
@@ -1355,7 +1756,10 @@
                     );
 
 
-                    if (nome && nome.trim() !== "") {
+                    if (
+                        nome &&
+                        nome.trim() !== ""
+                    ) {
 
                         nome = nome.trim();
 
@@ -1385,7 +1789,9 @@
 
 
                 document
-                    .getElementById("mensagemPersonalizada")
+                    .getElementById(
+                        "mensagemPersonalizada"
+                    )
                     .classList.add("ativa");
 
 
@@ -1411,22 +1817,30 @@
 
         function alternarTema() {
 
-            document.body.classList.toggle("claro");
+            document.body.classList.toggle(
+                "claro"
+            );
 
 
             const botao =
-                document.querySelector(".botao-tema");
+                document.querySelector(
+                    ".botao-tema"
+                );
 
 
             if (
-                document.body.classList.contains("claro")
+                document.body.classList.contains(
+                    "claro"
+                )
             ) {
 
-                botao.textContent = "Modo escuro";
+                botao.textContent =
+                    "Modo escuro";
 
             } else {
 
-                botao.textContent = "Modo claro";
+                botao.textContent =
+                    "Modo claro";
 
             }
 
@@ -1440,11 +1854,15 @@
         function mudarFormacao() {
 
             const campo =
-                document.getElementById("campo");
+                document.getElementById(
+                    "campo"
+                );
 
 
             const formacao =
-                document.getElementById("formacao").value;
+                document.getElementById(
+                    "formacao"
+                ).value;
 
 
             campo.className =
@@ -1460,7 +1878,9 @@
         function atualizarListaJogadores() {
 
             const lista =
-                document.getElementById("listaJogadores");
+                document.getElementById(
+                    "listaJogadores"
+                );
 
 
             lista.innerHTML = "";
@@ -1470,29 +1890,40 @@
                 function(nome) {
 
                     const jogador =
-                        document.createElement("div");
+                        document.createElement(
+                            "div"
+                        );
 
 
-                    jogador.className = "jogador";
+                    jogador.className =
+                        "jogador";
+
 
                     jogador.draggable = true;
 
-                    jogador.dataset.nome = nome;
 
-                    jogador.textContent = nome;
+                    jogador.dataset.nome =
+                        nome;
+
+
+                    jogador.textContent =
+                        nome;
 
 
                     jogador.addEventListener(
                         "dragstart",
                         function() {
 
-                            jogadorArrastado = jogador;
+                            jogadorArrastado =
+                                jogador;
 
                         }
                     );
 
 
-                    lista.appendChild(jogador);
+                    lista.appendChild(
+                        jogador
+                    );
 
                 }
             );
@@ -1539,7 +1970,9 @@
 
 
                             const jogadorNome =
-                                jogadorArrastado.dataset.nome;
+                                jogadorArrastado
+                                    .dataset
+                                    .nome;
 
 
                             const posicaoAtual =
@@ -1609,23 +2042,36 @@
 
             if (posicao.id === "goleiro") {
 
-                posicao.textContent = "Goleiro";
+                posicao.textContent =
+                    "Goleiro";
 
-            } else if (posicao.id === "fixo") {
+            } else if (
+                posicao.id === "fixo"
+            ) {
 
-                posicao.textContent = "Fixo";
+                posicao.textContent =
+                    "Fixo";
 
-            } else if (posicao.id === "ala-esquerda") {
+            } else if (
+                posicao.id === "ala-esquerda"
+            ) {
 
-                posicao.textContent = "Ala Esq.";
+                posicao.textContent =
+                    "Ala Esq.";
 
-            } else if (posicao.id === "ala-direita") {
+            } else if (
+                posicao.id === "ala-direita"
+            ) {
 
-                posicao.textContent = "Ala Dir.";
+                posicao.textContent =
+                    "Ala Dir.";
 
-            } else if (posicao.id === "pivo") {
+            } else if (
+                posicao.id === "pivo"
+            ) {
 
-                posicao.textContent = "Pivô";
+                posicao.textContent =
+                    "Pivô";
 
             }
 
@@ -1658,18 +2104,26 @@
 
 
             const area =
-                document.getElementById("gerenciar");
+                document.getElementById(
+                    "gerenciar"
+                );
 
 
-            if (desbloqueado === "true") {
+            if (
+                desbloqueado === "true"
+            ) {
 
-                area.classList.add("ativa");
+                area.classList.add(
+                    "ativa"
+                );
 
                 atualizarListaGerenciamento();
 
             } else {
 
-                area.classList.remove("ativa");
+                area.classList.remove(
+                    "ativa"
+                );
 
             }
 
@@ -1691,7 +2145,9 @@
                 function(nome) {
 
                     const item =
-                        document.createElement("div");
+                        document.createElement(
+                            "div"
+                        );
 
 
                     item.className =
@@ -1699,33 +2155,48 @@
 
 
                     const texto =
-                        document.createElement("span");
+                        document.createElement(
+                            "span"
+                        );
 
 
-                    texto.textContent = nome;
+                    texto.textContent =
+                        nome;
 
 
                     const botao =
-                        document.createElement("button");
+                        document.createElement(
+                            "button"
+                        );
 
 
-                    botao.className = "remover";
-
-                    botao.textContent = "Remover";
-
-
-                    botao.onclick = function() {
-
-                        removerAluno(nome);
-
-                    };
+                    botao.className =
+                        "remover";
 
 
-                    item.appendChild(texto);
+                    botao.textContent =
+                        "Remover";
 
-                    item.appendChild(botao);
 
-                    lista.appendChild(item);
+                    botao.onclick =
+                        function() {
+
+                            removerAluno(nome);
+
+                        };
+
+
+                    item.appendChild(
+                        texto
+                    );
+
+                    item.appendChild(
+                        botao
+                    );
+
+                    lista.appendChild(
+                        item
+                    );
 
                 }
             );
@@ -1740,7 +2211,9 @@
         function adicionarAluno() {
 
             const input =
-                document.getElementById("novoAluno");
+                document.getElementById(
+                    "novoAluno"
+                );
 
 
             const nome =
@@ -1749,14 +2222,18 @@
 
             if (nome === "") {
 
-                alert("Digite o nome de um aluno.");
+                alert(
+                    "Digite o nome de um aluno."
+                );
 
                 return;
 
             }
 
 
-            if (!alunosDaTurma.includes(nome)) {
+            if (
+                !alunosDaTurma.includes(nome)
+            ) {
 
                 alert(
                     "Esse nome não está na lista de alunos da turma."
@@ -1767,7 +2244,11 @@
             }
 
 
-            if (jogadoresInterclasse.includes(nome)) {
+            if (
+                jogadoresInterclasse.includes(
+                    nome
+                )
+            ) {
 
                 alert(
                     "Esse aluno já está no Interclasse."
@@ -1778,7 +2259,9 @@
             }
 
 
-            jogadoresInterclasse.push(nome);
+            jogadoresInterclasse.push(
+                nome
+            );
 
 
             salvarJogadores();
@@ -1851,7 +2334,10 @@
         }
 
 
-        // Inicializa a lista
+        // ============================
+        // INICIALIZAÇÃO
+        // ============================
+
         atualizarListaJogadores();
 
     </script>
