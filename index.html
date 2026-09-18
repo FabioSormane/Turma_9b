@@ -1,0 +1,1860 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>9º Ano B</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Inter", Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% -10%, #242424 0, #111 38%, #090909 75%);
+            color: white;
+            transition: 0.3s;
+            min-height: 100vh;
+        }
+
+        header {
+            position: relative;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,.04), transparent 45%),
+                #050505;
+            text-align: center;
+            padding: 55px 20px 45px;
+            border-bottom: 1px solid #303030;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: "9B";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -55%);
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 190px;
+            letter-spacing: 12px;
+            color: rgba(255,255,255,.025);
+            pointer-events: none;
+        }
+
+        header h1 {
+            position: relative;
+            margin: 0;
+            font-family: "Bebas Neue", sans-serif;
+            font-size: clamp(58px, 9vw, 100px);
+            letter-spacing: 5px;
+            line-height: .9;
+        }
+
+        header p {
+            position: relative;
+            margin: 18px 0 0;
+            color: #999;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .botao-tema {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            padding: 9px 13px;
+            border: 1px solid #444;
+            background: rgba(255,255,255,.05);
+            backdrop-filter: blur(8px);
+            color: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 12px;
+            transition: .25s;
+        }
+
+        .botao-tema:hover {
+            background: white;
+            color: #111;
+            transform: translateY(-2px);
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            background: rgba(8,8,8,.88);
+            backdrop-filter: blur(14px);
+            padding: 12px;
+            border-bottom: 1px solid #292929;
+        }
+
+        nav button {
+            background: transparent;
+            color: #aaa;
+            border: 1px solid transparent;
+            padding: 11px 17px;
+            border-radius: 7px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        nav button:hover {
+            color: white;
+            background: #191919;
+            border-color: #333;
+            transform: translateY(-1px);
+        }
+
+        .pagina {
+            display: none;
+            max-width: 1050px;
+            margin: auto;
+            padding: 55px 20px 45px;
+        }
+
+        .pagina.ativa {
+            display: block;
+            animation: aparecer .35s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .inicio {
+            text-align: center;
+        }
+
+        .inicio h2,
+        #informacoes > h2,
+        .interclasse h2 {
+            font-family: "Bebas Neue", sans-serif;
+            letter-spacing: 2px;
+            font-size: 48px;
+            margin: 0 0 8px;
+        }
+
+        .inicio h3 {
+            font-size: 25px;
+            margin-top: 30px;
+        }
+
+        .inicio p {
+            max-width: 700px;
+            margin: 14px auto;
+            font-size: 16px;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .logo-9b {
+            display: block;
+            width: 330px;
+            max-width: 90%;
+            margin: 38px auto;
+            border-radius: 18px;
+            border: 1px solid #3b3b3b;
+            box-shadow: 0 25px 70px rgba(0,0,0,.55);
+            transition: .35s;
+        }
+
+        .logo-9b:hover {
+            transform: scale(1.025) rotate(-.4deg);
+            box-shadow: 0 30px 80px rgba(0,0,0,.75);
+        }
+
+        .instagram {
+            margin: 38px auto 0;
+            padding: 22px;
+            max-width: 500px;
+            background: linear-gradient(145deg, #1b1b1b, #111);
+            border: 1px solid #303030;
+            border-radius: 14px;
+            box-shadow: 0 15px 40px rgba(0,0,0,.25);
+        }
+
+        .instagram p {
+            margin: 0 0 8px;
+            color: #777;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .instagram a {
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .instagram a:hover {
+            text-decoration: underline;
+        }
+
+        .cartoes {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 30px 0 45px;
+        }
+
+        .cartao {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #1c1c1c, #111);
+            border: 1px solid #333;
+            padding: 25px 35px;
+            border-radius: 14px;
+            min-width: 230px;
+            text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,.22);
+        }
+
+        .cartao::before {
+            content: "";
+            position: absolute;
+            width: 70px;
+            height: 3px;
+            background: white;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%);
+        }
+
+        .cartao h3 {
+            margin-top: 0;
+            color: #888;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cartao p {
+            margin-bottom: 0;
+            font-size: 22px;
+            font-weight: 800;
+        }
+
+        #informacoes > h2:not(:first-child) {
+            margin-top: 50px;
+        }
+
+        .alunos {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .aluno {
+            background: #161616;
+            padding: 14px;
+            border-radius: 9px;
+            border: 1px solid #292929;
+            text-align: center;
+            color: #bbb;
+            font-size: 13px;
+            transition: .2s;
+        }
+
+        .aluno:hover {
+            color: white;
+            border-color: #555;
+            background: #1d1d1d;
+            transform: translateY(-2px);
+        }
+
+        .interclasse {
+            text-align: center;
+        }
+
+        .interclasse > p {
+            color: #888;
+        }
+
+        select,
+        input {
+            padding: 12px 14px;
+            background: #171717;
+            color: white;
+            border: 1px solid #3b3b3b;
+            border-radius: 9px;
+            font-family: inherit;
+            outline: none;
+            transition: .2s;
+        }
+
+        select:focus,
+        input:focus {
+            border-color: #888;
+            box-shadow: 0 0 0 3px rgba(255,255,255,.05);
+        }
+
+        .campo {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 35px auto;
+            aspect-ratio: 2 / 1;
+            background:
+                linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px),
+                #176b35;
+            background-size: 25px 25px;
+            border: 4px solid white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,.45);
+        }
+
+        .campo::before {
+            content: "";
+            position: absolute;
+            width: 1px;
+            height: 100%;
+            background: rgba(255,255,255,.8);
+            left: 50%;
+            top: 0;
+        }
+
+        .campo::after {
+            content: "";
+            position: absolute;
+            width: 15%;
+            aspect-ratio: 1;
+            border: 2px solid rgba(255,255,255,.85);
+            border-radius: 50%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .gol {
+            position: absolute;
+            width: 12%;
+            height: 22%;
+            border: 3px solid white;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .gol-cima {
+            top: -3px;
+            border-top: none;
+        }
+
+        .gol-baixo {
+            bottom: -3px;
+            border-bottom: none;
+        }
+
+        .posicao {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            background: rgba(12,12,12,.92);
+            border: 3px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 800;
+            z-index: 2;
+            padding: 5px;
+            box-shadow: 0 8px 20px rgba(0,0,0,.35);
+            transition: .2s;
+        }
+
+        .posicao:hover {
+            transform: translateY(-2px) scale(1.04);
+        }
+
+        #goleiro {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #fixo {
+            top: 42%;
+            left: 25%;
+        }
+
+        #ala-esquerda {
+            top: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        #ala-direita {
+            top: 42%;
+            right: 25%;
+        }
+
+        #pivo {
+            top: 15%;
+            right: 50%;
+            transform: translateX(50%);
+        }
+
+        .formacao-3x1 #goleiro {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-3x1 #fixo {
+            top: 42%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-3x1 #ala-esquerda {
+            top: 20%;
+            left: 25%;
+        }
+
+        .formacao-3x1 #ala-direita {
+            top: 20%;
+            right: 25%;
+        }
+
+        .formacao-3x1 #pivo {
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-2x2 #goleiro {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-2x2 #fixo {
+            top: 45%;
+            left: 30%;
+        }
+
+        .formacao-2x2 #ala-esquerda {
+            top: 45%;
+            right: 30%;
+            left: auto;
+        }
+
+        .formacao-2x2 #ala-direita {
+            top: 20%;
+            left: 35%;
+        }
+
+        .formacao-2x2 #pivo {
+            top: 20%;
+            right: 35%;
+        }
+
+        .formacao-4x0 #goleiro {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-4x0 #fixo {
+            top: 42%;
+            left: 10%;
+        }
+
+        .formacao-4x0 #ala-esquerda {
+            top: 20%;
+            left: 35%;
+        }
+
+        .formacao-4x0 #ala-direita {
+            top: 20%;
+            right: 35%;
+        }
+
+        .formacao-4x0 #pivo {
+            top: 42%;
+            right: 10%;
+        }
+
+        .formacao-3x2 #goleiro {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-3x2 #fixo {
+            top: 45%;
+            left: 20%;
+        }
+
+        .formacao-3x2 #ala-esquerda {
+            top: 20%;
+            left: 25%;
+        }
+
+        .formacao-3x2 #ala-direita {
+            top: 20%;
+            right: 25%;
+        }
+
+        .formacao-3x2 #pivo {
+            top: 45%;
+            right: 20%;
+        }
+
+        .formacao-1x3 #goleiro {
+            bottom: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-1x3 #fixo {
+            top: 45%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .formacao-1x3 #ala-esquerda {
+            top: 20%;
+            left: 20%;
+        }
+
+        .formacao-1x3 #ala-direita {
+            top: 20%;
+            right: 20%;
+        }
+
+        .formacao-1x3 #pivo {
+            top: 8%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .lista-jogadores {
+            max-width: 800px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 9px;
+        }
+
+        .jogador {
+            background: linear-gradient(145deg, #1c1c1c, #141414);
+            border: 1px solid #333;
+            padding: 13px;
+            border-radius: 9px;
+            cursor: grab;
+            user-select: none;
+            color: #ddd;
+            font-size: 13px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .jogador:hover {
+            border-color: #666;
+            transform: translateY(-2px);
+        }
+
+        .jogador:active {
+            cursor: grabbing;
+            transform: scale(.98);
+        }
+
+        .area-gerenciar {
+            display: none;
+            background: linear-gradient(145deg, #191919, #111);
+            border: 1px solid #333;
+            border-radius: 14px;
+            padding: 25px;
+            margin-top: 45px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.25);
+        }
+
+        .area-gerenciar.ativa {
+            display: block;
+        }
+
+        .adicionar {
+            display: flex;
+            justify-content: center;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .botao {
+            padding: 11px 15px;
+            border: 1px solid #444;
+            background: #242424;
+            color: white;
+            border-radius: 9px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .botao:hover {
+            background: white;
+            color: #111;
+            transform: translateY(-2px);
+        }
+
+        .lista-interclasse {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 9px;
+            margin-top: 20px;
+        }
+
+        .item-interclasse {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            background: #101010;
+            border: 1px solid #2d2d2d;
+            padding: 10px;
+            border-radius: 9px;
+        }
+
+        .remover {
+            background: #401616;
+            color: #eee;
+            border: 1px solid #652323;
+            padding: 6px 9px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .remover:hover {
+            background: #691f1f;
+        }
+
+        .mensagem-personalizada {
+            display: none;
+            text-align: center;
+            background: linear-gradient(145deg, #1c1c1c, #111);
+            border: 1px solid #333;
+            padding: 15px;
+            margin: 20px auto;
+            border-radius: 10px;
+            max-width: 600px;
+            color: #bbb;
+        }
+
+        .mensagem-personalizada.ativa {
+            display: block;
+        }
+
+        .contato {
+            max-width: 760px;
+            margin: 55px auto 0;
+            padding: 28px;
+            text-align: center;
+            background: linear-gradient(145deg, #1b1b1b, #101010);
+            border: 1px solid #303030;
+            border-radius: 16px;
+            box-shadow: 0 20px 50px rgba(0,0,0,.25);
+        }
+
+        .contato h3 {
+            margin: 0 0 8px;
+            font-family: "Bebas Neue", sans-serif;
+            font-size: 32px;
+            letter-spacing: 1.5px;
+        }
+
+        .contato p {
+            margin: 0 0 22px;
+            color: #999;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .botoes-contato {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .botao-contato {
+            min-width: 150px;
+            padding: 12px 18px;
+            border: 1px solid #3e3e3e;
+            background: #222;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: .2s;
+        }
+
+        .botao-contato:hover {
+            background: white;
+            color: #111;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            color: #666;
+            border-top: 1px solid #252525;
+            margin-top: 30px;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        body.claro {
+            background: #f0f0f0;
+            color: #111;
+        }
+
+        body.claro header {
+            background: #fff;
+            border-color: #ddd;
+        }
+
+        body.claro header::before {
+            color: rgba(0,0,0,.035);
+        }
+
+        body.claro header p {
+            color: #777;
+        }
+
+        body.claro nav {
+            background: rgba(245,245,245,.9);
+            border-color: #ddd;
+        }
+
+        body.claro nav button {
+            color: #666;
+        }
+
+        body.claro nav button:hover {
+            color: #111;
+            background: #fff;
+            border-color: #ccc;
+        }
+
+        body.claro .botao-tema {
+            background: white;
+            color: #111;
+            border-color: #ccc;
+        }
+
+        body.claro .inicio p {
+            color: #555;
+        }
+
+        body.claro .instagram,
+        body.claro .cartao,
+        body.claro .aluno,
+        body.claro .jogador,
+        body.claro .area-gerenciar,
+        body.claro select,
+        body.claro input,
+        body.claro .mensagem-personalizada {
+            background: white;
+            color: #111;
+            border-color: #ddd;
+        }
+
+        body.claro .instagram a {
+            color: #111;
+        }
+
+        body.claro .cartao h3 {
+            color: #777;
+        }
+
+        body.claro .aluno {
+            color: #555;
+        }
+
+        body.claro .aluno:hover {
+            color: #111;
+            background: #fafafa;
+            border-color: #bbb;
+        }
+
+        body.claro .jogador {
+            color: #333;
+        }
+
+        body.claro .botao {
+            background: #f5f5f5;
+            color: #111;
+            border-color: #ccc;
+        }
+
+        body.claro .item-interclasse {
+            background: #f4f4f4;
+            border-color: #ddd;
+        }
+
+        body.claro .contato {
+            background: white;
+            border-color: #ddd;
+        }
+
+        body.claro .contato p {
+            color: #666;
+        }
+
+        body.claro .botao-contato {
+            background: #f5f5f5;
+            color: #111;
+            border-color: #ccc;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding-top: 70px;
+            }
+
+            header h1 {
+                font-size: 62px;
+            }
+
+            header p {
+                font-size: 10px;
+                letter-spacing: 2px;
+            }
+
+            .botao-tema {
+                position: static;
+                margin-bottom: 18px;
+            }
+
+            nav {
+                padding: 8px;
+            }
+
+            nav button {
+                padding: 10px 12px;
+                font-size: 11px;
+            }
+
+            .pagina {
+                padding-top: 40px;
+            }
+
+            .inicio h2,
+            #informacoes > h2,
+            .interclasse h2 {
+                font-size: 40px;
+            }
+
+            .posicao {
+                width: 60px;
+                height: 60px;
+                font-size: 9px;
+            }
+
+            .campo {
+                border-width: 3px;
+                border-radius: 10px;
+            }
+
+            .alunos {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <button class="botao-tema" onclick="alternarTema()">Modo claro</button>
+
+        <h1>9º Ano B</h1>
+
+        <p>Uma turma que eu considero incrível.</p>
+    </header>
+
+    <nav>
+        <button onclick="mostrarPagina('inicio')">Início</button>
+        <button onclick="mostrarPagina('informacoes')">Informações</button>
+        <button onclick="pedirSenha()">Escalação do Interclasse</button>
+    </nav>
+
+    <main>
+
+        <section id="inicio" class="pagina ativa">
+
+            <div class="inicio">
+
+                <h2>9º ANO B</h2>
+
+                <h3>Os mais fodas da escola.</h3>
+
+                <p>
+                    Essa é uma turma que marcou o nosso ano.
+                    Cada pessoa tem seu jeito, sua história e sua importância.
+                </p>
+
+                <p>
+                    Esse site é o nosso cartãozinho de entrada.
+                    Um pequeno espaço para mostrar quem somos
+                    e representar a nossa turma.
+                </p>
+
+                <img src="nonoano.jpg"
+                     alt="Logo do 9º Ano B"
+                     class="logo-9b">
+
+                <h3>Aqui é 9º B. Quem conhece, sabe.</h3>
+
+                <div class="instagram">
+
+                    <p>Nosso Instagram</p>
+
+                    <a href="https://instagram.com/formandos_9b.2026/"
+                       target="_blank"
+                       rel="noopener noreferrer">
+                        @formandos_9b.2026
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="informacoes" class="pagina">
+
+            <h2>Informações da Turma</h2>
+
+            <div class="cartoes">
+
+                <div class="cartao">
+                    <h3>Representante</h3>
+                    <p>Kaio</p>
+                </div>
+
+                <div class="cartao">
+                    <h3>Vice-representante</h3>
+                    <p>Livia</p>
+                </div>
+
+            </div>
+
+            <h2>Alunos</h2>
+
+            <div class="alunos">
+
+                <div class="aluno">Amanda</div>
+                <div class="aluno">Ana B.</div>
+                <div class="aluno">Arthur</div>
+                <div class="aluno">Bruce</div>
+                <div class="aluno">Camila</div>
+                <div class="aluno">Cauã</div>
+                <div class="aluno">Davi</div>
+                <div class="aluno">Emily</div>
+                <div class="aluno">Erick</div>
+                <div class="aluno">Eva</div>
+                <div class="aluno">Fabio</div>
+                <div class="aluno">Guilherme</div>
+                <div class="aluno">Joana</div>
+                <div class="aluno">Julia</div>
+                <div class="aluno">Junior</div>
+                <div class="aluno">Kaio</div>
+                <div class="aluno">Livia</div>
+                <div class="aluno">Maria E.</div>
+                <div class="aluno">Maria E. A.</div>
+                <div class="aluno">Melissa</div>
+                <div class="aluno">Nicolas</div>
+                <div class="aluno">Paulo</div>
+                <div class="aluno">Rodrigo</div>
+                <div class="aluno">Sarah</div>
+                <div class="aluno">Sofia</div>
+
+            </div>
+
+            <div id="gerenciar" class="area-gerenciar">
+
+                <h2>Gerenciar Interclasse</h2>
+
+                <p>
+                    Você está com o acesso desbloqueado.
+                    Aqui você pode escolher quem participa do Interclasse.
+                </p>
+
+                <div class="adicionar">
+
+                    <input type="text"
+                           id="novoAluno"
+                           placeholder="Nome do aluno">
+
+                    <button class="botao"
+                            onclick="adicionarAluno()">
+                        Adicionar ao Interclasse
+                    </button>
+
+                </div>
+
+                <h3>Participantes do Interclasse</h3>
+
+                <div id="listaInterclasse"
+                     class="lista-interclasse">
+                </div>
+
+            </div>
+
+        </section>
+
+        <section id="interclasse" class="pagina">
+
+            <div class="interclasse">
+
+                <h2>Escalação do Interclasse</h2>
+
+                <div id="mensagemPersonalizada"
+                     class="mensagem-personalizada">
+                </div>
+
+                <p>
+                    Escolha a formação e arraste os jogadores
+                    para as posições.
+                </p>
+
+                <select id="formacao"
+                        onchange="mudarFormacao()">
+
+                    <option value="formacao-3x1">
+                        3x1 - Diamante
+                    </option>
+
+                    <option value="formacao-2x2">
+                        2x2 - Quadrado
+                    </option>
+
+                    <option value="formacao-4x0">
+                        4x0
+                    </option>
+
+                    <option value="formacao-3x2">
+                        3x2 - Goleiro-Linha
+                    </option>
+
+                    <option value="formacao-1x3">
+                        1x3 - Y
+                    </option>
+
+                </select>
+
+                <div id="campo"
+                     class="campo formacao-3x1">
+
+                    <div class="gol gol-cima"></div>
+                    <div class="gol gol-baixo"></div>
+
+                    <div class="posicao"
+                         id="goleiro"
+                         data-jogador="">
+                        Goleiro
+                    </div>
+
+                    <div class="posicao"
+                         id="fixo"
+                         data-jogador="">
+                        Fixo
+                    </div>
+
+                    <div class="posicao"
+                         id="ala-esquerda"
+                         data-jogador="">
+                        Ala Esq.
+                    </div>
+
+                    <div class="posicao"
+                         id="ala-direita"
+                         data-jogador="">
+                        Ala Dir.
+                    </div>
+
+                    <div class="posicao"
+                         id="pivo"
+                         data-jogador="">
+                        Pivô
+                    </div>
+
+                </div>
+
+                <h3>Jogadores do Interclasse</h3>
+
+                <div id="listaJogadores"
+                     class="lista-jogadores">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <section class="contato">
+
+        <h3>Contate-me</h3>
+
+        <p>
+            Contate-me para dúvidas ou ideias novas.
+        </p>
+
+        <div class="botoes-contato">
+
+            <a class="botao-contato"
+               href="#"
+               onclick="abrirWhatsApp(); return false;">
+                WhatsApp
+            </a>
+
+            <a class="botao-contato"
+               href="#"
+               onclick="abrirGmail(); return false;">
+                Gmail
+            </a>
+
+        </div>
+
+    </section>
+
+    <footer>
+        Site criado por: Fabio S. · 9º Ano B — 2026
+    </footer>
+
+    <script>
+
+        const senhaCorreta = "1425762";
+
+        // ============================
+        // DADOS DE CONTATO
+        // ============================
+
+        const whatsappNumero = "5531973440938";
+
+        const emailContato = "fabiosmprofissional@gmail.com";
+
+
+        // ============================
+        // WHATSAPP
+        // ============================
+
+        function abrirWhatsApp() {
+
+            const mensagem =
+                "Olá! Vim pelo site do 9º Ano B e tenho uma dúvida/ideia.";
+
+            const link =
+                "https://wa.me/" +
+                whatsappNumero +
+                "?text=" +
+                encodeURIComponent(mensagem);
+
+            window.open(link, "_blank");
+
+        }
+
+
+        // ============================
+        // GMAIL
+        // ============================
+
+        function abrirGmail() {
+
+            const assunto =
+                "Contato pelo site do 9º Ano B";
+
+            const link =
+                "https://mail.google.com/mail/?view=cm&fs=1&to=" +
+                encodeURIComponent(emailContato) +
+                "&su=" +
+                encodeURIComponent(assunto);
+
+            window.open(link, "_blank");
+
+        }
+
+
+        // ============================
+        // ALUNOS
+        // ============================
+
+        const alunosDaTurma = [
+
+            "Amanda",
+            "Ana B.",
+            "Arthur",
+            "Bruce",
+            "Camila",
+            "Cauã",
+            "Davi",
+            "Emily",
+            "Erick",
+            "Eva",
+            "Fabio",
+            "Guilherme",
+            "Joana",
+            "Julia",
+            "Junior",
+            "Kaio",
+            "Livia",
+            "Maria E.",
+            "Maria E. A.",
+            "Melissa",
+            "Nicolas",
+            "Paulo",
+            "Rodrigo",
+            "Sarah",
+            "Sofia"
+
+        ];
+
+
+        let jogadoresInterclasse =
+            JSON.parse(
+                localStorage.getItem("jogadoresInterclasse")
+            );
+
+
+        if (!jogadoresInterclasse) {
+
+            jogadoresInterclasse = [
+
+                "Kaio",
+                "Arthur",
+                "Nicolas",
+                "Bruce",
+                "Cauã",
+                "Junior",
+                "Rodrigo",
+                "Paulo",
+                "Fabio"
+
+            ];
+
+        }
+
+
+        let jogadorArrastado = null;
+
+
+        // ============================
+        // TROCAR PÁGINA
+        // ============================
+
+        function mostrarPagina(pagina) {
+
+            document
+                .querySelectorAll(".pagina")
+                .forEach(function(item) {
+
+                    item.classList.remove("ativa");
+
+                });
+
+
+            document
+                .getElementById(pagina)
+                .classList.add("ativa");
+
+
+            window.scrollTo({
+
+                top: 0,
+                behavior: "smooth"
+
+            });
+
+
+            if (pagina === "informacoes") {
+
+                atualizarGerenciamento();
+
+            }
+
+
+            if (pagina === "interclasse") {
+
+                atualizarListaJogadores();
+
+            }
+
+        }
+
+
+        // ============================
+        // SENHA
+        // ============================
+
+        function pedirSenha() {
+
+            const senha = prompt(
+                "Digite a senha para acessar a Escalação do Interclasse:"
+            );
+
+
+            if (senha === senhaCorreta) {
+
+                localStorage.setItem(
+                    "interclasseDesbloqueado",
+                    "true"
+                );
+
+
+                let nome =
+                    localStorage.getItem("nomeUsuario");
+
+
+                if (!nome) {
+
+                    nome = prompt(
+                        "Senha correta!\n\nQual é o seu nome?"
+                    );
+
+
+                    if (nome && nome.trim() !== "") {
+
+                        nome = nome.trim();
+
+                        localStorage.setItem(
+                            "nomeUsuario",
+                            nome
+                        );
+
+                    }
+
+                }
+
+
+                if (!nome) {
+
+                    nome = "jogador";
+
+                }
+
+
+                document.getElementById(
+                    "mensagemPersonalizada"
+                ).innerHTML =
+                    "Bem-vindo, <strong>" +
+                    nome +
+                    "</strong>! A escalação está desbloqueada.";
+
+
+                document
+                    .getElementById("mensagemPersonalizada")
+                    .classList.add("ativa");
+
+
+                mostrarPagina("interclasse");
+
+
+            } else {
+
+                if (senha !== null) {
+
+                    alert("Senha incorreta!");
+
+                }
+
+            }
+
+        }
+
+
+        // ============================
+        // TEMA
+        // ============================
+
+        function alternarTema() {
+
+            document.body.classList.toggle("claro");
+
+
+            const botao =
+                document.querySelector(".botao-tema");
+
+
+            if (
+                document.body.classList.contains("claro")
+            ) {
+
+                botao.textContent = "Modo escuro";
+
+            } else {
+
+                botao.textContent = "Modo claro";
+
+            }
+
+        }
+
+
+        // ============================
+        // FORMAÇÃO
+        // ============================
+
+        function mudarFormacao() {
+
+            const campo =
+                document.getElementById("campo");
+
+
+            const formacao =
+                document.getElementById("formacao").value;
+
+
+            campo.className =
+                "campo " + formacao;
+
+        }
+
+
+        // ============================
+        // LISTA DE JOGADORES
+        // ============================
+
+        function atualizarListaJogadores() {
+
+            const lista =
+                document.getElementById("listaJogadores");
+
+
+            lista.innerHTML = "";
+
+
+            jogadoresInterclasse.forEach(
+                function(nome) {
+
+                    const jogador =
+                        document.createElement("div");
+
+
+                    jogador.className = "jogador";
+
+                    jogador.draggable = true;
+
+                    jogador.dataset.nome = nome;
+
+                    jogador.textContent = nome;
+
+
+                    jogador.addEventListener(
+                        "dragstart",
+                        function() {
+
+                            jogadorArrastado = jogador;
+
+                        }
+                    );
+
+
+                    lista.appendChild(jogador);
+
+                }
+            );
+
+
+            prepararPosicoes();
+
+        }
+
+
+        // ============================
+        // POSIÇÕES
+        // ============================
+
+        function prepararPosicoes() {
+
+            document
+                .querySelectorAll(".posicao")
+                .forEach(function(posicao) {
+
+
+                    posicao.addEventListener(
+                        "dragover",
+                        function(evento) {
+
+                            evento.preventDefault();
+
+                        }
+                    );
+
+
+                    posicao.addEventListener(
+                        "drop",
+                        function(evento) {
+
+                            evento.preventDefault();
+
+
+                            if (!jogadorArrastado) {
+
+                                return;
+
+                            }
+
+
+                            const jogadorNome =
+                                jogadorArrastado.dataset.nome;
+
+
+                            const posicaoAtual =
+                                document.querySelector(
+                                    `.posicao[data-jogador="${jogadorNome}"]`
+                                );
+
+
+                            if (posicaoAtual) {
+
+                                restaurarPosicao(
+                                    posicaoAtual
+                                );
+
+                            }
+
+
+                            const antigoJogador =
+                                posicao.dataset.jogador;
+
+
+                            if (antigoJogador) {
+
+                                const jogadorOriginal =
+                                    document.querySelector(
+                                        `.jogador[data-nome="${antigoJogador}"]`
+                                    );
+
+
+                                if (jogadorOriginal) {
+
+                                    jogadorOriginal.style.opacity =
+                                        "1";
+
+                                }
+
+                            }
+
+
+                            posicao.dataset.jogador =
+                                jogadorNome;
+
+
+                            posicao.textContent =
+                                jogadorNome;
+
+
+                            jogadorArrastado.style.opacity =
+                                "0.4";
+
+
+                            jogadorArrastado = null;
+
+                        }
+                    );
+
+                });
+
+        }
+
+
+        // ============================
+        // RESTAURAR POSIÇÃO
+        // ============================
+
+        function restaurarPosicao(posicao) {
+
+            if (posicao.id === "goleiro") {
+
+                posicao.textContent = "Goleiro";
+
+            } else if (posicao.id === "fixo") {
+
+                posicao.textContent = "Fixo";
+
+            } else if (posicao.id === "ala-esquerda") {
+
+                posicao.textContent = "Ala Esq.";
+
+            } else if (posicao.id === "ala-direita") {
+
+                posicao.textContent = "Ala Dir.";
+
+            } else if (posicao.id === "pivo") {
+
+                posicao.textContent = "Pivô";
+
+            }
+
+
+            posicao.dataset.jogador = "";
+
+        }
+
+
+        document.addEventListener(
+            "dragend",
+            function() {
+
+                jogadorArrastado = null;
+
+            }
+        );
+
+
+        // ============================
+        // GERENCIAMENTO
+        // ============================
+
+        function atualizarGerenciamento() {
+
+            const desbloqueado =
+                localStorage.getItem(
+                    "interclasseDesbloqueado"
+                );
+
+
+            const area =
+                document.getElementById("gerenciar");
+
+
+            if (desbloqueado === "true") {
+
+                area.classList.add("ativa");
+
+                atualizarListaGerenciamento();
+
+            } else {
+
+                area.classList.remove("ativa");
+
+            }
+
+        }
+
+
+        function atualizarListaGerenciamento() {
+
+            const lista =
+                document.getElementById(
+                    "listaInterclasse"
+                );
+
+
+            lista.innerHTML = "";
+
+
+            jogadoresInterclasse.forEach(
+                function(nome) {
+
+                    const item =
+                        document.createElement("div");
+
+
+                    item.className =
+                        "item-interclasse";
+
+
+                    const texto =
+                        document.createElement("span");
+
+
+                    texto.textContent = nome;
+
+
+                    const botao =
+                        document.createElement("button");
+
+
+                    botao.className = "remover";
+
+                    botao.textContent = "Remover";
+
+
+                    botao.onclick = function() {
+
+                        removerAluno(nome);
+
+                    };
+
+
+                    item.appendChild(texto);
+
+                    item.appendChild(botao);
+
+                    lista.appendChild(item);
+
+                }
+            );
+
+        }
+
+
+        // ============================
+        // ADICIONAR ALUNO
+        // ============================
+
+        function adicionarAluno() {
+
+            const input =
+                document.getElementById("novoAluno");
+
+
+            const nome =
+                input.value.trim();
+
+
+            if (nome === "") {
+
+                alert("Digite o nome de um aluno.");
+
+                return;
+
+            }
+
+
+            if (!alunosDaTurma.includes(nome)) {
+
+                alert(
+                    "Esse nome não está na lista de alunos da turma."
+                );
+
+                return;
+
+            }
+
+
+            if (jogadoresInterclasse.includes(nome)) {
+
+                alert(
+                    "Esse aluno já está no Interclasse."
+                );
+
+                return;
+
+            }
+
+
+            jogadoresInterclasse.push(nome);
+
+
+            salvarJogadores();
+
+
+            input.value = "";
+
+
+            atualizarListaGerenciamento();
+
+            atualizarListaJogadores();
+
+        }
+
+
+        // ============================
+        // REMOVER ALUNO
+        // ============================
+
+        function removerAluno(nome) {
+
+            const confirmar =
+                confirm(
+                    "Remover " +
+                    nome +
+                    " do Interclasse?"
+                );
+
+
+            if (!confirmar) {
+
+                return;
+
+            }
+
+
+            jogadoresInterclasse =
+                jogadoresInterclasse.filter(
+                    function(jogador) {
+
+                        return jogador !== nome;
+
+                    }
+                );
+
+
+            salvarJogadores();
+
+
+            atualizarListaGerenciamento();
+
+            atualizarListaJogadores();
+
+        }
+
+
+        // ============================
+        // SALVAR
+        // ============================
+
+        function salvarJogadores() {
+
+            localStorage.setItem(
+                "jogadoresInterclasse",
+                JSON.stringify(
+                    jogadoresInterclasse
+                )
+            );
+
+        }
+
+
+        // Inicializa a lista
+        atualizarListaJogadores();
+
+    </script>
+
+</body>
+</html>
