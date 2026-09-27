@@ -1639,6 +1639,243 @@ button,a,input,select,textarea{
     .divine-canvas-wrap{box-shadow:none;}
 }
 
+
+/* =========================================================
+   INTERCLASSE — CORREÇÃO MOBILE DEFINITIVA
+   Reorganiza a área sem remover nenhuma função.
+   ========================================================= */
+@media (max-width:760px){
+    #interclasse{
+        width:100%;
+        min-width:0;
+        overflow:visible;
+    }
+
+    #conteudoInterclasse{
+        width:100%;
+        min-width:0;
+        overflow:visible;
+    }
+
+    #conteudoInterclasse .admin-bar{
+        width:100%;
+        min-width:0;
+        overflow:visible;
+    }
+
+    #conteudoInterclasse .admin-bar > div:first-child{
+        min-width:0;
+    }
+
+    #ultimaMudancaInterclasse{
+        max-width:100%;
+        overflow-wrap:anywhere;
+    }
+
+    #conteudoInterclasse .team-grid{
+        width:100%;
+        min-width:0;
+        display:flex;
+        flex-direction:column;
+        gap:12px;
+        overflow:visible;
+    }
+
+    /* No celular, a quadra vem primeiro: é a parte principal do Interclasse. */
+    #conteudoInterclasse .field-wrap{
+        order:1;
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        padding:9px;
+        overflow:visible;
+    }
+
+    #conteudoInterclasse .team-grid > div:first-child{
+        order:2;
+        width:100%;
+        min-width:0;
+    }
+
+    #conteudoInterclasse .formation-bar{
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        display:flex;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        overflow-y:hidden;
+        -webkit-overflow-scrolling:touch;
+        scrollbar-width:none;
+        overscroll-behavior-x:contain;
+        padding:1px 1px 7px;
+        margin:0 0 9px;
+    }
+
+    #conteudoInterclasse .formation-bar::-webkit-scrollbar{
+        display:none;
+    }
+
+    #conteudoInterclasse .formation-bar button{
+        flex:0 0 auto;
+        min-width:max-content;
+        min-height:44px;
+        white-space:nowrap;
+    }
+
+    /* Campo inteiro dentro da tela, sem cortar laterais nem altura. */
+    #conteudoInterclasse .field{
+        width:100%;
+        max-width:100%;
+        min-width:0;
+        height:clamp(470px,125vw,610px);
+        min-height:0;
+        aspect-ratio:auto;
+        margin:0 auto;
+        overflow:hidden;
+        border-radius:18px;
+    }
+
+    #conteudoInterclasse .pos{
+        width:clamp(68px,20vw,82px);
+        height:clamp(68px,20vw,82px);
+        min-width:68px;
+        min-height:68px;
+        max-width:82px;
+        max-height:82px;
+        padding:7px;
+        box-sizing:border-box;
+        z-index:5;
+        touch-action:none !important;
+        -webkit-user-select:none;
+        user-select:none;
+    }
+
+    #conteudoInterclasse .pos .label{
+        font-size:7px;
+        letter-spacing:.05em;
+    }
+
+    #conteudoInterclasse .pos .name{
+        max-width:calc(100% - 8px);
+        font-size:10px;
+        line-height:1.1;
+    }
+
+    #conteudoInterclasse .field:after{
+        width:26%;
+        max-width:112px;
+        min-width:76px;
+        height:auto;
+        aspect-ratio:1;
+    }
+
+    #conteudoInterclasse .card{
+        width:100%;
+        min-width:0;
+        overflow:visible;
+    }
+
+    #conteudoInterclasse .players-list{
+        width:100%;
+        min-width:0;
+    }
+
+    #conteudoInterclasse .player-row{
+        width:100%;
+        min-width:0;
+        max-width:100%;
+        min-height:50px;
+        overflow:hidden;
+        touch-action:none !important;
+    }
+
+    #conteudoInterclasse .player-row span{
+        min-width:0;
+        overflow:hidden;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+    }
+
+    #conteudoInterclasse .player-row .danger-btn{
+        flex:0 0 auto;
+        min-height:40px;
+    }
+
+    #conteudoInterclasse .management,
+    #conteudoInterclasse .bola-grid,
+    #conteudoInterclasse .bola-card{
+        width:100%;
+        min-width:0;
+        overflow:visible;
+    }
+
+    #conteudoInterclasse .bola-card select{
+        width:100%;
+        min-width:0;
+        max-width:100%;
+    }
+
+    #conteudoInterclasse .main-btn,
+    #conteudoInterclasse .ghost-btn{
+        min-height:44px;
+    }
+
+    /* Evita que textos longos criem largura invisível. */
+    #conteudoInterclasse h3,
+    #conteudoInterclasse p,
+    #conteudoInterclasse small,
+    #conteudoInterclasse span,
+    #conteudoInterclasse strong{
+        overflow-wrap:anywhere;
+    }
+}
+
+@media (max-width:470px){
+    #conteudoInterclasse .field{
+        height:clamp(455px,127vw,560px);
+    }
+
+    #conteudoInterclasse .pos{
+        width:72px;
+        height:72px;
+        min-width:72px;
+        min-height:72px;
+    }
+
+    #conteudoInterclasse .pos .label{
+        font-size:6.5px;
+    }
+
+    #conteudoInterclasse .pos .name{
+        font-size:9px;
+        max-width:58px;
+    }
+
+    #conteudoInterclasse .admin-bar{
+        padding:13px;
+    }
+}
+
+@media (max-width:360px){
+    #conteudoInterclasse .field{
+        height:455px;
+    }
+
+    #conteudoInterclasse .pos{
+        width:68px;
+        height:68px;
+        min-width:68px;
+        min-height:68px;
+        padding:6px;
+    }
+
+    #conteudoInterclasse .pos .name{
+        max-width:54px;
+        font-size:8.5px;
+    }
+}
+
 </style>
 </head>
 
