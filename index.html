@@ -254,7 +254,7 @@ body.light .logo-card{background:rgba(255,255,255,.82);border-color:#ddd}
     list-style:none;
     margin-top:10px;
 }
-.roster li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--line)}
+roster li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--line)}
 
 /* =========================================================
    SALA DO 9º B — MAPA DE ASSENTOS
@@ -562,12 +562,14 @@ body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
 .formacao-3x1 #pivo{top:19%;left:50%;right:auto;transform:translateX(-50%)}
 
 /* 2-2 · QUADRADO
-   Duas linhas bem claras, formando um quadrado. */
+   Dois jogadores atrás e dois à frente.
+   As alas permanecem no respectivo lado da quadra.
+   Referência visual: Fixo + Ala-Direita atrás / Ala-Esquerda + Pivô à frente. */
 .formacao-2x2 #goleiro{bottom:5%;left:50%;top:auto;right:auto;transform:translateX(-50%)}
-.formacao-2x2 #fixo{top:56%;left:25%;right:auto;transform:none}
-.formacao-2x2 #pivo{top:56%;right:25%;left:auto;transform:none}
-.formacao-2x2 #ala-esquerda{top:26%;left:25%;right:auto;transform:none}
-.formacao-2x2 #ala-direita{top:26%;right:25%;left:auto;transform:none}
+.formacao-2x2 #fixo{top:56%;left:27%;right:auto;transform:translateX(-50%)}
+.formacao-2x2 #ala-direita{top:56%;right:27%;left:auto;transform:translateX(50%)}
+.formacao-2x2 #ala-esquerda{top:24%;left:27%;right:auto;transform:translateX(-50%)}
+.formacao-2x2 #pivo{top:24%;right:27%;left:auto;transform:translateX(50%)}
 
 /* 4-0 · LINHA — manter exatamente a disposição que você definiu. */
 .formacao-4x0 #goleiro{
@@ -610,13 +612,14 @@ body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
 .formacao-2x1x1 #ala-direita{top:45%;right:29%;left:auto;transform:translateX(50%)}
 .formacao-2x1x1 #pivo{top:17%;left:50%;right:auto;transform:translateX(-50%)}
 
-/* Goleiro-linha · 2-2
-   O goleiro sai da meta e participa da construção. */
-.formacao-goleiro-linha #goleiro{top:57%;bottom:auto;left:50%;right:auto;transform:translateX(-50%)}
-.formacao-goleiro-linha #fixo{top:39%;left:23%;right:auto;transform:none}
-.formacao-goleiro-linha #pivo{top:39%;right:23%;left:auto;transform:none}
-.formacao-goleiro-linha #ala-esquerda{top:17%;left:32%;right:auto;transform:none}
-.formacao-goleiro-linha #ala-direita{top:17%;right:32%;left:auto;transform:none}
+/* Goleiro-linha · 3-2
+   Referência prática de 5x4: o goleiro avança para ser o último homem,
+   com dois jogadores atrás e dois mais adiantados, mantendo os alas em seus lados. */
+.formacao-goleiro-linha #goleiro{top:55%;bottom:auto;left:50%;right:auto;transform:translateX(-50%)}
+.formacao-goleiro-linha #fixo{top:43%;left:27%;right:auto;transform:translateX(-50%)}
+.formacao-goleiro-linha #ala-direita{top:43%;right:27%;left:auto;transform:translateX(50%)}
+.formacao-goleiro-linha #ala-esquerda{top:22%;left:27%;right:auto;transform:translateX(-50%)}
+.formacao-goleiro-linha #pivo{top:22%;right:27%;left:auto;transform:translateX(50%)}
 
 .formation-bar{
     display:flex;
@@ -3124,7 +3127,10 @@ button,a,input,select,textarea{
                 <button class="main-btn" onclick="salvarPerfilInfo()">Salvar perfil</button>
                 <button class="ghost-btn" onclick="limparPerfilInfo()">Limpar informações</button>
             </div>
-            <div class="profile-note">Essas informações ficam salvas neste navegador e podem ser usadas no seu perfil da Comunidade.</div>
+            <div class="profile-note">Sua conta fica vinculada a este dispositivo. Depois da primeira confirmação, você não precisa informar nome novamente.</div>
+            <div class="profile-save-row" style="margin-top:10px">
+                <button class="ghost-btn" onclick="trocarContaDispositivo()">Trocar conta neste dispositivo</button>
+            </div>
         </section>
 
         <section class="profile-tab-panel" id="profilePanelFoto">
@@ -3388,7 +3394,8 @@ async function carregarSalaOnline(){
     }
     try{
         const {data,error}=await sb.from("classroom_seating").select("seating").eq("id",ID_SALA_9B).maybeSingle();
-        if(!error && data?.seating){
+        if(error) throw error;
+        if(data?.seating){
             sala9B=normalizarMapaSala(data.seating);
             localStorage.setItem(CHAVE_SALA_9B,JSON.stringify(sala9B));
         }else{
@@ -3399,6 +3406,26 @@ async function carregarSalaOnline(){
         sala9B=normalizarMapaSala(sala9B);
     }
     renderizarSala9B();
+}
+
+let sala9BRealtime = null;
+
+function iniciarRealtimeSala(){
+    if(!sb || sala9BRealtime) return;
+    sala9BRealtime = sb.channel("9b-classroom-seating")
+        .on("postgres_changes",{event:"*",schema:"public",table:"classroom_seating",filter:`id=eq.${ID_SALA_9B}`},payload=>{
+            const novaSala = payload?.new?.seating;
+            if(!novaSala) return;
+            sala9B = normalizarMapaSala(novaSala);
+            localStorage.setItem(CHAVE_SALA_9B,JSON.stringify(sala9B));
+            salaSelecionado = null;
+            renderizarSala9B();
+        })
+        .subscribe(status=>{
+            if(status === "CHANNEL_ERROR"){
+                console.warn("O mapa da sala não pôde ativar a atualização em tempo real.");
+            }
+        });
 }
 
 async function salvarSalaOnline(){
@@ -5198,12 +5225,17 @@ async function restaurarSessao(){
     usuarioAtual=data.session?.user||null;
     if(usuarioAtual) await verificarAdmin();
 
+    iniciarRealtimeSala();
+    await carregarSalaOnline();
+
     adminVisual=!!souAdmin && sessionStorage.getItem("9B_admin_visual_v1") !== "usuario";
     atualizarInterfaceAdmin();
 
     sb.auth.onAuthStateChange(async (_event,session)=>{
         usuarioAtual=session?.user||null;
         await verificarAdmin();
+        iniciarRealtimeSala();
+        await carregarSalaOnline();
         if(!souAdmin) adminVisual=false;
         atualizarInterfaceAdmin();
     });
@@ -5572,14 +5604,30 @@ function fecharConfirmacaoIdentidade(){
     if(modal && identidadeAtual()) modal.classList.remove("show");
 }
 
-function confirmarIdentidadeInicial(){
+async function confirmarIdentidadeInicial(){
     const input=qs("identidadeNomeInput");
+    const feedback=qs("identityFeedback");
     const nome=validarNomeIdentidade(input?.value||"");
     if(!nome){
-        qs("identityFeedback")?.classList.add("erro");
-        if(qs("identityFeedback")) qs("identityFeedback").textContent="Confirme um nome válido da lista da turma.";
+        feedback?.classList.add("erro");
+        if(feedback) feedback.textContent="Confirme um nome válido da lista da turma.";
         return;
     }
+
+    if(sb){
+        if(feedback){feedback.textContent="Verificando disponibilidade do nome...";feedback.className="identity-feedback";}
+        const reserva=await reivindicarNomeContaOnline(nome);
+        if(!reserva.ok){
+            if(feedback){
+                feedback.textContent = reserva.reason === "nome_em_uso"
+                    ? "Esse nome já está vinculado a outra conta."
+                    : "Não foi possível verificar esse nome agora.";
+                feedback.className="identity-feedback erro";
+            }
+            return;
+        }
+    }
+
     localStorage.setItem(CHAVE_IDENTIDADE_SITE,nome);
     localStorage.setItem(CHAVE_SOCIAL_NOME,nome);
     atualizarNomeSocialUI();
@@ -5859,6 +5907,49 @@ if(!socialVisitorId){
 let socialPosts=[];
 let socialComments=[];
 let socialProfiles={};
+
+async function reivindicarNomeContaOnline(nome){
+    const nomeLimpo=String(nome||'').trim();
+    if(!nomeLimpo || !socialVisitorId) return {ok:false,reason:'nome_invalido'};
+    if(!sb) return {ok:true,offline:true};
+    try{
+        const {data,error}=await sb.rpc('site_claim_name',{p_visitor_id:socialVisitorId,p_display_name:nomeLimpo.slice(0,40)});
+        if(error){
+            console.error('Falha ao reservar o nome da conta.',error);
+            return {ok:false,reason:'erro_servidor',error};
+        }
+        return data || {ok:false,reason:'resposta_invalida'};
+    }catch(error){
+        console.error(error);
+        return {ok:false,reason:'erro_rede',error};
+    }
+}
+
+async function garantirContaDispositivoOnline(){
+    const nome=identidadeAtual();
+    if(!nome) return {ok:false,reason:'sem_nome'};
+    return reivindicarNomeContaOnline(nome);
+}
+
+async function trocarContaDispositivo(){
+    if(!confirm('Trocar a conta deste dispositivo? A conta atual continuará existindo e o nome dela continuará reservado.')) return;
+
+    localStorage.removeItem(CHAVE_IDENTIDADE_SITE);
+    localStorage.removeItem(CHAVE_SOCIAL_NOME);
+    localStorage.removeItem(CHAVE_PERFIL_FOTO);
+    localStorage.removeItem(CHAVE_PERFIL_INFO);
+    localStorage.removeItem(CHAVE_PERFIL_CROP);
+
+    socialVisitorId = (crypto?.randomUUID ? crypto.randomUUID() : `9b-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    localStorage.setItem(CHAVE_SOCIAL_VISITOR,socialVisitorId);
+    socialProfiles={};
+
+    fecharPerfil();
+    atualizarAvatarPerfil();
+    prepararNomeSocialInput();
+    abrirConfirmacaoIdentidade(false);
+}
+
 let socialStats={};
 let socialMyReactions={};
 let socialSort="recentes";
@@ -5892,6 +5983,11 @@ function normalizarLinkPerfil(valor,tipo){
 async function sincronizarMeuPerfilOnline(){
     if(!sb || !socialVisitorId || !identidadeAtual()) return;
     try{
+        const reserva=await reivindicarNomeContaOnline(identidadeAtual());
+        if(!reserva.ok){
+            console.warn('A conta deste dispositivo não possui mais o nome reservado.',reserva);
+            return;
+        }
         const info=lerInfoPerfil();
         const crop=lerCropPerfil();
         const foto=fotoPerfilAtual();
@@ -6443,6 +6539,20 @@ async function excluirSocialComentario(id){
 
 function renderizarAdminSocialIndicadores(){}
 
+async function validarContaInicialNoServidor(){
+    const nome=identidadeAtual();
+    if(!nome || !sb) return true;
+    const resultado=await garantirContaDispositivoOnline();
+    if(resultado.ok) return true;
+
+    // O nome pode ter sido reservado por outra pessoa após perda/alteração do dispositivo.
+    localStorage.removeItem(CHAVE_IDENTIDADE_SITE);
+    localStorage.removeItem(CHAVE_SOCIAL_NOME);
+    mostrarToast('Este dispositivo precisa confirmar uma conta novamente.');
+    abrirConfirmacaoIdentidade(false);
+    return false;
+}
+
 /* =========================================================
    GLOBALS
    ========================================================= */
@@ -6450,6 +6560,7 @@ window.mostrarPagina = mostrarPagina;
 window.alternarTema = alternarTema;
 window.abrirPerfil = abrirPerfil;
 window.fecharPerfil = fecharPerfil;
+window.trocarContaDispositivo = trocarContaDispositivo;
 window.abrirPerfilPublico = abrirPerfilPublico;
 window.fecharPerfilPublico = fecharPerfilPublico;
 window.sincronizarMeuPerfilOnline = sincronizarMeuPerfilOnline;
@@ -6537,10 +6648,6 @@ window.salvarPowerConfig = salvarPowerConfig;
 window.carregarPowerConfig = carregarPowerConfig;
 window.carregarPowerConfigLocal = carregarPowerConfigLocal;
 window.restaurarPowerPadrao = restaurarPowerPadrao;
-window.alternarModoInformacoes = alternarModoInformacoes;
-window.aplicarPowerConfig = aplicarPowerConfig;
-window.powerPreview = powerPreview;
-
 
 /* =========================================================
    INÍCIO
@@ -6549,7 +6656,9 @@ renderizarDadosDemo();
 atualizarAvatarPerfil();
 prepararNomeSocialInput();
 if(!identidadeAtual()) abrirConfirmacaoIdentidade(false);
-else { void sincronizarMeuPerfilOnline(); }
+else {
+    void validarContaInicialNoServidor();
+}
 preencherPowerInputs(POWER_DEFAULTS);
 restaurarVisualNormal();
 iniciarThree();
