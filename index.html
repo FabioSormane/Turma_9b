@@ -483,6 +483,8 @@ body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
 .player-row:active{cursor:grabbing}
 .player-row.selected{border-color:var(--accent);box-shadow:0 0 0 2px rgba(183,255,26,.12)}
 .player-row span{font-size:14px;pointer-events:none}
+.admin-name-gold{color:#d6ad4b !important;font-weight:1000;text-shadow:0 0 10px rgba(214,173,75,.12);}
+.admin-name-badge{display:inline-flex;align-items:center;gap:5px;margin-left:7px;padding:3px 6px;border:1px solid rgba(214,173,75,.34);border-radius:999px;background:rgba(214,173,75,.09);color:#e4c66f;font-size:8px;font-weight:1000;letter-spacing:.08em;text-transform:uppercase;vertical-align:middle;line-height:1;}
 .field-wrap{
     border:1px solid var(--line);
     border-radius:22px;
@@ -621,6 +623,41 @@ body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
 .formacao-goleiro-linha #ala-esquerda{top:22%;left:27%;right:auto;transform:translateX(-50%)}
 .formacao-goleiro-linha #pivo{top:22%;right:27%;left:auto;transform:translateX(50%)}
 
+.interclasse-time-switch{
+    display:flex;
+    gap:8px;
+    margin:0 0 8px;
+    padding:5px;
+    border:1px solid var(--line);
+    border-radius:14px;
+    background:var(--bg2);
+    width:max-content;
+    max-width:100%;
+}
+.interclasse-time-switch button{
+    border:1px solid transparent;
+    background:transparent;
+    color:var(--muted);
+    padding:9px 13px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:800;
+    font-size:12px;
+    transition:.18s ease;
+}
+.interclasse-time-switch button:hover{color:var(--text);background:rgba(255,255,255,.04)}
+.interclasse-time-switch button.active{
+    background:var(--accent);
+    color:#0b0b0b;
+    border-color:var(--accent);
+}
+.interclasse-time-note{
+    color:var(--muted);
+    font-size:11px;
+    line-height:1.5;
+    margin:0 0 13px;
+}
+
 .formation-bar{
     display:flex;
     flex-wrap:wrap;
@@ -683,6 +720,66 @@ body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
     margin-bottom:12px;
 }
 .event-list{display:grid;gap:9px}
+.agenda-data{
+    display:inline-block;
+    margin-left:6px;
+    font-size:10px;
+    letter-spacing:.04em;
+    color:var(--muted);
+    font-weight:700;
+}
+.agenda-lista-titulo{
+    margin:15px 0 8px;
+    font-size:9px;
+    letter-spacing:.15em;
+    color:var(--muted);
+    font-weight:900;
+}
+.cronograma-box{
+    border:1px solid var(--line);
+    background:var(--bg2);
+    border-radius:14px;
+    padding:10px;
+}
+.cronograma-titulo{
+    font-size:9px;
+    letter-spacing:.15em;
+    color:var(--accent);
+    font-weight:900;
+    margin-bottom:8px;
+}
+.cronograma-dia{display:grid;gap:6px}
+.aula-item{
+    display:grid;
+    grid-template-columns:28px minmax(0,1fr);
+    align-items:center;
+    gap:8px;
+    min-height:36px;
+    padding:5px 7px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--card);
+}
+.aula-num{
+    width:28px;
+    height:28px;
+    display:grid;
+    place-items:center;
+    border-radius:8px;
+    background:var(--accent);
+    color:#0b0b0b;
+    font-size:11px;
+    font-weight:900;
+}
+.aula-nome{font-size:12px;font-weight:800;line-height:1.15}
+.cronograma-vazio{
+    padding:10px;
+    border:1px dashed var(--line);
+    border-radius:10px;
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.35;
+}
 .event{
     position:relative;
     padding:12px 12px 12px 18px;
@@ -2257,6 +2354,18 @@ button,a,input,select,textarea{
         overflow:visible;
     }
 
+    #conteudoInterclasse .interclasse-time-switch{
+        width:100%;
+        max-width:100%;
+        overflow-x:auto;
+        scrollbar-width:none;
+    }
+    #conteudoInterclasse .interclasse-time-switch::-webkit-scrollbar{display:none;}
+    #conteudoInterclasse .interclasse-time-switch button{
+        flex:1 0 auto;
+        white-space:nowrap;
+    }
+
     #conteudoInterclasse .admin-bar{
         width:100%;
         min-width:0;
@@ -2769,7 +2878,7 @@ button,a,input,select,textarea{
     <div id="conteudoInterclasse" style="display:none">
         <div class="admin-bar show">
             <div>
-                <strong>Interclasse compartilhado</strong><br>
+                <strong>Interclasse compartilhado · <span id="interclasseNomeTime">Time principal</span></strong><br>
                 <span>As alterações feitas por qualquer pessoa com acesso aparecem para todos.</span>
                 <div class="interclasse-last-change" id="ultimaMudancaInterclasse">Última mudança feita por: <strong>—</strong></div>
             </div>
@@ -2779,6 +2888,12 @@ button,a,input,select,textarea{
                 <button class="ghost-btn small-btn" onclick="bloquearInterclasse()">Bloquear</button>
             </div>
         </div>
+
+        <div class="interclasse-time-switch" id="interclasseTimeSwitch">
+            <button type="button" class="active" id="btnTimePrincipal" onclick="alternarTimeInterclasse('principal')">Time principal</button>
+            <button type="button" id="btnTimeReserva" onclick="alternarTimeInterclasse('reserva')">Time reserva</button>
+        </div>
+        <div class="interclasse-time-note" id="interclasseTimeNote">Escalação, formação, bola parada e jogadores do time principal.</div>
 
         <div class="team-grid">
             <div>
@@ -2943,9 +3058,29 @@ button,a,input,select,textarea{
     </div>
 
     <div class="agenda-grid">
-        <div class="agenda-column"><h3>HOJE</h3><div class="event-list" id="agendaHoje"></div></div>
-        <div class="agenda-column"><h3>AMANHÃ</h3><div class="event-list" id="agendaAmanha"></div></div>
-        <div class="agenda-column"><h3>PRÓXIMA SEMANA</h3><div class="event-list" id="agendaProxima"></div></div>
+        <div class="agenda-column">
+            <h3>HOJE <span class="agenda-data" id="agendaDataHoje"></span></h3>
+            <div class="cronograma-box">
+                <div class="cronograma-titulo">CRONOGRAMA DE AULAS</div>
+                <div class="cronograma-dia" id="cronogramaHoje"></div>
+            </div>
+            <div class="agenda-lista-titulo">COMPROMISSOS</div>
+            <div class="event-list" id="agendaHoje"></div>
+        </div>
+        <div class="agenda-column">
+            <h3>AMANHÃ <span class="agenda-data" id="agendaDataAmanha"></span></h3>
+            <div class="cronograma-box">
+                <div class="cronograma-titulo">CRONOGRAMA DE AULAS</div>
+                <div class="cronograma-dia" id="cronogramaAmanha"></div>
+            </div>
+            <div class="agenda-lista-titulo">COMPROMISSOS</div>
+            <div class="event-list" id="agendaAmanha"></div>
+        </div>
+        <div class="agenda-column">
+            <h3>PRÓXIMA SEMANA</h3>
+            <div class="agenda-lista-titulo">COMPROMISSOS</div>
+            <div class="event-list" id="agendaProxima"></div>
+        </div>
     </div>
 
     <div class="admin-tools" id="agendaAdmin">
@@ -3242,11 +3377,37 @@ let souAdmin = false;
 
 const CHAVE_DESBLOQUEIO = "9B_interclasse_desbloqueado_v2";
 const CHAVE_JOGADORES = "9B_jogadores_interclasse_v2";
-const CHAVE_TEMA = "9B_tema_v2";
 const CHAVE_FORMACAO = "9B_formacao_v3";
 const CHAVE_BOLA = "9B_bola_parada_v3";
+const CHAVE_TEMA = "9B_tema_v2";
 const CHAVE_INTERCLASSE_NOME = "9B_interclasse_nome_v1";
-const ID_ESTADO_INTERCLASSE = "principal";
+const CHAVE_TIME_INTERCLASSE_ATIVO = "9B_time_interclasse_ativo_v1";
+
+const CONFIG_TIMES_INTERCLASSE = {
+    principal: {
+        id: "principal",
+        nome: "Time principal",
+        descricao: "Escalação, formação, bola parada e jogadores do time principal.",
+        jogadoresKey: CHAVE_JOGADORES,
+        mapaKey: "9B_mapa_posicoes_v3",
+        formacaoKey: CHAVE_FORMACAO,
+        bolaKey: CHAVE_BOLA,
+        jogadoresPadrao: ["Kaio","Arthur","Nicolas","Bruce","Cauã","Junior","Rodrigo","Paulo","Fabio"]
+    },
+    reserva: {
+        id: "reserva",
+        nome: "Time reserva",
+        descricao: "Escalação, formação, bola parada e jogadores do time reserva.",
+        jogadoresKey: "9B_jogadores_interclasse_reserva_v1",
+        mapaKey: "9B_mapa_posicoes_reserva_v1",
+        formacaoKey: "9B_formacao_reserva_v1",
+        bolaKey: "9B_bola_parada_reserva_v1",
+        jogadoresPadrao: []
+    }
+};
+
+let timeInterclasseAtual = localStorage.getItem(CHAVE_TIME_INTERCLASSE_ATIVO) || "principal";
+if(!CONFIG_TIMES_INTERCLASSE[timeInterclasseAtual]) timeInterclasseAtual = "principal";
 
 const senhaInterclasse = "1425762";
 
@@ -3268,6 +3429,24 @@ function normalizarNomeBusca(valor){
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "")
         .trim();
+}
+
+const NOME_ADMIN_REAL = "Fabio";
+const NOME_ADMIN_EXIBICAO = "Bolinha Delas";
+
+function ehNomeAdminVisual(nome){
+    return normalizarNomeBusca(nome) === normalizarNomeBusca(NOME_ADMIN_REAL);
+}
+
+function nomeExibicaoAluno(nome){
+    return ehNomeAdminVisual(nome) ? NOME_ADMIN_EXIBICAO : String(nome || "");
+}
+
+function nomeExibicaoHTML(nome){
+    const texto = esc(nomeExibicaoAluno(nome));
+    return ehNomeAdminVisual(nome)
+        ? `<span class="admin-name-gold">${texto}</span><span class="admin-name-badge">ADMIN</span>`
+        : texto;
 }
 
 function distanciaLevenshtein(a,b){
@@ -3315,15 +3494,38 @@ function candidatosAluno(consulta){
         .map(item=>item.nome);
 }
 
-let jogadores = JSON.parse(localStorage.getItem(CHAVE_JOGADORES)) || [
-    "Kaio","Arthur","Nicolas","Bruce","Cauã","Junior","Rodrigo","Paulo","Fabio"
-];
+function configTimeInterclasse(tipo=timeInterclasseAtual){
+    return CONFIG_TIMES_INTERCLASSE[tipo] || CONFIG_TIMES_INTERCLASSE.principal;
+}
 
-jogadores = jogadores.filter(nome =>
-    alunosDaTurma.includes(nome) && !nomesFemininosInterclasse.has(nome)
-);
+function estadoLocalDoTime(tipo=timeInterclasseAtual){
+    const cfg = configTimeInterclasse(tipo);
+    let lista = JSON.parse(localStorage.getItem(cfg.jogadoresKey));
+    if(!Array.isArray(lista)) lista = cfg.jogadoresPadrao.slice();
+    lista = lista.filter(nome => alunosDaTurma.includes(nome) && !nomesFemininosInterclasse.has(nome));
 
-localStorage.setItem(CHAVE_JOGADORES,JSON.stringify(jogadores));
+    const mapaSalvo = JSON.parse(localStorage.getItem(cfg.mapaKey));
+    const mapa = (mapaSalvo && typeof mapaSalvo === "object") ? mapaSalvo : {goleiro:null,fixo:null,"ala-esquerda":null,"ala-direita":null,pivo:null};
+
+    let formacao = localStorage.getItem(cfg.formacaoKey) || "formacao-3x1";
+    const formacoesValidas = new Set([
+        "formacao-3x1","formacao-2x2","formacao-4x0","formacao-3x1-recuado",
+        "formacao-1x2x1","formacao-1x3","formacao-2x1x1","formacao-goleiro-linha"
+    ]);
+    if(!formacoesValidas.has(formacao)) formacao = "formacao-3x1";
+
+    const bola = JSON.parse(localStorage.getItem(cfg.bolaKey)) || {};
+    return {jogadores:lista,mapaPosicoes:mapa,formacaoAtual:formacao,bola};
+}
+
+let estadoInicialDoTime = estadoLocalDoTime(timeInterclasseAtual);
+let jogadores = estadoInicialDoTime.jogadores;
+let mapaPosicoes = estadoInicialDoTime.mapaPosicoes;
+let formacaoAtual = estadoInicialDoTime.formacaoAtual;
+
+localStorage.setItem(configTimeInterclasse().jogadoresKey,JSON.stringify(jogadores));
+localStorage.setItem(configTimeInterclasse().mapaKey,JSON.stringify(mapaPosicoes));
+localStorage.setItem(configTimeInterclasse().formacaoKey,formacaoAtual);
 
 const formacoes = {
     "formacao-3x1": {nome:"3-1 · Diamante"},
@@ -3336,12 +3538,8 @@ const formacoes = {
     "formacao-goleiro-linha": {nome:"Goleiro-linha · 2-2"}
 };
 
-let formacaoAtual = localStorage.getItem(CHAVE_FORMACAO) || "formacao-3x1";
 let jogadorSelecionado = null;
 let jogadorArrastado = null;
-let mapaPosicoes = JSON.parse(localStorage.getItem("9B_mapa_posicoes_v3")) || {
-    goleiro:null,fixo:null,"ala-esquerda":null,"ala-direita":null,pivo:null
-};
 
 const CHAVE_SALA_9B = "9B_sala_cadeiras_v1";
 const ID_SALA_9B = "main";
@@ -3640,6 +3838,7 @@ function mostrarPagina(id){
     }
 
     if(id === "interclasse" && estaDesbloqueado()){
+        atualizarSeletorDeTimeInterclasse();
         carregarInterclasseOnline({mostrarErro:false});
     }
 
@@ -3857,6 +4056,67 @@ function formatarData(data){
     return `${d}/${m}/${y}`;
 }
 
+/* =========================================================
+   CRONOGRAMA ESCOLAR
+   1 = segunda ... 5 = sexta.
+   O dia é calculado automaticamente pela data local do navegador.
+========================================================= */
+const cronogramaEscolar = {
+    1:["Geografia","Matemática","Ciências","Português","Artes"],
+    2:["Ed. Física","Inglês","Português","Geografia","Artes"],
+    3:["Laboratório/Afetivo","Matemática","História","Português","Inglês"],
+    4:["Matemática","Português","Português","Ed. Física","História"],
+    5:["Matemática","Ciências","Matemática","História","Geografia"]
+};
+
+const nomesDiasSemana = [
+    "Domingo",
+    "Segunda-feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado"
+];
+
+function obterDataAgenda(offsetDias=0){
+    const agora = new Date();
+    return new Date(agora.getFullYear(),agora.getMonth(),agora.getDate()+offsetDias);
+}
+
+function renderizarCronogramaDia(data, containerId, dataId){
+    const container = document.getElementById(containerId);
+    const label = document.getElementById(dataId);
+    if(!container) return;
+
+    const diaSemana = data.getDay();
+    const dataTexto = data.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"});
+
+    if(label){
+        label.textContent = `${nomesDiasSemana[diaSemana]} · ${dataTexto}`;
+    }
+
+    const aulas = cronogramaEscolar[diaSemana] || [];
+
+    if(!aulas.length){
+        container.innerHTML = `<div class="cronograma-vazio">Sem aulas previstas para ${esc(nomesDiasSemana[diaSemana].toLowerCase())}.</div>`;
+        return;
+    }
+
+    container.innerHTML = aulas.map((materia,index)=>`
+        <div class="aula-item">
+            <span class="aula-num">${index+1}</span>
+            <span class="aula-nome">${esc(materia)}</span>
+        </div>
+    `).join("");
+}
+
+function renderizarCronogramaAgenda(){
+    renderizarCronogramaDia(obterDataAgenda(0),"cronogramaHoje","agendaDataHoje");
+    renderizarCronogramaDia(obterDataAgenda(1),"cronogramaAmanha","agendaDataAmanha");
+}
+
+
 function calcularTextoContagem(data){
     if(!data) return "";
     const agora = new Date();
@@ -3899,6 +4159,8 @@ function montarEventoHTML(evento){
 }
 
 function renderizarAgenda(){
+    renderizarCronogramaAgenda();
+
     const grupos = {
         hoje: document.getElementById("agendaHoje"),
         amanha: document.getElementById("agendaAmanha"),
@@ -3926,6 +4188,13 @@ function renderizarAgenda(){
     document.getElementById("countProxima").textContent = contagens.proxima || 0;
 
     renderizarAgendaAdmin();
+}
+
+let timerCronogramaEscolar = null;
+if(!timerCronogramaEscolar){
+    timerCronogramaEscolar = setInterval(()=>{
+        renderizarCronogramaAgenda();
+    },60000);
 }
 
 function renderizarAgendaAdmin(){
@@ -4441,7 +4710,8 @@ function lerBolaParadaAtual(){
 }
 
 function aplicarBolaParadaInterclasse(dados = {}){
-    localStorage.setItem(CHAVE_BOLA,JSON.stringify(dados));
+    const cfg = configTimeInterclasse();
+    localStorage.setItem(cfg.bolaKey,JSON.stringify(dados));
     const selects = ["faltaSelect","escanteioSelect","penaltiSelect"];
     selects.forEach(id=>{
         const el = document.getElementById(id);
@@ -4450,9 +4720,62 @@ function aplicarBolaParadaInterclasse(dados = {}){
 }
 
 function salvarEstadoInterclasseLocal(){
-    localStorage.setItem(CHAVE_JOGADORES,JSON.stringify(jogadores));
-    localStorage.setItem("9B_mapa_posicoes_v3",JSON.stringify(mapaPosicoes));
-    localStorage.setItem(CHAVE_FORMACAO,formacaoAtual);
+    const cfg = configTimeInterclasse();
+    localStorage.setItem(cfg.jogadoresKey,JSON.stringify(jogadores));
+    localStorage.setItem(cfg.mapaKey,JSON.stringify(mapaPosicoes));
+    localStorage.setItem(cfg.formacaoKey,formacaoAtual);
+}
+
+function carregarEstadoInterclasseLocal(tipo=timeInterclasseAtual){
+    const estado = estadoLocalDoTime(tipo);
+    jogadores = estado.jogadores;
+    mapaPosicoes = estado.mapaPosicoes;
+    formacaoAtual = estado.formacaoAtual;
+    jogadorSelecionado = null;
+    jogadorArrastado = null;
+    localStorage.setItem(configTimeInterclasse(tipo).jogadoresKey,JSON.stringify(jogadores));
+    localStorage.setItem(configTimeInterclasse(tipo).mapaKey,JSON.stringify(mapaPosicoes));
+    localStorage.setItem(configTimeInterclasse(tipo).formacaoKey,formacaoAtual);
+    aplicarBolaParadaInterclasse(estado.bola);
+}
+
+function atualizarSeletorDeTimeInterclasse(){
+    const cfg = configTimeInterclasse();
+    const nome = document.getElementById("interclasseNomeTime");
+    const nota = document.getElementById("interclasseTimeNote");
+    const principal = document.getElementById("btnTimePrincipal");
+    const reserva = document.getElementById("btnTimeReserva");
+    if(nome) nome.textContent = cfg.nome;
+    if(nota) nota.textContent = cfg.descricao;
+    if(principal) principal.classList.toggle("active",timeInterclasseAtual === "principal");
+    if(reserva) reserva.classList.toggle("active",timeInterclasseAtual === "reserva");
+}
+
+async function alternarTimeInterclasse(tipo){
+    if(!estaDesbloqueado()) return;
+    if(!CONFIG_TIMES_INTERCLASSE[tipo]) return;
+    if(tipo === timeInterclasseAtual){
+        await sincronizarInterclasseManual();
+        return;
+    }
+
+    salvarEstadoInterclasseLocal();
+    timeInterclasseAtual = tipo;
+    localStorage.setItem(CHAVE_TIME_INTERCLASSE_ATIVO,timeInterclasseAtual);
+    carregarEstadoInterclasseLocal(timeInterclasseAtual);
+    atualizarSeletorDeTimeInterclasse();
+    ultimaMudancaInterclasseEm = "";
+    renderizarJogadores();
+    montarBotoesFormacao();
+    aplicarFormacao();
+    renderizarUltimaMudancaInterclasse("","");
+
+    const remoto = await carregarInterclasseOnline({mostrarErro:false});
+    if(!remoto || !remoto.ultima_mudanca_por){
+        await sincronizarPrimeiroAcessoInterclasse();
+    }
+
+    mostrarToast(`${configTimeInterclasse().nome} carregado.`);
 }
 
 async function carregarInterclasseOnline(opcoes={}){
@@ -4461,7 +4784,7 @@ async function carregarInterclasseOnline(opcoes={}){
     const {data,error} = await sb
         .from("interclasse_estado")
         .select("*")
-        .eq("id",ID_ESTADO_INTERCLASSE)
+        .eq("id",configTimeInterclasse().id)
         .maybeSingle();
 
     if(error){
@@ -4515,7 +4838,7 @@ async function salvarEstadoInterclasseOnline(){
     const bola = lerBolaParadaAtual();
 
     const payload = {
-        id:ID_ESTADO_INTERCLASSE,
+        id:configTimeInterclasse().id,
         jogadores,
         mapa_posicoes:mapaPosicoes,
         formacao:formacaoAtual,
@@ -4549,7 +4872,7 @@ async function sincronizarPrimeiroAcessoInterclasse(){
     const {data,error} = await sb
         .from("interclasse_estado")
         .select("ultima_mudanca_por,ultima_mudanca_em")
-        .eq("id",ID_ESTADO_INTERCLASSE)
+        .eq("id",configTimeInterclasse().id)
         .maybeSingle();
 
     if(error){
@@ -4650,6 +4973,8 @@ async function liberarInterclasse(){
     document.getElementById("interclasseAcesso").style.display = "none";
     document.getElementById("conteudoInterclasse").style.display = "block";
     document.getElementById("gerenciamento").classList.add("show");
+    carregarEstadoInterclasseLocal(timeInterclasseAtual);
+    atualizarSeletorDeTimeInterclasse();
     renderizarJogadores();
     montarBotoesFormacao();
     aplicarFormacao();
@@ -4825,12 +5150,12 @@ async function removerAluno(nome){
 function renderizarJogadores(){
     const box = document.getElementById("listaJogadores");
     box.innerHTML = jogadores.map(nome=>`
-        <div class="player-row"
+        <div class="player-row" data-jogador-nome="${esc(nome)}"
              draggable="true"
              ondragstart="iniciarArraste(event,'${esc(nome)}')"
              onpointerdown="iniciarToqueJogador(event,'${esc(nome)}')"
              onclick="selecionarJogador('${esc(nome)}')">
-            <span>${esc(nome)}</span>
+            <span>${nomeExibicaoHTML(nome)}</span>
             <button class="danger-btn small-btn" onclick="event.stopPropagation();removerAluno('${esc(nome)}')">Remover</button>
         </div>
     `).join("");
@@ -4840,11 +5165,11 @@ function renderizarJogadores(){
         if(!select) return;
         const valorAtual = select.value;
         select.innerHTML = `<option value="">Selecionar...</option>` +
-            jogadores.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join("");
+            jogadores.map(n=>`<option value="${esc(n)}">${esc(nomeExibicaoAluno(n))}${ehNomeAdminVisual(n) ? " · ADMIN" : ""}</option>`).join("");
         if(jogadores.includes(valorAtual)) select.value = valorAtual;
     });
 
-    const bola = JSON.parse(localStorage.getItem(CHAVE_BOLA)) || {};
+    const bola = JSON.parse(localStorage.getItem(configTimeInterclasse().bolaKey)) || {};
     if(bola.falta) document.getElementById("faltaSelect").value = bola.falta;
     if(bola.escanteio) document.getElementById("escanteioSelect").value = bola.escanteio;
     if(bola.penalti) document.getElementById("penaltiSelect").value = bola.penalti;
@@ -5007,7 +5332,7 @@ async function colocarJogador(posicao,nome){
 
 function atualizarSelecoes(){
     document.querySelectorAll(".player-row").forEach(row=>{
-        const nome = row.querySelector("span")?.textContent;
+        const nome = row.getAttribute("data-jogador-nome") || "";
         row.classList.toggle("selected",nome === jogadorSelecionado);
     });
 
@@ -5022,7 +5347,7 @@ function atualizarCampo(){
         const el = document.getElementById(pos);
         if(!el) return;
         const span = el.querySelector(".name");
-        span.textContent = nome || "Vazio";
+        span.innerHTML = nome ? nomeExibicaoHTML(nome) : "Vazio";
     });
     atualizarSelecoes();
 }
@@ -5559,6 +5884,14 @@ function validarNomeIdentidade(valor){
     return null;
 }
 
+function aplicarNomeAdminVisualGlobal(){
+    document.querySelectorAll(".aluno, .classroom-name").forEach(el=>{
+        const texto=el.textContent.trim();
+        if(!ehNomeAdminVisual(texto)) return;
+        el.innerHTML=nomeExibicaoHTML(NOME_ADMIN_REAL);
+    });
+}
+
 function atualizarNomeSocialUI(){
     const nome=identidadeAtual();
     const input=qs("socialNome");
@@ -6060,7 +6393,7 @@ async function abrirPerfilPublico(visitorId){
     const avatar=qs('publicProfileAvatar');
     if(avatar){avatar.src=perfil.avatar_url || AVATAR_PADRAO_PERFIL;avatar.style.cssText=cropStylePerfil(perfil);}
     const nome=perfil.display_name || 'Aluno';
-    if(qs('publicProfileTitle')) qs('publicProfileTitle').textContent=nome;
+    if(qs('publicProfileTitle')) qs('publicProfileTitle').innerHTML=nomeExibicaoHTML(nome);
     if(qs('publicProfilePronouns')) qs('publicProfilePronouns').textContent=perfil.pronouns || '';
     if(qs('publicProfileBio')) qs('publicProfileBio').textContent=perfil.bio || '';
     const links=qs('publicProfileLinks');
@@ -6156,6 +6489,7 @@ function renderizarOriginalSocial(original){
         ? `<img class="social-media" src="${esc(original.media_url)}" alt="Mídia do post original" loading="lazy">`
         : "";
     const nomeOriginal=original.is_anonymous ? "Anônimo" : (original.author_name || "Anônimo");
+    const nomeOriginalHtml=original.is_anonymous ? "Anônimo" : nomeExibicaoHTML(nomeOriginal);
     const perfilOriginal=original.is_anonymous ? null : socialProfiles[String(original.visitor_id)];
     const avatarOriginal=perfilOriginal?.avatar_url || AVATAR_PADRAO_PERFIL;
     const styleOriginal=perfilOriginal ? cropStylePerfil(perfilOriginal) : "";
@@ -6165,7 +6499,7 @@ function renderizarOriginalSocial(original){
             <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(original.visitor_id)}')">
                 <div class="social-avatar"><img src="${esc(avatarOriginal)}" alt="Foto de ${esc(nomeOriginal)}" style="${styleOriginal}"></div>
             </button>
-            <div class="social-author-text"><button class="social-profile-link" onclick="abrirPerfilPublico('${esc(original.visitor_id)}')"><strong>${esc(nomeOriginal)}</strong></button></div>
+            <div class="social-author-text"><button class="social-profile-link" onclick="abrirPerfilPublico('${esc(original.visitor_id)}')"><strong>${nomeOriginalHtml}</strong></button></div>
         </div>`;
     return `<div class="social-repost-shell">
         <div class="social-repost-label">Post republicado</div>
@@ -6177,6 +6511,7 @@ function renderizarOriginalSocial(original){
 
 function renderizarSocialPost(post){
     const autorExibido=post.is_anonymous ? "Anônimo" : (post.author_name || "Anônimo");
+    const autorExibidoHtml=post.is_anonymous ? "Anônimo" : nomeExibicaoHTML(autorExibido);
     const stats=statsDoPostSocial(post.id);
     const minhaReacao=socialMyReactions[post.id] || "";
     const comentarios=comentariosDoPostSocial(post.id);
@@ -6200,7 +6535,8 @@ function renderizarSocialPost(post){
         const perfilComentario=socialProfiles[String(c.visitor_id)];
         const avatarComentario=perfilComentario?.avatar_url || AVATAR_PADRAO_PERFIL;
         const styleComentario=perfilComentario ? cropStylePerfil(perfilComentario) : "";
-        const autorComentario=esc(c.author_name||"Aluno");
+        const autorComentarioRaw=c.author_name||"Aluno";
+        const autorComentario=nomeExibicaoHTML(autorComentarioRaw);
         return `<div class="social-comment">
             <div class="social-comment-head">
                 <div class="social-comment-author">
@@ -6220,10 +6556,10 @@ function renderizarSocialPost(post){
         ? `<div class="social-author"><div class="social-avatar">?</div><div class="social-author-text"><strong>Anônimo</strong><span>${tempoRelativoSocial(post.created_at)}${post.repost_of ? " · republicação" : ""}</span></div></div>`
         : `<div class="social-author">
             <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(post.visitor_id)}')" aria-label="Abrir perfil de ${esc(autorExibido)}">
-                <div class="social-avatar"><img src="${esc(avatarPost)}" alt="Foto de ${esc(autorExibido)}" style="${avatarPostStyle}"></div>
+                <div class="social-avatar"><img src="${esc(avatarPost)}" alt="Foto de ${esc(nomeExibicaoAluno(autorExibido))}" style="${avatarPostStyle}"></div>
             </button>
             <div class="social-author-text">
-                <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(post.visitor_id)}')"><strong>${esc(autorExibido)}</strong></button>
+                <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(post.visitor_id)}')"><strong>${autorExibidoHtml}</strong></button>
                 <span>${tempoRelativoSocial(post.created_at)}${post.repost_of ? " · republicação" : ""}</span>
             </div>
         </div>`;
@@ -6598,6 +6934,7 @@ window.teclaNomeInterclasse = teclaNomeInterclasse;
 window.bloquearInterclasse = bloquearInterclasse;
 window.trocarNomeInterclasse = trocarNomeInterclasse;
 window.sincronizarInterclasseManual = sincronizarInterclasseManual;
+window.alternarTimeInterclasse = alternarTimeInterclasse;
 window.adicionarAluno = adicionarAluno;
 window.removerAluno = removerAluno;
 window.buscarAlunoDigitado = buscarAlunoDigitado;
@@ -6655,6 +6992,7 @@ window.restaurarPowerPadrao = restaurarPowerPadrao;
 renderizarDadosDemo();
 atualizarAvatarPerfil();
 prepararNomeSocialInput();
+aplicarNomeAdminVisualGlobal();
 if(!identidadeAtual()) abrirConfirmacaoIdentidade(false);
 else {
     void validarContaInicialNoServidor();
@@ -6673,6 +7011,9 @@ if(estaDesbloqueado()){
     const nomeInput = document.getElementById("nomeInterclasse");
     if(nomeInput) nomeInput.value = obterNomeInterclasse();
     liberarInterclasse();
+}else{
+    carregarEstadoInterclasseLocal(timeInterclasseAtual);
+    atualizarSeletorDeTimeInterclasse();
 }
 
 /* Atualiza contagens sem precisar recarregar */
