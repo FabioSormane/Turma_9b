@@ -256,6 +256,103 @@ body.light .logo-card{background:rgba(255,255,255,.82);border-color:#ddd}
 }
 .roster li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--line)}
 
+/* =========================================================
+   SALA DO 9º B — MAPA DE ASSENTOS
+   ========================================================= */
+.classroom-card{overflow:hidden;}
+.classroom-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px;}
+.classroom-heading h3{margin-bottom:5px;}
+.classroom-heading p{color:var(--muted);font-size:12px;line-height:1.55;max-width:760px;}
+.classroom-status{display:inline-flex;align-items:center;min-height:32px;padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--muted);font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
+body.admin-mode .classroom-status{color:#171006;border-color:rgba(214,173,75,.4);background:linear-gradient(145deg,#eed58a,#c59635);}
+.classroom-wrap{border:1px solid var(--line);border-radius:18px;background:linear-gradient(145deg,#161616,#0b0b0b);padding:14px;overflow-x:auto;}
+body.light .classroom-wrap{background:linear-gradient(145deg,#f1f5f2,#e4ebe6);}
+.classroom-board{position:relative;min-width:540px;padding:48px 12px 16px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:
+    radial-gradient(circle at 50% 0%,rgba(183,255,26,.05),transparent 30%),
+    repeating-linear-gradient(90deg,rgba(255,255,255,.018) 0 1px,transparent 1px 54px),
+    #101010;}
+body.light .classroom-board{border-color:#dce4de;background:
+    radial-gradient(circle at 50% 0%,rgba(143,197,42,.08),transparent 30%),
+    repeating-linear-gradient(90deg,rgba(24,35,28,.025) 0 1px,transparent 1px 54px),
+    #edf2ee;}
+.classroom-teacher{position:absolute;top:11px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;justify-content:center;min-width:190px;min-height:30px;padding:6px 12px;border:1px solid var(--line);border-radius:9px;background:var(--card2);color:var(--muted);font-size:10px;font-weight:900;letter-spacing:.12em;}
+.classroom-front-line{position:absolute;top:45px;left:12px;right:12px;height:1px;background:var(--line);}
+.info-view-switch{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:14px;}
+.info-view-btn{min-width:150px;}
+.alunos-alfabetica-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;}
+.aluno-info-card{position:relative;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:var(--bg2);font-weight:800;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:50px;}
+.aluno-info-card .aluno-tag{font-size:9px;text-transform:uppercase;letter-spacing:.08em;padding:4px 6px;border-radius:6px;color:var(--muted);border:1px solid var(--line);background:var(--card2);white-space:nowrap;}
+.aluno-info-card.representante{border-color:rgba(183,255,26,.65);background:linear-gradient(145deg,rgba(183,255,26,.13),var(--card));box-shadow:0 8px 22px rgba(0,0,0,.12);}
+.aluno-info-card.representante .aluno-tag{color:#0b0b0b;background:var(--accent);border-color:var(--accent);font-weight:900;}
+.aluno-info-card.vice{border-color:rgba(183,255,26,.42);background:linear-gradient(145deg,rgba(183,255,26,.07),var(--card));}
+.aluno-info-card.vice .aluno-tag{color:var(--text);border-color:rgba(183,255,26,.32);background:rgba(183,255,26,.10);}
+body.light .aluno-info-card.representante{background:linear-gradient(145deg,rgba(168,216,59,.20),#fff);border-color:rgba(111,157,23,.48);}
+body.light .aluno-info-card.vice{background:linear-gradient(145deg,rgba(168,216,59,.11),#fff);border-color:rgba(111,157,23,.30);}
+.classroom-grid{display:grid;grid-template-columns:repeat(6,minmax(84px,1fr));grid-template-rows:repeat(5,minmax(86px,1fr));gap:14px 10px;}
+.classroom-seat{position:relative;min-height:86px;border:1px solid var(--line);border-radius:13px;background:linear-gradient(145deg,var(--card),var(--bg2));display:flex;align-items:flex-end;justify-content:center;padding:8px;transition:.18s;user-select:none;}
+.classroom-seat.empty{opacity:.62;}
+.classroom-seat.occupied{
+    border-color:rgba(183,255,26,.58);
+    background:linear-gradient(145deg,rgba(183,255,26,.13),var(--card));
+    box-shadow:0 0 0 1px rgba(183,255,26,.10),0 8px 22px rgba(0,0,0,.16);
+}
+.classroom-seat.occupied .classroom-chair-back{
+    border-color:rgba(183,255,26,.65);
+    background:rgba(183,255,26,.12);
+}
+.classroom-seat.occupied .classroom-chair-seat{
+    border-color:rgba(183,255,26,.72);
+    background:rgba(183,255,26,.18);
+}
+.classroom-seat.occupied .classroom-name{
+    border-color:rgba(183,255,26,.42);
+    background:rgba(183,255,26,.12);
+    color:var(--text);
+}
+body.light .classroom-seat.occupied{
+    border-color:rgba(111,157,23,.50);
+    background:linear-gradient(145deg,rgba(168,216,59,.20),#fff);
+    box-shadow:0 0 0 1px rgba(111,157,23,.08),0 8px 22px rgba(24,35,28,.08);
+}
+body.light .classroom-seat.occupied .classroom-chair-back{
+    border-color:rgba(111,157,23,.58);
+    background:rgba(168,216,59,.16);
+}
+body.light .classroom-seat.occupied .classroom-chair-seat{
+    border-color:rgba(111,157,23,.62);
+    background:rgba(168,216,59,.20);
+}
+body.light .classroom-seat.occupied .classroom-name{
+    border-color:rgba(111,157,23,.28);
+    background:rgba(168,216,59,.15);
+}
+.classroom-seat.admin-draggable{cursor:grab;}
+.classroom-seat.admin-draggable:active{cursor:grabbing;}
+.classroom-seat.drag-over{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 14%,transparent),0 10px 26px rgba(0,0,0,.18);transform:translateY(-1px);}
+.classroom-chair-back{position:absolute;left:50%;top:9px;transform:translateX(-50%);width:42px;height:26px;border:2px solid #555;border-bottom-width:4px;border-radius:11px 11px 8px 8px;background:#171717;}
+body.light .classroom-chair-back{border-color:#b3beb7;background:#e6ebe7;}
+.classroom-chair-seat{position:absolute;left:50%;bottom:27px;transform:translateX(-50%);width:52px;height:21px;border:2px solid #555;border-radius:8px;background:#1b1b1b;}
+body.light .classroom-chair-seat{border-color:#b3beb7;background:#e1e7e3;}
+.classroom-name{position:relative;z-index:2;max-width:100%;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:rgba(0,0,0,.42);font-size:11px;font-weight:900;text-align:center;line-height:1.2;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+body.light .classroom-name{background:rgba(255,255,255,.78);}
+.classroom-seat.empty .classroom-name{color:var(--muted);font-weight:700;background:transparent;}
+.classroom-selected{border-color:var(--accent)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 16%,transparent);}
+.classroom-admin{display:none;margin-top:13px;padding:13px;border:1px dashed var(--line);border-radius:14px;background:var(--bg2);}
+.classroom-admin.show{display:block;}
+.classroom-admin-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;}
+.classroom-admin-head strong{display:block;font-size:13px;}
+.classroom-admin-head span{display:block;color:var(--muted);font-size:10px;line-height:1.5;margin-top:3px;}
+.classroom-pool-title{margin-top:13px;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.09em;font-weight:900;}
+.classroom-pool{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;min-height:34px;}
+.classroom-person{border:1px solid var(--line);background:var(--card);color:var(--text);padding:8px 10px;border-radius:10px;font-size:11px;font-weight:800;cursor:grab;user-select:none;touch-action:none;}
+.classroom-person:active{cursor:grabbing;}
+.classroom-person.dragging{opacity:.45;}
+.classroom-admin-note{margin-top:9px;color:var(--muted);font-size:10px;line-height:1.45;}
+body.admin-mode .classroom-seat{border-color:rgba(214,173,75,.14);}
+body.admin-mode .classroom-seat.drag-over{border-color:var(--divine-gold-soft);box-shadow:0 0 0 3px rgba(214,173,75,.12),0 10px 26px rgba(0,0,0,.2);}
+body.admin-mode .classroom-name{border-color:rgba(214,173,75,.14);}
+body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
+
 .team-grid{
     display:grid;
     grid-template-columns:320px 1fr;
@@ -714,6 +811,33 @@ body.light .logo-card{background:rgba(255,255,255,.82);border-color:#ddd}
 .admin-item-text small{display:block;color:var(--muted);margin-top:3px}
 .admin-item-actions{display:flex;gap:6px;flex-wrap:wrap}
 
+
+/* =========================================================
+   IDENTIDADE INICIAL — confirmação obrigatória do nome
+   ========================================================= */
+.identity-modal{
+    position:fixed;inset:0;z-index:5000;display:none;place-items:center;
+    background:rgba(0,0,0,.76);backdrop-filter:blur(15px);padding:18px;
+}
+.identity-modal.show{display:grid;}
+.identity-card{
+    width:min(480px,100%);padding:24px;border:1px solid var(--line);
+    border-radius:22px;background:var(--card);box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+.identity-kicker{color:var(--accent);font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;}
+.identity-card h3{font-family:"Space Grotesk",sans-serif;font-size:30px;letter-spacing:-.04em;}
+.identity-card p{color:var(--muted);line-height:1.6;font-size:13px;margin:8px 0 17px;}
+.identity-card input{width:100%;min-height:48px;padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--bg2);color:var(--text);outline:none;}
+.identity-card input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 11%,transparent);}
+.identity-feedback{min-height:19px;font-size:12px;margin:8px 1px;color:var(--muted);}
+.identity-feedback.erro{color:#ff8585;}
+.identity-feedback.ok{color:var(--accent);}
+.identity-actions{display:grid;grid-template-columns:1fr;gap:8px;margin-top:10px;}
+.identity-name-preview{margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg2);font-size:12px;color:var(--muted);}
+.identity-name-preview strong{color:var(--text);}
+body.admin-mode .identity-card{border-color:rgba(214,173,75,.22);box-shadow:0 35px 100px rgba(0,0,0,.65),0 0 50px rgba(214,173,75,.06);}
+body.admin-mode .identity-kicker{color:var(--divine-gold-soft);}
+
 .login-modal{
     position:fixed;inset:0;
     z-index:3000;
@@ -787,6 +911,17 @@ body.light .logo-card{background:rgba(255,255,255,.82);border-color:#ddd}
     .bola-grid{grid-template-columns:1fr}
 }
 @media(max-width:700px){
+    .info-view-switch{display:grid;grid-template-columns:1fr 1fr;}
+    .info-view-btn{width:100%;min-width:0;}
+    .alunos-alfabetica-grid{grid-template-columns:1fr 1fr;}
+
+    .classroom-heading{flex-direction:column;}
+    .classroom-board{min-width:510px;}
+    .classroom-grid{grid-template-columns:repeat(6,minmax(82px,1fr));gap:12px 8px;}
+    .classroom-seat{min-height:80px;}
+    .classroom-admin-head{flex-direction:column;}
+    .classroom-admin-head .ghost-btn{width:100%;}
+    .classroom-person{min-height:40px;display:inline-flex;align-items:center;}
     main{padding:25px 14px 50px}
     .header-inner{padding:12px 14px}
     .top-actions{display:none}
@@ -1314,6 +1449,462 @@ body.admin-mode .eyebrow{color:var(--divine-gold-soft)}
 }
 
 
+
+/* =========================================================
+   COMUNIDADE 9B — feed social estilo fórum moderno
+   ========================================================= */
+.social-shell{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 280px;
+    gap:16px;
+    align-items:start;
+}
+.social-main{min-width:0;}
+.social-sidebar{position:sticky;top:90px;}
+.social-toolbar{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    padding:9px;
+    border:1px solid var(--line);
+    border-radius:16px;
+    background:var(--card);
+    margin-bottom:12px;
+}
+.social-tabs{display:flex;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none;}
+.social-tabs::-webkit-scrollbar{display:none}
+.social-tab{
+    flex:0 0 auto;
+    border:1px solid transparent;
+    background:transparent;
+    color:var(--muted);
+    border-radius:10px;
+    padding:9px 11px;
+    cursor:pointer;
+    font-size:12px;
+    font-weight:800;
+}
+.social-tab.active,.social-tab:hover{background:var(--card2);border-color:var(--line);color:var(--text)}
+.social-refresh{flex:0 0 auto;min-height:40px;}
+
+.social-composer{
+    border:1px solid var(--line);
+    background:var(--card);
+    border-radius:18px;
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:var(--shadow);
+}
+.social-composer-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.social-composer-title{font-family:"Space Grotesk",sans-serif;font-size:18px;font-weight:800;letter-spacing:-.02em}
+.social-composer-note{font-size:11px;color:var(--muted)}
+.social-composer input[type=text],
+.social-composer textarea{
+    width:100%;
+    border:1px solid var(--line);
+    border-radius:11px;
+    background:var(--bg2);
+    color:var(--text);
+    outline:none;
+    padding:11px 12px;
+}
+.social-composer input[type=text]{margin-bottom:8px;}
+.social-composer textarea{min-height:120px;resize:vertical;line-height:1.55;}
+.social-composer input:focus,.social-composer textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent)}
+.social-compose-bottom{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+.social-media-picker{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.social-file-label{
+    display:inline-flex;align-items:center;justify-content:center;gap:7px;
+    min-height:42px;padding:9px 12px;border:1px solid var(--line);border-radius:10px;
+    background:var(--bg2);color:var(--text);cursor:pointer;font-size:12px;font-weight:800;
+}
+.social-file-label:hover{border-color:#555}
+.social-file-label input{display:none}
+.social-file-name{font-size:11px;color:var(--muted);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.social-publish-btn{min-height:44px;}
+.social-preview{display:none;margin-top:10px;position:relative;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--bg2)}
+.social-preview.show{display:block}
+.social-preview img{display:block;width:100%;max-height:380px;object-fit:contain;background:#0a0a0a}
+.social-preview-remove{position:absolute;right:8px;top:8px;border:1px solid rgba(255,255,255,.22);background:rgba(0,0,0,.65);color:white;width:34px;height:34px;border-radius:50%;cursor:pointer}
+.social-feed{display:grid;gap:12px;}
+.social-empty,.social-error{
+    padding:22px;border:1px dashed var(--line);border-radius:18px;color:var(--muted);background:var(--card);text-align:center;line-height:1.6;
+}
+.social-post{
+    border:1px solid var(--line);
+    border-radius:18px;
+    background:var(--card);
+    overflow:hidden;
+    box-shadow:var(--shadow);
+}
+.social-post-body{padding:16px;}
+.social-post-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.social-author{display:flex;align-items:center;gap:9px;min-width:0}
+.social-avatar{
+    width:38px;height:38px;flex:0 0 38px;border-radius:50%;display:grid;place-items:center;
+    background:linear-gradient(145deg,var(--accent),var(--accent2));color:#111;font-weight:900;font-size:13px;
+    border:1px solid color-mix(in srgb,var(--accent) 40%,var(--line));
+}
+.social-author-text{min-width:0}
+.social-author-text strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.social-author-text span{display:block;color:var(--muted);font-size:10px;margin-top:2px}
+.social-post-menu{display:flex;align-items:center;gap:5px;}
+.social-post-menu button{min-width:34px;min-height:34px;padding:6px 9px;}
+.social-post-text{font-size:15px;line-height:1.65;white-space:pre-wrap;overflow-wrap:anywhere;color:var(--text);}
+.social-media{
+    display:block;width:100%;max-height:600px;object-fit:contain;background:#090909;margin-top:12px;border:1px solid var(--line);border-radius:12px;
+}
+.social-post-actions{
+    display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:14px;padding-top:11px;border-top:1px solid var(--line);
+}
+.social-action{
+    border:1px solid transparent;background:transparent;color:var(--muted);min-height:40px;padding:8px 10px;border-radius:10px;cursor:pointer;font-size:11px;font-weight:800;
+}
+.social-action:hover{background:var(--card2);border-color:var(--line);color:var(--text)}
+.social-action.active-like{color:#6ecb5a;background:rgba(110,203,90,.08);border-color:rgba(110,203,90,.18)}
+.social-action.active-dislike{color:#f17878;background:rgba(241,120,120,.08);border-color:rgba(241,120,120,.18)}
+.social-count{font-variant-numeric:tabular-nums;}
+.social-comments{display:none;padding:0 16px 16px;border-top:1px solid var(--line);background:color-mix(in srgb,var(--card) 88%,var(--bg2));}
+.social-comments.show{display:block}
+.social-comment-list{display:grid;gap:8px;margin-top:12px}
+.social-comment{padding:10px 11px;border:1px solid var(--line);border-radius:11px;background:var(--bg2)}
+.social-comment-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:4px}
+.social-comment-head strong{font-size:11px}.social-comment-head span{font-size:9px;color:var(--muted)}
+.social-inline-delete{border:0;background:none;color:#ff8b8b;font-size:9px;font-weight:800;cursor:pointer;padding:0;margin-left:4px;}
+.social-comment-text{font-size:12px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.social-comment-form{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px;margin-top:10px}
+.social-comment-form input{width:100%;min-height:42px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);padding:9px 11px;outline:none}
+.social-comment-form button{min-height:42px}
+.social-repost-shell{margin-top:12px;border:1px solid var(--line);border-radius:13px;padding:12px;background:var(--bg2)}
+.social-repost-label{font-size:10px;color:var(--accent);font-weight:900;text-transform:uppercase;letter-spacing:.09em;margin-bottom:7px}
+.social-repost-title{font-size:12px;font-weight:800;margin-bottom:4px}
+.social-repost-text{font-size:12px;line-height:1.5;color:var(--muted);white-space:pre-wrap;overflow-wrap:anywhere}
+
+.social-identity-row{
+    display:flex;align-items:center;justify-content:space-between;gap:10px;
+    padding:10px 12px;border:1px solid var(--line);border-radius:11px;
+    background:var(--bg2);margin-bottom:8px;
+}
+.social-identity-main{display:flex;align-items:center;gap:8px;min-width:0;}
+.social-identity-dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 10%,transparent);flex:0 0 9px;}
+.social-identity-main span{font-size:12px;color:var(--muted);}
+.social-identity-main strong{color:var(--text);}
+.social-anon-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:10px;padding:10px 12px;border:1px solid var(--line);border-radius:11px;background:var(--bg2);}
+.social-anon-copy{min-width:0;}
+.social-anon-copy strong{display:block;font-size:12px;}
+.social-anon-copy span{display:block;color:var(--muted);font-size:10px;margin-top:2px;line-height:1.4;}
+.social-anon-switch{position:relative;width:46px;height:26px;flex:0 0 46px;}
+.social-anon-switch input{position:absolute;opacity:0;width:0;height:0;}
+.social-anon-slider{position:absolute;inset:0;border-radius:999px;background:#343434;border:1px solid var(--line);cursor:pointer;transition:.2s;}
+.social-anon-slider:before{content:"";position:absolute;width:20px;height:20px;left:2px;top:2px;border-radius:50%;background:#ddd;transition:.2s;}
+.social-anon-switch input:checked + .social-anon-slider{background:var(--accent);}
+.social-anon-switch input:checked + .social-anon-slider:before{transform:translateX(20px);background:#111;}
+.social-delete-own{color:#ff8b8b !important;}
+.social-auth-note{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);font-size:10px;color:var(--muted);line-height:1.45;margin-top:10px;}
+
+.social-side-card{border:1px solid var(--line);background:var(--card);border-radius:18px;padding:15px;box-shadow:var(--shadow);}
+.social-side-card + .social-side-card{margin-top:10px}
+.social-side-card h3{font-size:16px;margin-bottom:7px}
+.social-side-card p{font-size:12px;color:var(--muted);line-height:1.55}
+.social-rules{display:grid;gap:7px;margin-top:10px}
+.social-rule{padding:9px 10px;border:1px solid var(--line);border-radius:10px;background:var(--bg2);font-size:11px;color:var(--muted)}
+.social-admin-badge{display:none;margin-top:10px;padding:9px 10px;border:1px solid rgba(214,173,75,.22);background:rgba(214,173,75,.06);border-radius:10px;color:var(--divine-gold-soft);font-size:10px;font-weight:800}
+body.admin-mode .social-admin-badge{display:block}
+body.admin-mode .social-post,body.admin-mode .social-composer,body.admin-mode .social-sidebar .social-side-card,body.admin-mode .social-toolbar{border-color:rgba(214,173,75,.14)}
+body.admin-mode .social-author .social-avatar{background:linear-gradient(145deg,#e0bc59,#b9892f);}
+
+@media(max-width:900px){
+    .social-shell{grid-template-columns:1fr;}
+    .social-sidebar{position:static;display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .social-side-card + .social-side-card{margin-top:0}
+}
+@media(max-width:760px){
+    .identity-card{padding:18px;border-radius:18px;}
+    .identity-card h3{font-size:26px;}
+    .social-identity-row,.social-anon-row{align-items:flex-start;flex-direction:column;}
+    .social-anon-switch{align-self:flex-end;}
+    .social-toolbar{padding:7px;margin-bottom:10px;}
+    .social-tab{min-height:42px;font-size:11px;}
+    .social-composer{padding:13px;border-radius:16px;}
+    .social-compose-bottom{align-items:stretch;}
+    .social-media-picker{width:100%;}
+    .social-file-label{flex:1;min-height:46px;}
+    .social-publish-btn{width:100%;min-height:46px;}
+    .social-post{border-radius:16px;}
+    .social-post-body{padding:13px;}
+    .social-post-text{font-size:14px;line-height:1.6;}
+    .social-media{max-height:65vh;}
+    .social-post-actions{gap:4px;margin-top:11px;}
+    .social-action{min-height:44px;padding:8px 9px;}
+    .social-comments{padding:0 13px 13px;}
+    .social-comment-form{grid-template-columns:1fr;}
+    .social-comment-form button{width:100%;}
+    .social-sidebar{grid-template-columns:1fr;}
+}
+@media(max-width:420px){
+    .social-composer-head{align-items:flex-start;flex-direction:column;}
+    .social-file-name{max-width:180px;}
+    .social-author-text strong{max-width:160px;}
+}
+
+@media(max-width:600px){
+    .profile-modal{padding:66px 10px 12px;align-items:flex-start;}
+    .profile-panel{width:100%;padding:15px;border-radius:18px;}
+    .profile-panel-head h3{font-size:21px;}
+    .profile-social-grid{grid-template-columns:1fr;}
+    .profile-actions,.profile-save-row{grid-template-columns:1fr;}
+    .profile-save-row{display:grid;}
+    .profile-crop-area{width:min(72vw,220px);height:min(72vw,220px);}
+    .profile-tab{min-height:44px;}
+}
+
+/* =========================================================
+   PERFIL DO USUÁRIO
+   ========================================================= */
+:root{
+    --profile-size:44px;
+}
+.profile-trigger{
+    width:var(--profile-size);
+    height:var(--profile-size);
+    flex:0 0 var(--profile-size);
+    padding:2px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:var(--card);
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    overflow:hidden;
+    transition:transform .2s,border-color .2s,box-shadow .2s;
+    box-shadow:0 7px 22px rgba(0,0,0,.16);
+}
+.profile-trigger:hover{
+    transform:translateY(-1px) scale(1.03);
+    border-color:var(--accent);
+    box-shadow:0 10px 28px rgba(0,0,0,.22),0 0 0 3px color-mix(in srgb,var(--accent) 10%,transparent);
+}
+.profile-trigger img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    border-radius:50%;
+    background:var(--bg2);
+}
+.profile-modal{
+    position:fixed;
+    inset:0;
+    z-index:3600;
+    display:none;
+    align-items:flex-start;
+    justify-content:flex-start;
+    padding:76px 18px 18px;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(10px);
+    overflow:auto;
+}
+.profile-modal.show{display:flex}
+.profile-panel{
+    width:min(500px,100%);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:20px;
+    background:var(--card);
+    box-shadow:0 30px 90px rgba(0,0,0,.35);
+    animation:profilePanelIn .24s ease;
+}
+@keyframes profilePanelIn{
+    from{opacity:0;transform:translateY(-10px) scale(.98)}
+    to{opacity:1;transform:none}
+}
+.profile-panel-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:16px;
+}
+.profile-panel-head h3{
+    font-family:"Space Grotesk",sans-serif;
+    font-size:24px;
+    letter-spacing:-.04em;
+}
+.profile-close{
+    width:34px;height:34px;border-radius:50%;
+    border:1px solid var(--line);background:var(--bg2);
+    color:var(--text);cursor:pointer;
+}
+.profile-tabs{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+    padding:5px;
+    border:1px solid var(--line);
+    border-radius:13px;
+    background:var(--bg2);
+    margin-bottom:16px;
+}
+.profile-tab{
+    border:1px solid transparent;
+    border-radius:9px;
+    padding:10px 12px;
+    background:transparent;
+    color:var(--muted);
+    cursor:pointer;
+    font-weight:800;
+    font-size:12px;
+}
+.profile-tab.active{
+    background:var(--card);
+    color:var(--text);
+    border-color:var(--line);
+}
+.profile-tab-panel{display:none}
+.profile-tab-panel.active{display:block}
+.profile-preview-wrap{
+    display:grid;
+    place-items:center;
+    padding:8px 0 18px;
+}
+.profile-preview{
+    width:112px;height:112px;border-radius:50%;
+    object-fit:cover;display:block;
+    border:2px solid var(--line);
+    background:var(--bg2);
+    box-shadow:0 14px 38px rgba(0,0,0,.18);
+}
+.profile-help{
+    color:var(--muted);font-size:12px;line-height:1.55;
+    margin-bottom:14px;
+}
+.profile-actions{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px;
+}
+.profile-upload-label{
+    display:flex;align-items:center;justify-content:center;
+    min-height:44px;padding:10px 13px;
+    border:1px solid var(--line);border-radius:11px;
+    background:var(--bg2);color:var(--text);cursor:pointer;
+    font-weight:700;font-size:13px;
+    transition:.2s;
+}
+.profile-upload-label:hover{border-color:var(--accent);background:var(--card2)}
+.profile-upload-label input{display:none}
+.profile-remove{min-height:44px}
+.profile-status{min-height:18px;margin-top:10px;font-size:11px;color:var(--muted);text-align:center}
+.profile-crop-area{
+    width:220px;
+    height:220px;
+    margin:0 auto 14px;
+    border-radius:50%;
+    overflow:hidden;
+    position:relative;
+    background:var(--bg2);
+    border:2px solid var(--line);
+    box-shadow:0 18px 50px rgba(0,0,0,.2),0 0 0 1px rgba(255,255,255,.03) inset;
+    touch-action:none;
+    cursor:grab;
+}
+.profile-crop-area:active{cursor:grabbing}
+.profile-crop-image{
+    position:absolute;
+    left:50%;
+    top:50%;
+    max-width:none;
+    width:auto;
+    height:auto;
+    user-select:none;
+    pointer-events:none;
+    will-change:transform;
+    transform-origin:center center;
+}
+.profile-crop-grid{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background:
+        linear-gradient(to right,transparent 49.5%,rgba(255,255,255,.18) 49.5%,rgba(255,255,255,.18) 50.5%,transparent 50.5%),
+        linear-gradient(to bottom,transparent 49.5%,rgba(255,255,255,.18) 49.5%,rgba(255,255,255,.18) 50.5%,transparent 50.5%);
+    opacity:.5;
+}
+.profile-crop-tip{
+    color:var(--muted);
+    font-size:11px;
+    text-align:center;
+    margin-bottom:14px;
+}
+.profile-control{
+    display:grid;
+    gap:6px;
+    margin-top:11px;
+}
+.profile-control label{
+    font-size:11px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:.08em;
+}
+.profile-control input[type="range"]{
+    width:100%;
+    accent-color:var(--accent);
+}
+.profile-info-grid{display:grid;gap:11px}
+.profile-field{display:grid;gap:6px}
+.profile-field label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.profile-field input,.profile-field textarea{
+    width:100%;
+    padding:11px 12px;
+    border-radius:10px;
+    border:1px solid var(--line);
+    background:var(--bg2);
+    color:var(--text);
+    outline:none;
+}
+.profile-field textarea{min-height:105px;resize:vertical}
+.profile-social-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.profile-save-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:13px}
+.profile-note{color:var(--muted);font-size:11px;line-height:1.5;margin-top:10px}
+body.light .profile-modal{background:rgba(25,35,28,.2)}
+body.light .profile-trigger{box-shadow:0 9px 24px rgba(24,35,28,.08)}
+body.admin-mode .profile-trigger{border-color:rgba(214,173,75,.28);box-shadow:0 8px 24px rgba(0,0,0,.35),0 0 20px rgba(214,173,75,.05)}
+body.admin-mode .profile-trigger:hover{border-color:var(--divine-gold-soft)}
+
+/* =========================================================
+   PERFIL PÚBLICO NA COMUNIDADE
+   ========================================================= */
+.social-profile-link{
+    border:0;padding:0;margin:0;background:transparent;color:inherit;cursor:pointer;text-align:left;
+}
+.social-profile-link:hover .social-avatar,
+.social-profile-link:focus-visible .social-avatar{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 12%,transparent);
+    transform:scale(1.04);
+}
+.social-avatar img{width:100%;height:100%;display:block;object-fit:cover;border-radius:50%;background:var(--bg2);transition:transform .2s}
+.social-comment-author{display:flex;align-items:center;gap:8px;min-width:0}
+.social-comment-avatar{width:30px;height:30px;flex:0 0 30px;border-radius:50%;overflow:hidden;border:1px solid var(--line);background:var(--bg2);display:grid;place-items:center;color:var(--text);font-size:9px;font-weight:900}
+.social-comment-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.public-profile-modal{position:fixed;inset:0;z-index:3700;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.58);backdrop-filter:blur(12px);overflow:auto}
+.public-profile-modal.show{display:flex}
+.public-profile-card{width:min(460px,100%);border:1px solid var(--line);border-radius:24px;background:var(--card);box-shadow:0 30px 100px rgba(0,0,0,.42);padding:22px;animation:profilePanelIn .22s ease}
+.public-profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.public-profile-main{display:flex;align-items:center;gap:13px;min-width:0}
+.public-profile-avatar{width:82px;height:82px;flex:0 0 82px;border-radius:50%;overflow:hidden;border:2px solid var(--line);background:var(--bg2);box-shadow:0 14px 38px rgba(0,0,0,.2)}
+.public-profile-avatar img{width:100%;height:100%;display:block;object-fit:cover}
+.public-profile-name{font-family:"Space Grotesk",sans-serif;font-size:25px;letter-spacing:-.04em}
+.public-profile-pronouns{margin-top:3px;font-size:11px;color:var(--muted)}
+.public-profile-bio{margin-top:17px;color:var(--text);font-size:13px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}
+.public-profile-links{display:flex;flex-wrap:wrap;gap:7px;margin-top:15px}
+.public-profile-links a{display:inline-flex;align-items:center;min-height:34px;padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:var(--bg2);color:var(--text);font-size:11px;font-weight:800}
+.public-profile-links a:hover{border-color:var(--accent);color:var(--text)}
+.public-profile-empty{margin-top:17px;color:var(--muted);font-size:12px;line-height:1.55}
+.public-profile-note{margin-top:16px;color:var(--muted);font-size:10px;line-height:1.45}
+body.admin-mode .public-profile-avatar{border-color:rgba(214,173,75,.25)}
+body.admin-mode .public-profile-links a:hover{border-color:var(--divine-gold-soft)}
+
 /* =========================================================
    MOBILE EXPERIENCE — mobile-first refinement
    Mantém 100% das funções, mas reorganiza a experiência para
@@ -1352,12 +1943,18 @@ button,a,input,select,textarea{
         width:100%;
         padding:10px var(--mobile-space) 8px;
         display:grid;
-        grid-template-columns:minmax(0,1fr) auto;
+        grid-template-columns:auto minmax(0,1fr) auto;
         grid-template-areas:
-            "brand actions"
-            "nav nav";
+            "profile brand actions"
+            "nav nav nav";
         gap:8px 10px;
         align-items:center;
+    }
+    .profile-trigger{
+        grid-area:profile;
+        width:42px;
+        height:42px;
+        --profile-size:42px;
     }
     .brand{
         grid-area:brand;
@@ -1883,12 +2480,16 @@ button,a,input,select,textarea{
 
 <header class="header">
     <div class="header-inner">
+        <button class="profile-trigger" id="profileTrigger" aria-label="Abrir configurações do perfil" onclick="abrirPerfil()">
+            <img id="profileAvatarTop" alt="Foto de perfil">
+        </button>
         <div class="brand" id="siteBrand">9º <span>B</span></div>
 
         <nav class="nav">
             <button data-page="inicio" class="active" onclick="mostrarPagina('inicio')">Início</button>
             <button data-page="informacoes" onclick="mostrarPagina('informacoes')">Informações</button>
             <button data-page="interclasse" onclick="mostrarPagina('interclasse')">Escalação do Interclasse</button>
+            <button data-page="social" onclick="mostrarPagina('social')">Comunidade</button>
             <button data-page="agenda" onclick="mostrarPagina('agenda')">Agenda</button>
             <button data-page="provas" onclick="mostrarPagina('provas')">Provas e trabalhos</button>
         </nav>
@@ -2014,6 +2615,7 @@ button,a,input,select,textarea{
                 <div class="divine-field"><label>Início</label><input id="cfgNavInicio" type="text" value="Início" oninput="aplicarPowerConfig(false)"></div>
                 <div class="divine-field"><label>Informações</label><input id="cfgNavInfo" type="text" value="Informações" oninput="aplicarPowerConfig(false)"></div>
                 <div class="divine-field"><label>Interclasse</label><input id="cfgNavInter" type="text" value="Escalação do Interclasse" oninput="aplicarPowerConfig(false)"></div>
+                <div class="divine-field"><label>Comunidade</label><input id="cfgNavSocial" type="text" value="Comunidade" oninput="aplicarPowerConfig(false)"></div>
                 <div class="divine-field"><label>Agenda</label><input id="cfgNavAgenda" type="text" value="Agenda" oninput="aplicarPowerConfig(false)"></div>
                 <div class="divine-field"><label>Provas</label><input id="cfgNavProvas" type="text" value="Provas e trabalhos" oninput="aplicarPowerConfig(false)"></div>
             </div>
@@ -2080,15 +2682,51 @@ button,a,input,select,textarea{
         </div>
     </div>
 
-    <div class="card" style="margin-top:14px">
-        <h3>Alunos</h3>
-        <ul class="roster">
-            <li>Amanda</li><li>Ana B.</li><li>Arthur</li><li>Bruce</li><li>Camila</li>
-            <li>Cauã</li><li>Davi</li><li>Emily</li><li>Erick</li><li>Eva</li>
-            <li>Fabio</li><li>Guilherme</li><li>Joana</li><li>Julia</li><li>Junior</li>
-            <li>Kaio</li><li>Livia</li><li>Maria E.</li><li>Maria E. A.</li><li>Melissa</li>
-            <li>Nicolas</li><li>Paulo</li><li>Rodrigo</li><li>Sarah</li><li>Sofia</li>
-        </ul>
+    <div class="info-view-switch" style="margin-top:14px">
+        <button class="main-btn small-btn info-view-btn active" id="btnMapaTurma" onclick="alternarModoInformacoes('mapeamento')">Mapeamento da sala</button>
+        <button class="ghost-btn small-btn info-view-btn" id="btnOrdemAlfabetica" onclick="alternarModoInformacoes('alfabetica')">Ordem alfabética</button>
+    </div>
+
+    <div id="modoMapeamentoTurma">
+    <div class="card classroom-card" style="margin-top:10px">
+        <div class="classroom-heading">
+            <div>
+                <h3>Sala do 9º Ano B</h3>
+                <p>5 fileiras · 6 cadeiras por fileira. O administrador pode organizar cada aluno na posição correta.</p>
+            </div>
+            <span class="classroom-status" id="classroomStatus">Modo visualização</span>
+        </div>
+
+        <div class="classroom-wrap">
+            <div class="classroom-board">
+                <div class="classroom-teacher">PROFESSOR(A)</div>
+                <div class="classroom-front-line"></div>
+                <div class="classroom-grid" id="classroomGrid"></div>
+            </div>
+        </div>
+
+        <div class="classroom-admin" id="classroomAdminTools">
+            <div class="classroom-admin-head">
+                <div>
+                    <strong>Organizar sala</strong>
+                    <span>Arraste um aluno para uma cadeira. Arraste uma cadeira ocupada para outra para trocar as posições.</span>
+                </div>
+                <button class="ghost-btn small-btn" onclick="resetarSala()">Limpar posições</button>
+            </div>
+            <div class="classroom-pool-title">Alunos ainda não posicionados</div>
+            <div class="classroom-pool" id="classroomPool"></div>
+            <div class="classroom-admin-note">No celular, você também pode tocar em um aluno e depois tocar na cadeira desejada.</div>
+        </div>
+    </div>
+    </div>
+
+    <div class="card info-alunos-alfabetica" id="modoAlfabeticoTurma" style="display:none;margin-top:10px">
+        <div class="section-heading" style="margin-bottom:14px">
+            <div class="eyebrow">Lista da turma</div>
+            <h3 style="font-family:'Space Grotesk';font-size:26px;letter-spacing:-.04em">Alunos em ordem alfabética</h3>
+            <p>Representante e vice ficam destacados.</p>
+        </div>
+        <div class="alunos-alfabetica-grid" id="listaAlunosAlfabetica"></div>
     </div>
 
     <div class="contact">
@@ -2199,6 +2837,84 @@ button,a,input,select,textarea{
                 </div>
             </div>
         </div>
+    </div>
+</section>
+
+
+<section class="page" id="social">
+    <div class="section-heading">
+        <div class="eyebrow">Comunidade da turma</div>
+        <h2>Comunidade 9B</h2>
+        <p>Um feed da turma para postar frases, textos, fotos e GIFs, comentar, curtir, descurtir e republicar.</p>
+    </div>
+
+    <div class="social-shell">
+        <div class="social-main">
+            <div class="social-toolbar">
+                <div class="social-tabs">
+                    <button class="social-tab active" id="socialTabRecentes" onclick="mudarOrdemSocial('recentes',this)">Recentes</button>
+                    <button class="social-tab" id="socialTabCurtidos" onclick="mudarOrdemSocial('curtidos',this)">Mais curtidos</button>
+                    <button class="social-tab" id="socialTabComentados" onclick="mudarOrdemSocial('comentados',this)">Mais comentados</button>
+                </div>
+                <button class="ghost-btn small-btn social-refresh" onclick="carregarSocialFeed(true)">Atualizar</button>
+            </div>
+
+            <div class="social-composer">
+                <div class="social-composer-head">
+                    <div>
+                        <div class="social-composer-title">O que está acontecendo na turma?</div>
+                        <div class="social-composer-note">Você não precisa criar uma conta. O nome fica salvo neste navegador.</div>
+                    </div>
+                    <span class="social-count" id="socialCharCount">0/5000</span>
+                </div>
+                <div class="social-identity-row">
+                    <div class="social-identity-main"><i class="social-identity-dot"></i><span>Publicando como <strong id="socialIdentityName">—</strong></span></div>
+                    <span style="font-size:10px;color:var(--muted);font-weight:800">IDENTIDADE CONFIRMADA</span>
+                </div>
+                <input type="hidden" id="socialNome">
+                <textarea id="socialTexto" maxlength="5000" placeholder="Escreva uma frase, conte alguma coisa, faça um post..." oninput="atualizarSocialCharCount()"></textarea>
+                <div class="social-anon-row">
+                    <div class="social-anon-copy"><strong>Postar anonimamente</strong><span>Seu nome não aparece no feed. O sistema continua registrando o autor real para controle e exclusão do próprio post.</span></div>
+                    <label class="social-anon-switch" aria-label="Postar anonimamente"><input id="socialAnonimo" type="checkbox"><span class="social-anon-slider"></span></label>
+                </div>
+                <div class="social-auth-note">Você pode publicar como “Anônimo”, mas a publicação nunca é realmente sem autor no banco: ela continua ligada ao seu nome confirmado e ao seu identificador deste navegador.</div>
+                <div class="social-preview" id="socialPreview">
+                    <img id="socialPreviewImg" alt="Pré-visualização da mídia">
+                    <button class="social-preview-remove" onclick="removerMidiaSocial()" aria-label="Remover mídia">×</button>
+                </div>
+                <div class="social-compose-bottom">
+                    <div class="social-media-picker">
+                        <label class="social-file-label">
+                            <span>Foto / GIF</span>
+                            <input id="socialArquivo" type="file" accept="image/*,.gif" onchange="selecionarMidiaSocial(event)">
+                        </label>
+                        <span class="social-file-name" id="socialFileName">Nenhuma mídia selecionada</span>
+                    </div>
+                    <button class="main-btn social-publish-btn" onclick="publicarSocialPost()">Publicar</button>
+                </div>
+            </div>
+
+            <div class="social-feed" id="socialFeed">
+                <div class="social-empty">Carregando comunidade...</div>
+            </div>
+        </div>
+
+        <aside class="social-sidebar">
+            <div class="social-side-card">
+                <h3>Como funciona</h3>
+                <p>É o nosso pequeno fórum: poste alguma coisa, responda os colegas e compartilhe o que aparecer aqui.</p>
+                <div class="social-rules">
+                    <div class="social-rule">Curtir e descurtir ficam registrados por navegador.</div>
+                    <div class="social-rule">Fotos e GIFs podem ser enviados direto pelo celular.</div>
+                    <div class="social-rule">Reposts mantêm o post original dentro do novo compartilhamento.</div>
+                </div>
+            </div>
+            <div class="social-side-card">
+                <h3>Comunidade ativa</h3>
+                <p id="socialStatsResumo">Carregando estatísticas...</p>
+                <div class="social-admin-badge">Modo admin: você pode excluir qualquer post ou comentário.</div>
+            </div>
+        </aside>
     </div>
 </section>
 
@@ -2341,6 +3057,136 @@ button,a,input,select,textarea{
 <footer class="footer" id="siteFooter">
     Site criado por Fabio S. · 9º Ano B · 2026
 </footer>
+
+
+<div class="identity-modal" id="identityModal" aria-modal="true" role="dialog">
+    <div class="identity-card">
+        <div class="identity-kicker">Primeiro acesso</div>
+        <h3>Confirme seu nome</h3>
+        <p>Seu nome será confirmado uma vez neste navegador. Depois disso, seus posts e comentários usarão automaticamente o nome confirmado, sem você precisar digitá-lo.</p>
+        <input id="identidadeNomeInput" type="text" maxlength="40" autocomplete="name" list="listaNomesTurma" placeholder="Digite seu nome" oninput="validarIdentidadeDigitada()" onkeydown="teclaIdentidade(event)">
+        <datalist id="listaNomesTurma">
+            <option value="Amanda"></option><option value="Ana B."></option><option value="Arthur"></option><option value="Bruce"></option><option value="Camila"></option><option value="Cauã"></option><option value="Davi"></option><option value="Emily"></option><option value="Erick"></option><option value="Eva"></option><option value="Fabio"></option><option value="Guilherme"></option><option value="Joana"></option><option value="Julia"></option><option value="Junior"></option><option value="Kaio"></option><option value="Livia"></option><option value="Maria E."></option><option value="Maria E. A."></option><option value="Melissa"></option><option value="Nicolas"></option><option value="Paulo"></option><option value="Rodrigo"></option><option value="Sarah"></option><option value="Sofia"></option>
+        </datalist>
+        <div class="identity-name-preview" id="identityPreview">Nome confirmado: <strong>—</strong></div>
+        <div class="identity-feedback" id="identityFeedback">Escolha seu nome da turma.</div>
+        <div class="identity-actions">
+            <button class="main-btn" id="identityConfirmBtn" onclick="confirmarIdentidadeInicial()">Confirmar meu nome</button>
+        </div>
+    </div>
+</div>
+
+<div class="profile-modal" id="profileModal" aria-modal="true" role="dialog" aria-labelledby="profileTitle">
+    <div class="profile-panel" onclick="event.stopPropagation()">
+        <div class="profile-panel-head">
+            <h3 id="profileTitle">Meu perfil</h3>
+            <button class="profile-close" onclick="fecharPerfil()" aria-label="Fechar">×</button>
+        </div>
+
+        <div class="profile-tabs">
+            <button class="profile-tab active" id="profileTabInfo" onclick="mudarAbaPerfil('info')">Informações</button>
+            <button class="profile-tab" id="profileTabFoto" onclick="mudarAbaPerfil('foto')">Foto de perfil</button>
+        </div>
+
+        <section class="profile-tab-panel active" id="profilePanelInfo">
+            <div class="profile-info-grid">
+                <div class="profile-field">
+                    <label for="profileBio">Biografia</label>
+                    <textarea id="profileBio" maxlength="180" placeholder="Conte um pouco sobre você..."></textarea>
+                </div>
+
+                <div class="profile-field">
+                    <label for="profilePronouns">Pronomes</label>
+                    <input id="profilePronouns" maxlength="40" placeholder="Ex.: ele/dele">
+                </div>
+
+                <div class="profile-social-grid">
+                    <div class="profile-field">
+                        <label for="profileInstagram">Instagram</label>
+                        <input id="profileInstagram" maxlength="120" placeholder="@seuusuario">
+                    </div>
+                    <div class="profile-field">
+                        <label for="profileTikTok">TikTok</label>
+                        <input id="profileTikTok" maxlength="120" placeholder="@seuusuario">
+                    </div>
+                    <div class="profile-field">
+                        <label for="profileYoutube">YouTube</label>
+                        <input id="profileYoutube" maxlength="160" placeholder="Link do canal">
+                    </div>
+                    <div class="profile-field">
+                        <label for="profileX">X / Twitter</label>
+                        <input id="profileSocialX" maxlength="120" placeholder="@seuusuario">
+                    </div>
+                </div>
+            </div>
+
+            <div class="profile-save-row">
+                <button class="main-btn" onclick="salvarPerfilInfo()">Salvar perfil</button>
+                <button class="ghost-btn" onclick="limparPerfilInfo()">Limpar informações</button>
+            </div>
+            <div class="profile-note">Essas informações ficam salvas neste navegador e podem ser usadas no seu perfil da Comunidade.</div>
+        </section>
+
+        <section class="profile-tab-panel" id="profilePanelFoto">
+            <div class="profile-crop-area" id="profileCropArea" aria-label="Área para posicionar sua foto">
+                <img class="profile-crop-image" id="profileCropImage" alt="Pré-visualização da foto">
+                <div class="profile-crop-grid"></div>
+            </div>
+            <div class="profile-crop-tip">Arraste a foto dentro do círculo para centralizar. Use o zoom para aproximar ou afastar.</div>
+
+            <div class="profile-preview-wrap">
+                <img class="profile-preview" id="profilePreview" alt="Sua foto de perfil">
+            </div>
+
+            <div class="profile-control">
+                <label for="profileZoom">Zoom</label>
+                <input id="profileZoom" type="range" min="1" max="3" step="0.01" value="1" oninput="atualizarCropAPartirDosControles()">
+            </div>
+            <div class="profile-control">
+                <label for="profileX">Posição horizontal</label>
+                <input id="profileCropX" type="range" min="-100" max="100" step="1" value="0" oninput="atualizarCropAPartirDosControles()">
+            </div>
+            <div class="profile-control">
+                <label for="profileY">Posição vertical</label>
+                <input id="profileCropY" type="range" min="-100" max="100" step="1" value="0" oninput="atualizarCropAPartirDosControles()">
+            </div>
+
+            <div class="profile-actions" style="margin-top:14px">
+                <label class="profile-upload-label">
+                    Escolher foto
+                    <input id="profileFile" type="file" accept="image/*" onchange="alterarFotoPerfil(event)">
+                </label>
+                <button class="ghost-btn profile-remove" onclick="removerFotoPerfil()">Usar padrão</button>
+            </div>
+            <div class="profile-save-row">
+                <button class="main-btn" onclick="salvarPosicaoFotoPerfil()">Salvar posição da foto</button>
+                <button class="ghost-btn" onclick="centralizarFotoPerfil()">Centralizar</button>
+            </div>
+            <div class="profile-status" id="profileStatus"></div>
+        </section>
+    </div>
+</div>
+
+<div class="public-profile-modal" id="publicProfileModal" aria-modal="true" role="dialog" aria-labelledby="publicProfileTitle" onclick="fecharPerfilPublico()">
+    <div class="public-profile-card" onclick="event.stopPropagation()">
+        <div class="public-profile-head">
+            <div class="public-profile-main">
+                <div class="public-profile-avatar">
+                    <img id="publicProfileAvatar" alt="Foto de perfil">
+                </div>
+                <div>
+                    <div class="public-profile-name" id="publicProfileTitle">Perfil</div>
+                    <div class="public-profile-pronouns" id="publicProfilePronouns"></div>
+                </div>
+            </div>
+            <button class="profile-close" onclick="fecharPerfilPublico()" aria-label="Fechar">×</button>
+        </div>
+        <div class="public-profile-bio" id="publicProfileBio"></div>
+        <div class="public-profile-links" id="publicProfileLinks"></div>
+        <div class="public-profile-empty" id="publicProfileEmpty"></div>
+        <div class="public-profile-note">Perfil público da Comunidade 9B.</div>
+    </div>
+</div>
 
 <div class="login-modal" id="loginModal">
     <div class="login-card">
@@ -2491,6 +3337,245 @@ let mapaPosicoes = JSON.parse(localStorage.getItem("9B_mapa_posicoes_v3")) || {
     goleiro:null,fixo:null,"ala-esquerda":null,"ala-direita":null,pivo:null
 };
 
+const CHAVE_SALA_9B = "9B_sala_cadeiras_v1";
+const ID_SALA_9B = "main";
+let sala9B = lerJSONLocal(CHAVE_SALA_9B, Array(30).fill(null));
+
+function migrarSalaAntiga(valor){
+    if(!Array.isArray(valor)) return Array(30).fill(null);
+
+    // Versão antiga: 7 fileiras x 5 colunas (35 posições).
+    // Converte para a versão correta: 5 fileiras x 6 colunas (30 posições),
+    // preservando as cinco primeiras colunas das cinco primeiras fileiras.
+    if(valor.length === 35){
+        const nova = Array(30).fill(null);
+        for(let linha = 0; linha < 5; linha++){
+            for(let coluna = 0; coluna < 5; coluna++){
+                nova[linha * 6 + coluna] = valor[linha * 5 + coluna] ?? null;
+            }
+        }
+        return nova;
+    }
+
+    const nova = valor.slice(0,30);
+    while(nova.length < 30) nova.push(null);
+    return nova;
+}
+
+sala9B = migrarSalaAntiga(sala9B);
+let salaArrasto = null;
+let salaSelecionado = null;
+
+function sala9BAdminAtivo(){
+    return !!souAdmin && !!adminVisual;
+}
+
+function normalizarMapaSala(valor){
+    let arr = migrarSalaAntiga(valor);
+    const nomesPermitidos = new Set(alunosDaTurma);
+    const vistos = new Set();
+    return arr.map(nome=>{
+        if(typeof nome!="string" || !nomesPermitidos.has(nome) || vistos.has(nome)) return null;
+        vistos.add(nome);
+        return nome;
+    });
+}
+
+async function carregarSalaOnline(){
+    if(!sb){
+        renderizarSala9B();
+        return;
+    }
+    try{
+        const {data,error}=await sb.from("classroom_seating").select("seating").eq("id",ID_SALA_9B).maybeSingle();
+        if(!error && data?.seating){
+            sala9B=normalizarMapaSala(data.seating);
+            localStorage.setItem(CHAVE_SALA_9B,JSON.stringify(sala9B));
+        }else{
+            sala9B=normalizarMapaSala(sala9B);
+        }
+    }catch(error){
+        console.warn("Não foi possível carregar a sala do 9º B.",error);
+        sala9B=normalizarMapaSala(sala9B);
+    }
+    renderizarSala9B();
+}
+
+async function salvarSalaOnline(){
+    if(!sala9BAdminAtivo()) return;
+    sala9B=normalizarMapaSala(sala9B);
+    localStorage.setItem(CHAVE_SALA_9B,JSON.stringify(sala9B));
+    if(!sb || !usuarioAtual) return;
+    const {error}=await sb.from("classroom_seating").upsert({
+        id:ID_SALA_9B,
+        seating:sala9B,
+        updated_at:new Date().toISOString(),
+        updated_by:usuarioAtual.id
+    },{onConflict:"id"});
+    if(error){
+        console.warn("Não foi possível salvar a sala online.",error);
+        mostrarToast("Não foi possível salvar a sala no servidor.");
+    }else{
+        mostrarToast("Sala do 9º B salva para todos.");
+    }
+}
+
+function alunoNaSala(nome){
+    return sala9B.includes(nome);
+}
+
+function renderizarSala9B(){
+    const grid=document.getElementById("classroomGrid");
+    const pool=document.getElementById("classroomPool");
+    const adminBox=document.getElementById("classroomAdminTools");
+    const status=document.getElementById("classroomStatus");
+    if(!grid) return;
+    const adminAtivo=sala9BAdminAtivo();
+    if(status) status.textContent=adminAtivo ? "Modo administrador" : "Modo visualização";
+    if(adminBox) adminBox.classList.toggle("show",adminAtivo);
+
+    grid.innerHTML=Array.from({length:30},(_,index)=>{
+        const nome=sala9B[index];
+        const vazio=!nome;
+        return `<div class="classroom-seat ${vazio?"empty":"occupied"} ${adminAtivo?"admin-draggable":""} ${salaSelecionado?.type==="seat" && salaSelecionado.index===index ? "classroom-selected":""}"\n            data-seat-index="${index}"\n            ${adminAtivo?`draggable="true" ondragstart="iniciarArrastoSala(event,'seat',${index})" ondragover="permitirDropSala(event,${index})" ondrop="soltarSala(event,${index})" ondragleave="sairDropSala(event,${index})"`:``}\n            onclick="clicarCadeiraSala(${index})">\n            <div class="classroom-chair-back"></div>\n            <div class="classroom-chair-seat"></div>\n            <div class="classroom-name">${esc(nome || "Vazia")}</div>\n        </div>`;
+    }).join("");
+
+    if(pool){
+        const faltantes=alunosDaTurma.filter(nome=>!alunoNaSala(nome));
+        pool.innerHTML=faltantes.length ? faltantes.map(nome=>`
+            <div class="classroom-person ${salaSelecionado?.type==="pool" && salaSelecionado.name===nome ? "classroom-selected":""}"
+                draggable="${adminAtivo}"
+                ondragstart="iniciarArrastoSala(event,'pool','${esc(nome)}')"
+                onclick="selecionarAlunoSala('${esc(nome)}')">${esc(nome)}</div>`).join("") : `<span style="color:var(--muted);font-size:11px">Todos os 25 alunos já estão em uma cadeira.</span>`;
+    }
+}
+
+function iniciarArrastoSala(event,tipo,valor){
+    if(!sala9BAdminAtivo()){
+        event.preventDefault();
+        return;
+    }
+    salaArrasto=tipo==="seat" ? {type:"seat",index:Number(valor)} : {type:"pool",name:String(valor)};
+    if(event.dataTransfer){
+        event.dataTransfer.effectAllowed="move";
+        event.dataTransfer.setData("text/plain",tipo==="seat" ? `seat:${valor}` : `pool:${valor}`);
+    }
+    if(tipo==="pool") event.currentTarget.classList.add("dragging");
+}
+
+function permitirDropSala(event,index){
+    if(!sala9BAdminAtivo()) return;
+    event.preventDefault();
+    event.currentTarget.classList.add("drag-over");
+}
+
+function sairDropSala(event,index){
+    event.currentTarget.classList.remove("drag-over");
+}
+
+async function soltarSala(event,index){
+    if(!sala9BAdminAtivo()) return;
+    event.preventDefault();
+    event.currentTarget.classList.remove("drag-over");
+    let origem=salaArrasto;
+    if(!origem && event.dataTransfer?.getData("text/plain")){
+        const raw=event.dataTransfer.getData("text/plain");
+        if(raw.startsWith("seat:")) origem={type:"seat",index:Number(raw.slice(5))};
+        if(raw.startsWith("pool:")) origem={type:"pool",name:raw.slice(5)};
+    }
+    if(!origem) return;
+
+    const alvoNome=sala9B[index];
+    if(origem.type==="seat"){
+        const origemIndex=Number(origem.index);
+        if(origemIndex===index) return;
+        sala9B[index]=sala9B[origemIndex];
+        sala9B[origemIndex]=alvoNome || null;
+    }else if(origem.type==="pool"){
+        sala9B=sala9B.map(nome=>nome===origem.name?null:nome);
+        sala9B[index]=origem.name;
+    }
+    salaArrasto=null;
+    salaSelecionado=null;
+    renderizarSala9B();
+    await salvarSalaOnline();
+}
+
+function selecionarAlunoSala(nome){
+    if(!sala9BAdminAtivo()) return;
+    salaSelecionado={type:"pool",name:nome};
+    renderizarSala9B();
+}
+
+async function clicarCadeiraSala(index){
+    if(!sala9BAdminAtivo()) return;
+
+    if(!salaSelecionado){
+        if(!sala9B[index]) return;
+        salaSelecionado={type:"seat",index};
+        renderizarSala9B();
+        return;
+    }
+
+    const alvo=sala9B[index];
+    if(salaSelecionado.type==="pool"){
+        sala9B=sala9B.map(nome=>nome===salaSelecionado.name?null:nome);
+        sala9B[index]=salaSelecionado.name;
+    }else if(salaSelecionado.type==="seat"){
+        const origem=Number(salaSelecionado.index);
+        if(origem!==index){
+            sala9B[index]=sala9B[origem];
+            sala9B[origem]=alvo||null;
+        }
+    }
+    salaSelecionado=null;
+    renderizarSala9B();
+    await salvarSalaOnline();
+}
+
+async function resetarSala(){
+    if(!sala9BAdminAtivo()) return;
+    if(!confirm("Limpar todas as posições da sala?")) return;
+    sala9B=Array(30).fill(null);
+    salaSelecionado=null;
+    renderizarSala9B();
+    await salvarSalaOnline();
+}
+
+document.addEventListener("dragend",()=>{
+    salaArrasto=null;
+    document.querySelectorAll(".classroom-person.dragging").forEach(el=>el.classList.remove("dragging"));
+    document.querySelectorAll(".classroom-seat.drag-over").forEach(el=>el.classList.remove("drag-over"));
+});
+
+let modoInformacoesAtual = localStorage.getItem("9B_modo_informacoes_v1") || "mapeamento";
+
+function renderizarListaAlfabeticaTurma(){
+    const lista = document.getElementById("listaAlunosAlfabetica");
+    if(!lista) return;
+    const ordenados = alunosDaTurma.slice().sort((a,b)=>a.localeCompare(b,"pt-BR",{sensitivity:"base"}));
+    lista.innerHTML = ordenados.map(nome=>{
+        const classe = nome === "Kaio" ? "representante" : nome === "Livia" ? "vice" : "";
+        const tag = nome === "Kaio" ? "Representante" : nome === "Livia" ? "Vice" : "Aluno";
+        return `<div class="aluno-info-card ${classe}"><span>${esc(nome)}</span><span class="aluno-tag">${esc(tag)}</span></div>`;
+    }).join("");
+}
+
+function alternarModoInformacoes(modo){
+    modoInformacoesAtual = modo === "alfabetica" ? "alfabetica" : "mapeamento";
+    localStorage.setItem("9B_modo_informacoes_v1",modoInformacoesAtual);
+    const mapa = document.getElementById("modoMapeamentoTurma");
+    const lista = document.getElementById("modoAlfabeticoTurma");
+    const btnMapa = document.getElementById("btnMapaTurma");
+    const btnAlf = document.getElementById("btnOrdemAlfabetica");
+    if(mapa) mapa.style.display = modoInformacoesAtual === "mapeamento" ? "block" : "none";
+    if(lista) lista.style.display = modoInformacoesAtual === "alfabetica" ? "block" : "none";
+    if(btnMapa){ btnMapa.classList.toggle("active",modoInformacoesAtual === "mapeamento"); btnMapa.classList.toggle("main-btn",modoInformacoesAtual === "mapeamento"); btnMapa.classList.toggle("ghost-btn",modoInformacoesAtual !== "mapeamento"); }
+    if(btnAlf){ btnAlf.classList.toggle("active",modoInformacoesAtual === "alfabetica"); btnAlf.classList.toggle("main-btn",modoInformacoesAtual === "alfabetica"); btnAlf.classList.toggle("ghost-btn",modoInformacoesAtual !== "alfabetica"); }
+}
+
+renderizarListaAlfabeticaTurma();
+
 let eventosAgenda = [];
 let materias = [];
 let editandoEventoId = null;
@@ -2515,6 +3600,16 @@ function mostrarPagina(id){
 
     if(id === "agenda" || id === "provas"){
         carregarDadosOnline();
+    }
+
+    if(id === "informacoes"){
+        carregarSalaOnline();
+        renderizarListaAlfabeticaTurma();
+        alternarModoInformacoes(modoInformacoesAtual);
+    }
+
+    if(id === "social"){
+        carregarSocialFeed(false);
     }
 
     if(id === "interclasse" && estaDesbloqueado()){
@@ -2655,6 +3750,8 @@ function atualizarInterfaceAdmin(){
     if(qs("divineSessionUser")){
         qs("divineSessionUser").textContent=usuarioAtual?.email||"sessão autorizada";
     }
+
+    renderizarSala9B();
 
     if(adminAtivo){
         carregarPowerConfig(false);
@@ -4125,7 +5222,7 @@ const POWER_DEFAULTS={
     motion:80,particles:100,parallax:100,cinematic:false,
     instagram:"@formandos_9b.2026",statAlunos:"25",statAno:"9",statLetivo:"2026",footer:"Site criado por Fabio S. · 9º Ano B · 2026",
     logoBig:"9B",logoSmall:"NOSSA TURMA · 2026",
-    navInicio:"Início",navInfo:"Informações",navInter:"Escalação do Interclasse",navAgenda:"Agenda",navProvas:"Provas e trabalhos"
+    navInicio:"Início",navInfo:"Informações",navInter:"Escalação do Interclasse",navSocial:"Comunidade",navAgenda:"Agenda",navProvas:"Provas e trabalhos"
 };
 
 const NORMAL_VISUAL={
@@ -4190,6 +5287,7 @@ function aplicarPowerConfig(renderOnly=true){
         navInicio:qs("cfgNavInicio")?.value??powerConfig.navInicio,
         navInfo:qs("cfgNavInfo")?.value??powerConfig.navInfo,
         navInter:qs("cfgNavInter")?.value??powerConfig.navInter,
+        navSocial:qs("cfgNavSocial")?.value??powerConfig.navSocial,
         navAgenda:qs("cfgNavAgenda")?.value??powerConfig.navAgenda,
         navProvas:qs("cfgNavProvas")?.value??powerConfig.navProvas
     };
@@ -4219,7 +5317,7 @@ function aplicarPowerConfig(renderOnly=true){
     if(qs("statAno")) qs("statAno").textContent=c.statAno;
     if(qs("statLetivo")) qs("statLetivo").textContent=c.statLetivo;
     if(qs("siteFooter")) qs("siteFooter").textContent=c.footer;
-    [c.navInicio,c.navInfo,c.navInter,c.navAgenda,c.navProvas].forEach((v,i)=>{const b=document.querySelectorAll(".nav button")[i];if(b&&v!=null)b.textContent=v});
+    [c.navInicio,c.navInfo,c.navInter,c.navSocial,c.navAgenda,c.navProvas].forEach((v,i)=>{const b=document.querySelectorAll(".nav button")[i];if(b&&v!=null)b.textContent=v});
     if(qs("cfgRadiusOut")) qs("cfgRadiusOut").textContent=c.radius+"px";
     if(qs("cfgTitleScaleOut")) qs("cfgTitleScaleOut").textContent=c.titleScale+"%";
     if(qs("cfgTitleScaleOut2")) qs("cfgTitleScaleOut2").textContent=c.titleScale+"%";
@@ -4239,7 +5337,7 @@ function aplicarPowerConfig(renderOnly=true){
 function escapeHtml(str){return String(str??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
 function preencherPowerInputs(c){
     c=normalizarPowerConfig(c);powerConfig=c;
-    const map={cfgBrand:"brand",cfgEyebrow:"eyebrow",cfgHeroTitle:"heroTitle",cfgHeroSub:"heroSub",cfgHeroText:"heroText",cfgAccent:"accent",cfgBg:"bg",cfgCard:"card",cfgText:"text",cfgAccent2:"accent2",cfgRadius:"radius",cfgHeadingFont:"headingFont",cfgBodyFont:"bodyFont",cfgTitleScale:"titleScale",cfgTitleScale2:"titleScale",cfgMotion:"motion",cfgParticles:"particles",cfgParallax:"parallax",cfgInstagram:"instagram",cfgFooter:"footer",cfgLogoBig:"logoBig",cfgLogoSmall:"logoSmall",cfgStatAlunos:"statAlunos",cfgStatAno:"statAno",cfgStatLetivo:"statLetivo",cfgNavInicio:"navInicio",cfgNavInfo:"navInfo",cfgNavInter:"navInter",cfgNavAgenda:"navAgenda",cfgNavProvas:"navProvas"};
+    const map={cfgBrand:"brand",cfgEyebrow:"eyebrow",cfgHeroTitle:"heroTitle",cfgHeroSub:"heroSub",cfgHeroText:"heroText",cfgAccent:"accent",cfgBg:"bg",cfgCard:"card",cfgText:"text",cfgAccent2:"accent2",cfgRadius:"radius",cfgHeadingFont:"headingFont",cfgBodyFont:"bodyFont",cfgTitleScale:"titleScale",cfgTitleScale2:"titleScale",cfgMotion:"motion",cfgParticles:"particles",cfgParallax:"parallax",cfgInstagram:"instagram",cfgFooter:"footer",cfgLogoBig:"logoBig",cfgLogoSmall:"logoSmall",cfgStatAlunos:"statAlunos",cfgStatAno:"statAno",cfgStatLetivo:"statLetivo",cfgNavInicio:"navInicio",cfgNavInfo:"navInfo",cfgNavInter:"navInter",cfgNavSocial:"navSocial",cfgNavAgenda:"navAgenda",cfgNavProvas:"navProvas"};
     Object.entries(map).forEach(([id,key])=>{if(qs(id))qs(id).value=c[key]});
     if(qs("cfgCinematic"))qs("cfgCinematic").checked=!!c.cinematic;
     aplicarPowerConfig(true);
@@ -4404,11 +5502,965 @@ function iniciarDivineThree(){
     requestAnimationFrame(loop);
 }
 
+
+/* =========================================================
+   COMUNIDADE 9B — FEED SOCIAL
+   ========================================================= */
+const CHAVE_IDENTIDADE_SITE = "9B_identidade_site_v2";
+let identidadeModalForcada = false;
+
+function identidadeAtual(){
+    return (localStorage.getItem(CHAVE_IDENTIDADE_SITE) || "").trim();
+}
+
+function validarNomeIdentidade(valor){
+    const q=String(valor||"").trim();
+    if(!q) return null;
+    const normalizado=normalizarNomeBusca(q);
+    let exato=alunosDaTurma.find(n=>normalizarNomeBusca(n)===normalizado);
+    if(exato) return exato;
+    const candidatos=alunosDaTurma
+        .map(nome=>({nome,score:pontuarNomeBusca(q,nome)}))
+        .sort((a,b)=>a.score-b.score || a.nome.localeCompare(b.nome,"pt-BR"));
+    const melhor=candidatos[0];
+    if(melhor && melhor.score<=4) return melhor.nome;
+    return null;
+}
+
+function atualizarNomeSocialUI(){
+    const nome=identidadeAtual();
+    const input=qs("socialNome");
+    if(input) input.value=nome;
+    const out=qs("socialIdentityName");
+    if(out) out.textContent=nome || "—";
+}
+
+function validarIdentidadeDigitada(){
+    const input=qs("identidadeNomeInput");
+    const feedback=qs("identityFeedback");
+    const preview=qs("identityPreview");
+    const nome=validarNomeIdentidade(input?.value||"");
+    if(preview) preview.innerHTML=`Nome confirmado: <strong>${esc(nome||"—")}</strong>`;
+    if(!feedback) return;
+    if(!input?.value.trim()){
+        feedback.textContent="Escolha seu nome da turma.";
+        feedback.className="identity-feedback";
+        return;
+    }
+    if(nome){
+        feedback.textContent = nome===input.value.trim() ? "Nome reconhecido." : `Vamos usar: ${nome}`;
+        feedback.className="identity-feedback ok";
+    }else{
+        feedback.textContent="Esse nome não foi reconhecido na lista da turma.";
+        feedback.className="identity-feedback erro";
+    }
+}
+
+function abrirConfirmacaoIdentidade(troca=false){
+    const modal=qs("identityModal");
+    if(!modal) return;
+    identidadeModalForcada=!!troca;
+    const input=qs("identidadeNomeInput");
+    if(input) input.value=troca ? identidadeAtual() : (identidadeAtual() || localStorage.getItem(CHAVE_SOCIAL_NOME) || "");
+    validarIdentidadeDigitada();
+    modal.classList.add("show");
+    setTimeout(()=>input?.focus(),80);
+}
+
+function fecharConfirmacaoIdentidade(){
+    const modal=qs("identityModal");
+    if(modal && identidadeAtual()) modal.classList.remove("show");
+}
+
+function confirmarIdentidadeInicial(){
+    const input=qs("identidadeNomeInput");
+    const nome=validarNomeIdentidade(input?.value||"");
+    if(!nome){
+        qs("identityFeedback")?.classList.add("erro");
+        if(qs("identityFeedback")) qs("identityFeedback").textContent="Confirme um nome válido da lista da turma.";
+        return;
+    }
+    localStorage.setItem(CHAVE_IDENTIDADE_SITE,nome);
+    localStorage.setItem(CHAVE_SOCIAL_NOME,nome);
+    atualizarNomeSocialUI();
+    fecharConfirmacaoIdentidade();
+    mostrarToast(`Identidade confirmada como ${nome}.`);
+    void sincronizarMeuPerfilOnline();
+}
+
+function teclaIdentidade(event){
+    if(event.key==="Enter"){event.preventDefault();confirmarIdentidadeInicial();}
+}
+
+const CHAVE_PERFIL_FOTO = "9B_perfil_foto_v1";
+const CHAVE_PERFIL_INFO = "9B_perfil_info_v2";
+const CHAVE_PERFIL_CROP = "9B_perfil_crop_v2";
+const AVATAR_PADRAO_PERFIL = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#242424"/>
+  <circle cx="100" cy="77" r="36" fill="#8b8b8b"/>
+  <path d="M38 175c6-42 30-66 62-66s56 24 62 66" fill="#8b8b8b"/>
+</svg>`);
+
+let perfilCrop={x:0,y:0,zoom:1};
+let perfilDrag=null;
+
+function lerJSONLocal(chave, fallback){
+    try{return JSON.parse(localStorage.getItem(chave)||JSON.stringify(fallback));}
+    catch{return fallback;}
+}
+
+function fotoPerfilAtual(){
+    return localStorage.getItem(CHAVE_PERFIL_FOTO) || AVATAR_PADRAO_PERFIL;
+}
+
+function lerInfoPerfil(){
+    return lerJSONLocal(CHAVE_PERFIL_INFO,{bio:"",pronouns:"",instagram:"",tiktok:"",youtube:"",x:""});
+}
+
+function lerCropPerfil(){
+    const dados=lerJSONLocal(CHAVE_PERFIL_CROP,{x:0,y:0,zoom:1});
+    return {
+        x:Number.isFinite(Number(dados.x))?Number(dados.x):0,
+        y:Number.isFinite(Number(dados.y))?Number(dados.y):0,
+        zoom:Number.isFinite(Number(dados.zoom))?Number(dados.zoom):1
+    };
+}
+
+function atualizarAvatarPerfil(){
+    const foto=fotoPerfilAtual();
+    const top=document.getElementById("profileAvatarTop");
+    const preview=document.getElementById("profilePreview");
+    if(top){
+        top.src=foto;
+        top.style.objectPosition=`${50+perfilCrop.x/2}% ${50+perfilCrop.y/2}%`;
+        top.style.transform=`scale(${Math.max(1,Math.min(3,perfilCrop.zoom||1))})`;
+    }
+    if(preview){
+        preview.src=foto;
+        preview.style.objectPosition=`${50+perfilCrop.x/2}% ${50+perfilCrop.y/2}%`;
+        preview.style.transform=`scale(${Math.max(1,Math.min(3,perfilCrop.zoom||1))})`;
+    }
+    atualizarImagemCrop();
+}
+
+function preencherInfoPerfil(){
+    const info=lerInfoPerfil();
+    if(qs("profileBio")) qs("profileBio").value=info.bio||"";
+    if(qs("profilePronouns")) qs("profilePronouns").value=info.pronouns||"";
+    if(qs("profileInstagram")) qs("profileInstagram").value=info.instagram||"";
+    if(qs("profileTikTok")) qs("profileTikTok").value=info.tiktok||"";
+    if(qs("profileYoutube")) qs("profileYoutube").value=info.youtube||"";
+    if(qs("profileX")) qs("profileX").value=info.x||"";
+}
+
+function aplicarCropNosControles(){
+    if(qs("profileZoom")) qs("profileZoom").value=perfilCrop.zoom;
+    if(qs("profileCropX")) qs("profileCropX").value=perfilCrop.x;
+    if(qs("profileCropY")) qs("profileCropY").value=perfilCrop.y;
+}
+
+function atualizarImagemCrop(){
+    const area=qs("profileCropArea");
+    const img=qs("profileCropImage");
+    if(!area||!img) return;
+    img.src=fotoPerfilAtual();
+    const w=img.naturalWidth||200;
+    const h=img.naturalHeight||200;
+    const base=Math.max(area.clientWidth/w,area.clientHeight/h);
+    const escala=base*perfilCrop.zoom;
+    const largura=w*escala;
+    const altura=h*escala;
+    const deslocamentoX=perfilCrop.x*(area.clientWidth/2);
+    const deslocamentoY=perfilCrop.y*(area.clientHeight/2);
+    img.style.width=`${largura}px`;
+    img.style.height=`${altura}px`;
+    img.style.transform=`translate(-50%,-50%) translate(${deslocamentoX}px,${deslocamentoY}px)`;
+}
+
+function abrirPerfil(){
+    void carregarMeuPerfilOnline();
+    const modal=document.getElementById("profileModal");
+    if(!modal) return;
+    perfilCrop=lerCropPerfil();
+    preencherInfoPerfil();
+    aplicarCropNosControles();
+    atualizarAvatarPerfil();
+    mudarAbaPerfil("info");
+    const status=document.getElementById("profileStatus");
+    if(status) status.textContent="";
+    modal.classList.add("show");
+}
+
+function mudarAbaPerfil(aba){
+    const info=aba==="info";
+    qs("profilePanelInfo")?.classList.toggle("active",info);
+    qs("profilePanelFoto")?.classList.toggle("active",!info);
+    qs("profileTabInfo")?.classList.toggle("active",info);
+    qs("profileTabFoto")?.classList.toggle("active",!info);
+    if(!info){
+        perfilCrop=lerCropPerfil();
+        aplicarCropNosControles();
+        atualizarAvatarPerfil();
+        requestAnimationFrame(atualizarImagemCrop);
+    }
+}
+
+function fecharPerfil(){
+    document.getElementById("profileModal")?.classList.remove("show");
+}
+
+function salvarPerfilInfo(){
+    const info={
+        bio:(qs("profileBio")?.value||"").trim().slice(0,180),
+        pronouns:(qs("profilePronouns")?.value||"").trim().slice(0,40),
+        instagram:(qs("profileInstagram")?.value||"").trim().slice(0,120),
+        tiktok:(qs("profileTikTok")?.value||"").trim().slice(0,120),
+        youtube:(qs("profileYoutube")?.value||"").trim().slice(0,160),
+        x:(qs("profileSocialX")?.value||"").trim().slice(0,120)
+    };
+    localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify(info));
+    const status=qs("profileStatus");
+    if(status) status.textContent="Informações do perfil salvas.";
+    mostrarToast("Perfil atualizado.");
+    void sincronizarMeuPerfilOnline();
+}
+
+function limparPerfilInfo(){
+    localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify({bio:"",pronouns:"",instagram:"",tiktok:"",youtube:"",x:""}));
+    preencherInfoPerfil();
+    const status=qs("profileStatus");
+    if(status) status.textContent="Informações removidas.";
+    void sincronizarMeuPerfilOnline();
+}
+
+function removerFotoPerfil(){
+    localStorage.removeItem(CHAVE_PERFIL_FOTO);
+    perfilCrop={x:0,y:0,zoom:1};
+    localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify(perfilCrop));
+    aplicarCropNosControles();
+    atualizarAvatarPerfil();
+    const status=document.getElementById("profileStatus");
+    if(status) status.textContent="Foto padrão restaurada.";
+    void sincronizarMeuPerfilOnline();
+}
+
+async function alterarFotoPerfil(event){
+    const file=event?.target?.files?.[0];
+    if(!file) return;
+    if(!file.type.startsWith("image/")){
+        const status=document.getElementById("profileStatus");
+        if(status) status.textContent="Escolha uma imagem válida.";
+        return;
+    }
+    try{
+        const img=await createImageBitmap(file);
+        const max=1024;
+        const scale=Math.min(1,max/Math.max(img.width,img.height));
+        const canvas=document.createElement("canvas");
+        canvas.width=Math.max(1,Math.round(img.width*scale));
+        canvas.height=Math.max(1,Math.round(img.height*scale));
+        const ctx=canvas.getContext("2d",{alpha:false});
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        img.close?.();
+        const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",.86));
+        if(!blob) throw new Error("Falha ao processar imagem");
+        const reader=new FileReader();
+        reader.onload=()=>{
+            localStorage.setItem(CHAVE_PERFIL_FOTO,reader.result);
+            perfilCrop={x:0,y:0,zoom:1};
+            localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify(perfilCrop));
+            aplicarCropNosControles();
+            atualizarAvatarPerfil();
+            void sincronizarMeuPerfilOnline();
+            mudarAbaPerfil("foto");
+            const status=document.getElementById("profileStatus");
+            if(status) status.textContent="Foto carregada. Arraste e ajuste o zoom antes de salvar.";
+        };
+        reader.readAsDataURL(blob);
+    }catch(error){
+        console.error(error);
+        const status=document.getElementById("profileStatus");
+        if(status) status.textContent="Não foi possível usar essa imagem.";
+    }finally{
+        if(event?.target) event.target.value="";
+    }
+}
+
+function atualizarCropAPartirDosControles(){
+    perfilCrop.zoom=Number(qs("profileZoom")?.value||1);
+    perfilCrop.x=Number(qs("profileCropX")?.value||0);
+    perfilCrop.y=Number(qs("profileCropY")?.value||0);
+    atualizarImagemCrop();
+    atualizarAvatarPerfil();
+}
+
+function salvarPosicaoFotoPerfil(){
+    localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify(perfilCrop));
+    atualizarAvatarPerfil();
+    const status=qs("profileStatus");
+    if(status) status.textContent="Posição da foto salva.";
+    mostrarToast("Foto de perfil atualizada.");
+    void sincronizarMeuPerfilOnline();
+}
+
+function centralizarFotoPerfil(){
+    perfilCrop={x:0,y:0,zoom:1};
+    aplicarCropNosControles();
+    atualizarImagemCrop();
+    salvarPosicaoFotoPerfil();
+}
+
+function iniciarArrasteFotoPerfil(event){
+    const area=qs("profileCropArea");
+    if(!area) return;
+    perfilDrag={
+        pointerId:event.pointerId,
+        startX:event.clientX,
+        startY:event.clientY,
+        baseX:perfilCrop.x,
+        baseY:perfilCrop.y
+    };
+    area.setPointerCapture?.(event.pointerId);
+}
+
+function moverFotoPerfil(event){
+    if(!perfilDrag || event.pointerId!==perfilDrag.pointerId) return;
+    const area=qs("profileCropArea");
+    if(!area) return;
+    const escalaX=200/Math.max(1,area.clientWidth);
+    const escalaY=200/Math.max(1,area.clientHeight);
+    perfilCrop.x=Math.max(-100,Math.min(100,perfilDrag.baseX+(event.clientX-perfilDrag.startX)*escalaX));
+    perfilCrop.y=Math.max(-100,Math.min(100,perfilDrag.baseY+(event.clientY-perfilDrag.startY)*escalaY));
+    aplicarCropNosControles();
+    atualizarImagemCrop();
+    atualizarAvatarPerfil();
+}
+
+function terminarArrasteFotoPerfil(event){
+    if(perfilDrag && event?.pointerId===perfilDrag.pointerId) perfilDrag=null;
+}
+
+const profileCropArea=qs("profileCropArea");
+profileCropArea?.addEventListener("pointerdown",iniciarArrasteFotoPerfil);
+profileCropArea?.addEventListener("pointermove",moverFotoPerfil);
+profileCropArea?.addEventListener("pointerup",terminarArrasteFotoPerfil);
+profileCropArea?.addEventListener("pointercancel",terminarArrasteFotoPerfil);
+
+window.addEventListener("resize",()=>requestAnimationFrame(atualizarImagemCrop));
+
+const CHAVE_SOCIAL_VISITOR = "9B_social_visitor_v1";
+const CHAVE_SOCIAL_NOME = "9B_social_nome_v1";
+let socialVisitorId = localStorage.getItem(CHAVE_SOCIAL_VISITOR);
+if(!socialVisitorId){
+    socialVisitorId = (crypto?.randomUUID ? crypto.randomUUID() : `9b-${Date.now()}-${Math.random().toString(36).slice(2)}`);
+    localStorage.setItem(CHAVE_SOCIAL_VISITOR,socialVisitorId);
+}
+let socialPosts=[];
+let socialComments=[];
+let socialProfiles={};
+let socialStats={};
+let socialMyReactions={};
+let socialSort="recentes";
+let socialMidiaArquivo=null;
+const socialComentariosAbertos = new Set();
+
+
+function fotoPerfilParaSocial(visitorId){
+    const perfil=socialProfiles[String(visitorId)];
+    return perfil?.avatar_url || AVATAR_PADRAO_PERFIL;
+}
+
+function cropStylePerfil(perfil){
+    const x=Number(perfil?.crop_x)||0;
+    const y=Number(perfil?.crop_y)||0;
+    const zoom=Math.max(1,Math.min(3,Number(perfil?.crop_zoom)||1));
+    return `object-position:${50+x/2}% ${50+y/2}%;transform:scale(${zoom})`;
+}
+
+function normalizarLinkPerfil(valor,tipo){
+    const v=String(valor||'').trim();
+    if(!v) return '';
+    if(/^https?:\/\//i.test(v)) return v;
+    if(tipo==='instagram') return `https://instagram.com/${v.replace(/^@/,'')}`;
+    if(tipo==='tiktok') return `https://www.tiktok.com/@${v.replace(/^@/,'')}`;
+    if(tipo==='x') return `https://x.com/${v.replace(/^@/,'')}`;
+    if(tipo==='youtube') return v.includes('.') ? `https://${v}` : `https://youtube.com/@${v.replace(/^@/,'')}`;
+    return v;
+}
+
+async function sincronizarMeuPerfilOnline(){
+    if(!sb || !socialVisitorId || !identidadeAtual()) return;
+    try{
+        const info=lerInfoPerfil();
+        const crop=lerCropPerfil();
+        const foto=fotoPerfilAtual();
+        let avatar_url=null;
+        if(foto && foto!==AVATAR_PADRAO_PERFIL){
+            if(foto.startsWith('data:image/')){
+                const blob=await fetch(foto).then(r=>r.blob());
+                const {error:uploadError}=await sb.storage.from('profile-media').upload(`${socialVisitorId}/avatar.jpg`,blob,{contentType:'image/jpeg',upsert:true,cacheControl:'31536000'});
+                if(!uploadError){
+                    avatar_url=sb.storage.from('profile-media').getPublicUrl(`${socialVisitorId}/avatar.jpg`).data.publicUrl;
+                }
+            }else if(/^https?:\/\//i.test(foto)){
+                avatar_url=foto;
+            }
+        }
+        const payload={
+            visitor_id:socialVisitorId,
+            display_name:identidadeAtual().slice(0,40),
+            bio:(info.bio||'').slice(0,180),
+            pronouns:(info.pronouns||'').slice(0,40),
+            instagram:(info.instagram||'').slice(0,120),
+            tiktok:(info.tiktok||'').slice(0,120),
+            youtube:(info.youtube||'').slice(0,160),
+            x:(info.x||'').slice(0,120),
+            avatar_url,
+            crop_x:crop.x,
+            crop_y:crop.y,
+            crop_zoom:crop.zoom,
+            updated_at:new Date().toISOString()
+        };
+        const {error}=await sb.from('site_profiles').upsert(payload,{onConflict:'visitor_id'});
+        if(error) console.warn('Não foi possível sincronizar o perfil online.',error);
+        else socialProfiles[String(socialVisitorId)]=payload;
+    }catch(error){
+        console.warn('Sincronização do perfil online falhou.',error);
+    }
+}
+
+async function carregarMeuPerfilOnline(){
+    if(!sb || !socialVisitorId) return;
+    try{
+        const {data,error}=await sb.from('site_profiles').select('*').eq('visitor_id',socialVisitorId).maybeSingle();
+        if(error || !data) return;
+        socialProfiles[String(socialVisitorId)]=data;
+        if(data.avatar_url) localStorage.setItem(CHAVE_PERFIL_FOTO,data.avatar_url);
+        else localStorage.removeItem(CHAVE_PERFIL_FOTO);
+        localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify({bio:data.bio||'',pronouns:data.pronouns||'',instagram:data.instagram||'',tiktok:data.tiktok||'',youtube:data.youtube||'',x:data.x||''}));
+        localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify({x:Number(data.crop_x)||0,y:Number(data.crop_y)||0,zoom:Number(data.crop_zoom)||1}));
+        perfilCrop=lerCropPerfil();
+        atualizarAvatarPerfil();
+        preencherInfoPerfil();
+    }catch(error){
+        console.warn('Não foi possível carregar seu perfil online.',error);
+    }
+}
+
+async function abrirPerfilPublico(visitorId){
+    if(!visitorId) return;
+    const id=String(visitorId);
+    let perfil=socialProfiles[id] || null;
+    if(!perfil && sb){
+        const {data,error}=await sb.from('site_profiles').select('*').eq('visitor_id',id).maybeSingle();
+        if(!error && data){perfil=data;socialProfiles[id]=data;}
+    }
+    if(!perfil){
+        perfil={visitor_id:id,display_name:'Aluno',bio:'',pronouns:'',instagram:'',tiktok:'',youtube:'',x:'',avatar_url:null,crop_x:0,crop_y:0,crop_zoom:1};
+    }
+    const modal=qs('publicProfileModal');
+    if(!modal) return;
+    const avatar=qs('publicProfileAvatar');
+    if(avatar){avatar.src=perfil.avatar_url || AVATAR_PADRAO_PERFIL;avatar.style.cssText=cropStylePerfil(perfil);}
+    const nome=perfil.display_name || 'Aluno';
+    if(qs('publicProfileTitle')) qs('publicProfileTitle').textContent=nome;
+    if(qs('publicProfilePronouns')) qs('publicProfilePronouns').textContent=perfil.pronouns || '';
+    if(qs('publicProfileBio')) qs('publicProfileBio').textContent=perfil.bio || '';
+    const links=qs('publicProfileLinks');
+    const linkItems=[['Instagram',normalizarLinkPerfil(perfil.instagram,'instagram')],['TikTok',normalizarLinkPerfil(perfil.tiktok,'tiktok')],['YouTube',normalizarLinkPerfil(perfil.youtube,'youtube')],['X',normalizarLinkPerfil(perfil.x,'x')]].filter(([,url])=>url);
+    if(links) links.innerHTML=linkItems.map(([label,url])=>`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">${esc(label)}</a>`).join('');
+    if(qs('publicProfileEmpty')) qs('publicProfileEmpty').textContent=(!perfil.bio && !perfil.pronouns && !linkItems.length) ? 'Este perfil ainda não adicionou informações.' : '';
+    modal.classList.add('show');
+}
+
+function fecharPerfilPublico(){qs('publicProfileModal')?.classList.remove('show');}
+
+function nomeSocialAtual(){
+    return (identidadeAtual() || obterNomeInterclasse() || localStorage.getItem(CHAVE_SOCIAL_NOME) || "").trim();
+}
+
+function salvarNomeSocialLocal(){
+    const nome=nomeSocialAtual();
+    localStorage.setItem(CHAVE_SOCIAL_NOME,nome);
+    atualizarNomeSocialUI();
+}
+
+function atualizarSocialCharCount(){
+    const input=document.getElementById("socialTexto");
+    const out=document.getElementById("socialCharCount");
+    if(out) out.textContent=`${input?.value.length||0}/5000`;
+}
+
+function prepararNomeSocialInput(){
+    const input=document.getElementById("socialNome");
+    if(input) input.value=nomeSocialAtual();
+    atualizarNomeSocialUI();
+    atualizarSocialCharCount();
+}
+
+function mudarOrdemSocial(ordem,botao){
+    socialSort=ordem;
+    document.querySelectorAll(".social-tab").forEach(b=>b.classList.remove("active"));
+    if(botao) botao.classList.add("active");
+    renderizarSocialFeed();
+}
+
+function tempoRelativoSocial(data){
+    if(!data) return "agora";
+    const diff=Math.max(0,Date.now()-new Date(data).getTime());
+    const min=Math.floor(diff/60000);
+    if(min<1) return "agora";
+    if(min<60) return `há ${min} min`;
+    const h=Math.floor(min/60);
+    if(h<24) return `há ${h}h`;
+    const d=Math.floor(h/24);
+    if(d<7) return `há ${d}d`;
+    return new Date(data).toLocaleDateString("pt-BR");
+}
+
+function iniciaisSocial(nome){
+    const partes=String(nome||"9B").trim().split(/\s+/).filter(Boolean);
+    if(!partes.length) return "9B";
+    return (partes[0][0] + (partes[1]?.[0] || "")).toUpperCase();
+}
+
+function statsDoPostSocial(id){
+    return socialStats[id] || {like:0,dislike:0};
+}
+
+function comentariosDoPostSocial(id){
+    return socialComments.filter(c=>String(c.post_id)===String(id));
+}
+
+function postOriginalSocial(post){
+    if(!post?.repost_of) return null;
+    return socialPosts.find(p=>String(p.id)===String(post.repost_of)) || null;
+}
+
+function ordenarPostsSocial(posts){
+    const lista=[...posts];
+    if(socialSort==="curtidos"){
+        return lista.sort((a,b)=>{
+            const sa=statsDoPostSocial(a.id), sb=statsDoPostSocial(b.id);
+            return ((sb.like-sb.dislike)-(sa.like-sa.dislike)) || (new Date(b.created_at)-new Date(a.created_at));
+        });
+    }
+    if(socialSort==="comentados"){
+        return lista.sort((a,b)=>comentariosDoPostSocial(b.id).length-comentariosDoPostSocial(a.id).length || (new Date(b.created_at)-new Date(a.created_at)));
+    }
+    return lista.sort((a,b)=>new Date(b.created_at)-new Date(a.created_at));
+}
+
+function renderizarOriginalSocial(original){
+    if(!original){
+        return `<div class="social-repost-shell"><div class="social-repost-label">Post original indisponível</div><div class="social-repost-text">Esse conteúdo não está mais disponível.</div></div>`;
+    }
+    const media=original.media_url
+        ? `<img class="social-media" src="${esc(original.media_url)}" alt="Mídia do post original" loading="lazy">`
+        : "";
+    const nomeOriginal=original.is_anonymous ? "Anônimo" : (original.author_name || "Anônimo");
+    const perfilOriginal=original.is_anonymous ? null : socialProfiles[String(original.visitor_id)];
+    const avatarOriginal=perfilOriginal?.avatar_url || AVATAR_PADRAO_PERFIL;
+    const styleOriginal=perfilOriginal ? cropStylePerfil(perfilOriginal) : "";
+    const autor=original.is_anonymous
+        ? `<div class="social-author"><div class="social-avatar">?</div><div class="social-author-text"><strong>Anônimo</strong></div></div>`
+        : `<div class="social-author">
+            <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(original.visitor_id)}')">
+                <div class="social-avatar"><img src="${esc(avatarOriginal)}" alt="Foto de ${esc(nomeOriginal)}" style="${styleOriginal}"></div>
+            </button>
+            <div class="social-author-text"><button class="social-profile-link" onclick="abrirPerfilPublico('${esc(original.visitor_id)}')"><strong>${esc(nomeOriginal)}</strong></button></div>
+        </div>`;
+    return `<div class="social-repost-shell">
+        <div class="social-repost-label">Post republicado</div>
+        ${autor}
+        ${original.content ? `<div class="social-repost-text">${esc(original.content)}</div>` : ""}
+        ${media}
+    </div>`;
+}
+
+function renderizarSocialPost(post){
+    const autorExibido=post.is_anonymous ? "Anônimo" : (post.author_name || "Anônimo");
+    const stats=statsDoPostSocial(post.id);
+    const minhaReacao=socialMyReactions[post.id] || "";
+    const comentarios=comentariosDoPostSocial(post.id);
+    const abriu=socialComentariosAbertos.has(String(post.id));
+    const isAdmin=!!souAdmin && !!adminVisual;
+    const isOwner=post.visitor_id===socialVisitorId;
+    const perfilPost=post.is_anonymous ? null : socialProfiles[String(post.visitor_id)];
+    const avatarPost=perfilPost?.avatar_url || AVATAR_PADRAO_PERFIL;
+    const avatarPostStyle=perfilPost ? cropStylePerfil(perfilPost) : "";
+    let corpo="";
+
+    if(post.content) corpo+=`<div class="social-post-text">${esc(post.content)}</div>`;
+    if(post.media_url && (post.media_type==="image" || post.media_type==="gif")) corpo+=`<img class="social-media" src="${esc(post.media_url)}" alt="Imagem publicada por ${esc(autorExibido)}" loading="lazy">`;
+    if(post.repost_of) corpo+=renderizarOriginalSocial(postOriginalSocial(post));
+
+    const menu=(isAdmin || isOwner) ? `<div class="social-post-menu">${isOwner ? `<button class="ghost-btn small-btn social-delete-own" onclick="excluirSocialPost('${post.id}')">Excluir</button>` : ""}${isAdmin && !isOwner ? `<button class="ghost-btn small-btn" onclick="excluirSocialPost('${post.id}')">Excluir</button>` : ""}</div>` : "";
+
+    const comentariosHtml=comentarios.length ? comentarios.map(c=>{
+        const donoComentario=c.visitor_id===socialVisitorId;
+        const podeExcluir=donoComentario || isAdmin;
+        const perfilComentario=socialProfiles[String(c.visitor_id)];
+        const avatarComentario=perfilComentario?.avatar_url || AVATAR_PADRAO_PERFIL;
+        const styleComentario=perfilComentario ? cropStylePerfil(perfilComentario) : "";
+        const autorComentario=esc(c.author_name||"Aluno");
+        return `<div class="social-comment">
+            <div class="social-comment-head">
+                <div class="social-comment-author">
+                    <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(c.visitor_id)}')" aria-label="Abrir perfil de ${autorComentario}">
+                        <div class="social-comment-avatar"><img src="${esc(avatarComentario)}" alt="Foto de ${autorComentario}" style="${styleComentario}"></div>
+                    </button>
+                    <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(c.visitor_id)}')"><strong>${autorComentario}</strong></button>
+                </div>
+                <span>${tempoRelativoSocial(c.created_at)}</span>
+                ${podeExcluir ? `<button class="social-inline-delete" onclick="excluirSocialComentario('${c.id}')">Excluir</button>` : ""}
+            </div>
+            <div class="social-comment-text">${esc(c.content)}</div>
+        </div>`;
+    }).join("") : `<div style="font-size:11px;color:var(--muted);padding:10px 0">Ainda não há comentários.</div>`;
+
+    const autorHeader=post.is_anonymous
+        ? `<div class="social-author"><div class="social-avatar">?</div><div class="social-author-text"><strong>Anônimo</strong><span>${tempoRelativoSocial(post.created_at)}${post.repost_of ? " · republicação" : ""}</span></div></div>`
+        : `<div class="social-author">
+            <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(post.visitor_id)}')" aria-label="Abrir perfil de ${esc(autorExibido)}">
+                <div class="social-avatar"><img src="${esc(avatarPost)}" alt="Foto de ${esc(autorExibido)}" style="${avatarPostStyle}"></div>
+            </button>
+            <div class="social-author-text">
+                <button class="social-profile-link" onclick="abrirPerfilPublico('${esc(post.visitor_id)}')"><strong>${esc(autorExibido)}</strong></button>
+                <span>${tempoRelativoSocial(post.created_at)}${post.repost_of ? " · republicação" : ""}</span>
+            </div>
+        </div>`;
+
+    return `<article class="social-post" data-social-post="${post.id}">
+        <div class="social-post-body">
+            <div class="social-post-head">${autorHeader}${menu}</div>
+            ${corpo || `<div class="social-post-text">Post sem texto.</div>`}
+            <div class="social-post-actions">
+                <button class="social-action ${minhaReacao==="like" ? "active-like" : ""}" onclick="reagirSocial('${post.id}','like')">▲ <span class="social-count">${stats.like||0}</span></button>
+                <button class="social-action ${minhaReacao==="dislike" ? "active-dislike" : ""}" onclick="reagirSocial('${post.id}','dislike')">▼ <span class="social-count">${stats.dislike||0}</span></button>
+                <button class="social-action" onclick="alternarComentariosSocial('${post.id}')">Comentários <span class="social-count">${comentarios.length}</span></button>
+                <button class="social-action" onclick="republicarSocial('${post.id}')">↻ Republicar <span class="social-count">${socialPosts.filter(p=>String(p.repost_of)===String(post.id)).length}</span></button>
+            </div>
+        </div>
+        <div class="social-comments ${abriu ? "show" : ""}" id="socialComments-${post.id}">
+            <div class="social-comment-list">${comentariosHtml}</div>
+            <div class="social-comment-form">
+                <input type="text" maxlength="700" id="socialCommentInput-${post.id}" placeholder="Comente alguma coisa...">
+                <button class="main-btn" onclick="comentarSocial('${post.id}')">Comentar</button>
+            </div>
+        </div>
+    </article>`;
+}
+
+function renderizarSocialFeed(){
+    const box=document.getElementById("socialFeed");
+    if(!box) return;
+    prepararNomeSocialInput();
+    const posts=ordenarPostsSocial(socialPosts);
+    if(!posts.length){
+        box.innerHTML=`<div class="social-empty"><strong>Nada por aqui ainda.</strong><br>Seja a primeira pessoa a publicar alguma coisa.</div>`;
+    }else{
+        box.innerHTML=posts.map(renderizarSocialPost).join("");
+    }
+    const totalCurtidas=Object.values(socialStats).reduce((sum,s)=>sum+(s.like||0),0);
+    const totalComentarios=socialComments.length;
+    const totalReposts=socialPosts.filter(p=>p.repost_of).length;
+    const resumo=document.getElementById("socialStatsResumo");
+    if(resumo) resumo.textContent=`${socialPosts.length} publicações · ${totalComentarios} comentários · ${totalReposts} republicações · ${totalCurtidas} curtidas registradas.`;
+    renderizarAdminSocialIndicadores?.();
+}
+
+function mostrarErroSocial(mensagem){
+    const box=document.getElementById("socialFeed");
+    if(box) box.innerHTML=`<div class="social-error">${esc(mensagem)}</div>`;
+}
+
+async function carregarSocialFeed(forcar=false){
+    const box=document.getElementById("socialFeed");
+    if(!box) return;
+    prepararNomeSocialInput();
+    if(!sb){
+        mostrarErroSocial("O banco online da Comunidade ainda não foi configurado.");
+        return;
+    }
+    if(!forcar && socialPosts.length){
+        renderizarSocialFeed();
+        return;
+    }
+    box.innerHTML=`<div class="social-empty">Carregando publicações...</div>`;
+
+    const {data:posts,error:postError}=await sb.from("social_posts").select("*").order("created_at",{ascending:false}).limit(80);
+    if(postError){
+        console.error(postError);
+        mostrarErroSocial("Não foi possível carregar a Comunidade. Execute o SQL da Comunidade no Supabase e tente novamente.");
+        return;
+    }
+    socialPosts=posts||[];
+
+    const ids=[...new Set(socialPosts.map(p=>p.id).filter(Boolean))];
+    const repostIds=[...new Set(socialPosts.map(p=>p.repost_of).filter(Boolean))].filter(id=>!ids.includes(id));
+    if(repostIds.length){
+        const {data:orig,error:origError}=await sb.from("social_posts").select("*").in("id",repostIds);
+        if(!origError && orig) socialPosts=[...socialPosts,...orig];
+    }
+
+    const allIds=[...new Set(socialPosts.map(p=>p.id).filter(Boolean))];
+    if(allIds.length){
+        const {data:comments,error:commentError}=await sb.from("social_comments").select("*").in("post_id",allIds).order("created_at",{ascending:true});
+        socialComments=commentError ? [] : (comments||[]);
+
+        const profileIds=[...new Set([
+            ...socialPosts.filter(p=>!p.is_anonymous).map(p=>p.visitor_id),
+            ...socialComments.map(c=>c.visitor_id)
+        ].filter(Boolean))];
+        if(profileIds.length){
+            const {data:profiles,error:profilesError}=await sb.from("site_profiles").select("*").in("visitor_id",profileIds);
+            socialProfiles={};
+            if(!profilesError){(profiles||[]).forEach(profile=>{socialProfiles[String(profile.visitor_id)]=profile;});}
+        }else{
+            socialProfiles={};
+        }
+
+        const {data:stats,error:statsError}=await sb.from("social_post_stats").select("*").in("post_id",allIds);
+        if(!statsError){
+            socialStats={};
+            (stats||[]).forEach(row=>{socialStats[row.post_id]={like:Number(row.like_count)||0,dislike:Number(row.dislike_count)||0};});
+        }else{
+            socialStats={};
+        }
+
+        const {data:mine,error:mineError}=await sb.rpc("social_get_my_reactions",{p_visitor_id:socialVisitorId});
+        if(!mineError){
+            socialMyReactions={};
+            (mine||[]).forEach(row=>{socialMyReactions[row.post_id]=row.reaction;});
+        }else{
+            socialMyReactions={};
+        }
+    }else{
+        socialComments=[];socialStats={};socialMyReactions={};
+    }
+
+    renderizarSocialFeed();
+}
+
+function selecionarMidiaSocial(event){
+    const file=event.target.files?.[0];
+    if(!file){removerMidiaSocial();return;}
+    const tipo=file.type || "";
+    const nome=file.name.toLowerCase();
+    const ehGif=tipo==="image/gif" || nome.endsWith(".gif");
+    if(!tipo.startsWith("image/") && !ehGif){
+        mostrarToast("Escolha uma imagem ou GIF.");
+        removerMidiaSocial();
+        return;
+    }
+    const limite=ehGif ? 8*1024*1024 : 7*1024*1024;
+    if(file.size>limite){
+        mostrarToast(`A mídia é muito grande. Limite: ${ehGif ? "8" : "7"} MB.`);
+        removerMidiaSocial();
+        return;
+    }
+    socialMidiaArquivo=file;
+    const nomeEl=document.getElementById("socialFileName");
+    if(nomeEl) nomeEl.textContent=file.name;
+    const preview=document.getElementById("socialPreview");
+    const img=document.getElementById("socialPreviewImg");
+    if(preview && img){
+        img.src=URL.createObjectURL(file);
+        preview.classList.add("show");
+    }
+}
+
+function removerMidiaSocial(){
+    socialMidiaArquivo=null;
+    const input=document.getElementById("socialArquivo");
+    const preview=document.getElementById("socialPreview");
+    const img=document.getElementById("socialPreviewImg");
+    const nome=document.getElementById("socialFileName");
+    if(input) input.value="";
+    if(img){try{URL.revokeObjectURL(img.src)}catch{} img.removeAttribute("src");}
+    if(preview) preview.classList.remove("show");
+    if(nome) nome.textContent="Nenhuma mídia selecionada";
+}
+
+async function otimizarImagemSocial(file){
+    if(!file || file.type==="image/gif" || file.size<=2.5*1024*1024) return file;
+    try{
+        const img=await createImageBitmap(file);
+        const max=1600;
+        const scale=Math.min(1,max/Math.max(img.width,img.height));
+        const canvas=document.createElement("canvas");
+        canvas.width=Math.max(1,Math.round(img.width*scale));
+        canvas.height=Math.max(1,Math.round(img.height*scale));
+        const ctx=canvas.getContext("2d");
+        ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        img.close?.();
+        const blob=await new Promise(resolve=>canvas.toBlob(resolve,"image/jpeg",.82));
+        if(!blob) return file;
+        return new File([blob],`9b-social-${Date.now()}.jpg`,{type:"image/jpeg"});
+    }catch(error){
+        console.warn("Não foi possível otimizar a imagem.",error);
+        return file;
+    }
+}
+
+async function uploadMidiaSocial(file){
+    const preparada=await otimizarImagemSocial(file);
+    const ext=preparada.type==="image/gif" ? "gif" : (preparada.type.split("/")[1] || "jpg").replace("jpeg","jpg");
+    const caminho=`${socialVisitorId}/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
+    const {error}=await sb.storage.from("social-media").upload(caminho,preparada,{contentType:preparada.type || "image/jpeg",upsert:false,cacheControl:"31536000"});
+    if(error) throw error;
+    const {data}=sb.storage.from("social-media").getPublicUrl(caminho);
+    return {url:data.publicUrl,type:preparada.type==="image/gif" ? "gif" : "image"};
+}
+
+async function publicarSocialPost(){
+    if(!sb){mostrarToast("O Supabase não está configurado.");return;}
+    const nome=nomeSocialAtual();
+    const texto=(document.getElementById("socialTexto")?.value||"").trim();
+    const anonimo=!!document.getElementById("socialAnonimo")?.checked;
+    if(!nome){abrirConfirmacaoIdentidade(false);mostrarToast("Confirme seu nome antes de publicar.");return;}
+    if(!texto && !socialMidiaArquivo){mostrarToast("Escreva alguma coisa ou envie uma foto/GIF.");return;}
+    if(nome.length>40){mostrarToast("Seu nome pode ter no máximo 40 caracteres.");return;}
+
+    const btn=document.querySelector(".social-publish-btn");
+    const originalText=btn?.textContent;
+    if(btn){btn.disabled=true;btn.textContent="Publicando...";}
+
+    try{
+        let media_url=null,media_type=null;
+        if(socialMidiaArquivo){
+            const uploaded=await uploadMidiaSocial(socialMidiaArquivo);
+            media_url=uploaded.url;media_type=uploaded.type;
+        }
+        const {error}=await sb.from("social_posts").insert({
+            author_name:nome.slice(0,40),
+            visitor_id:socialVisitorId,
+            is_anonymous:anonimo,
+            content:texto.slice(0,5000) || null,
+            media_url,
+            media_type
+        });
+        if(error) throw error;
+        document.getElementById("socialTexto").value="";
+        atualizarSocialCharCount();
+        removerMidiaSocial();
+        mostrarToast("Post publicado.");
+        await carregarSocialFeed(true);
+    }catch(error){
+        console.error(error);
+        mostrarToast("Não foi possível publicar. Confira se o SQL da Comunidade foi executado.");
+    }finally{
+        if(btn){btn.disabled=false;btn.textContent=originalText||"Publicar";}
+    }
+}
+
+async function reagirSocial(postId,reaction){
+    if(!sb){mostrarToast("A Comunidade ainda não está configurada.");return;}
+    const {error}=await sb.rpc("social_react",{p_post_id:postId,p_visitor_id:socialVisitorId,p_reaction:reaction});
+    if(error){console.error(error);mostrarToast("Não foi possível registrar a reação.");return;}
+    await carregarSocialFeed(true);
+}
+
+function alternarComentariosSocial(postId){
+    const chave=String(postId);
+    if(socialComentariosAbertos.has(chave)) socialComentariosAbertos.delete(chave);
+    else socialComentariosAbertos.add(chave);
+    renderizarSocialFeed();
+    setTimeout(()=>document.getElementById(`socialCommentInput-${postId}`)?.focus(),40);
+}
+
+async function comentarSocial(postId){
+    if(!sb){mostrarToast("A Comunidade ainda não está configurada.");return;}
+    const nome=nomeSocialAtual();
+    const input=document.getElementById(`socialCommentInput-${postId}`);
+    const content=(input?.value||"").trim();
+    if(!nome){abrirConfirmacaoIdentidade(false);mostrarToast("Confirme seu nome para comentar.");return;}
+    if(!content){mostrarToast("Escreva um comentário.");return;}
+    const {error}=await sb.from("social_comments").insert({post_id:postId,author_name:nome.slice(0,40),visitor_id:socialVisitorId,content:content.slice(0,700)});
+    if(error){console.error(error);mostrarToast("Não foi possível comentar.");return;}
+    salvarNomeSocialLocal();
+    socialComentariosAbertos.add(String(postId));
+    await carregarSocialFeed(true);
+}
+
+async function republicarSocial(postId){
+    if(!sb){mostrarToast("A Comunidade ainda não está configurada.");return;}
+    const nome=nomeSocialAtual();
+    if(!nome){abrirConfirmacaoIdentidade(false);mostrarToast("Confirme seu nome antes de republicar.");return;}
+    const nota=prompt("Quer adicionar uma frase ao repost? Pode deixar em branco:","");
+    if(nota===null) return;
+    const original=socialPosts.find(p=>String(p.id)===String(postId));
+    if(!original){mostrarToast("Post original não encontrado.");return;}
+    const {error}=await sb.from("social_posts").insert({
+        author_name:nome.slice(0,40),
+        visitor_id:socialVisitorId,
+        content:nota.trim().slice(0,5000) || null,
+        media_url:null,
+        media_type:"repost",
+        repost_of:original.id
+    });
+    if(error){console.error(error);mostrarToast("Não foi possível republicar.");return;}
+    salvarNomeSocialLocal();
+    mostrarToast("Publicação republicada.");
+    await carregarSocialFeed(true);
+}
+
+async function excluirSocialPost(id){
+    if(!sb) return;
+    const post=socialPosts.find(p=>String(p.id)===String(id));
+    const souDono=post && post.visitor_id===socialVisitorId;
+    if(!souDono && !(souAdmin && adminVisual)) return;
+    if(!confirm("Excluir esta publicação da Comunidade?")) return;
+    let error=null;
+    if(souAdmin && adminVisual && !souDono){
+        error=(await sb.from("social_posts").delete().eq("id",id)).error;
+    }else{
+        error=(await sb.rpc("social_delete_post",{p_post_id:id,p_visitor_id:socialVisitorId})).error;
+    }
+    if(error){console.error(error);mostrarToast("Não foi possível excluir a publicação.");return;}
+    mostrarToast("Publicação excluída.");
+    await carregarSocialFeed(true);
+}
+
+async function excluirSocialComentario(id){
+    if(!sb) return;
+    const comentario=socialComments.find(c=>String(c.id)===String(id));
+    const souDono=comentario && comentario.visitor_id===socialVisitorId;
+    if(!souDono && !(souAdmin && adminVisual)) return;
+    if(!confirm("Excluir este comentário?")) return;
+    let error=null;
+    if(souAdmin && adminVisual && !souDono){
+        error=(await sb.from("social_comments").delete().eq("id",id)).error;
+    }else{
+        error=(await sb.rpc("social_delete_comment",{p_comment_id:id,p_visitor_id:socialVisitorId})).error;
+    }
+    if(error){console.error(error);mostrarToast("Não foi possível excluir o comentário.");return;}
+    mostrarToast("Comentário excluído.");
+    await carregarSocialFeed(true);
+}
+
+function renderizarAdminSocialIndicadores(){}
+
 /* =========================================================
    GLOBALS
    ========================================================= */
 window.mostrarPagina = mostrarPagina;
 window.alternarTema = alternarTema;
+window.abrirPerfil = abrirPerfil;
+window.fecharPerfil = fecharPerfil;
+window.abrirPerfilPublico = abrirPerfilPublico;
+window.fecharPerfilPublico = fecharPerfilPublico;
+window.sincronizarMeuPerfilOnline = sincronizarMeuPerfilOnline;
+window.alterarFotoPerfil = alterarFotoPerfil;
+window.removerFotoPerfil = removerFotoPerfil;
+window.mudarAbaPerfil = mudarAbaPerfil;
+window.salvarPerfilInfo = salvarPerfilInfo;
+window.limparPerfilInfo = limparPerfilInfo;
+window.atualizarCropAPartirDosControles = atualizarCropAPartirDosControles;
+window.salvarPosicaoFotoPerfil = salvarPosicaoFotoPerfil;
+window.centralizarFotoPerfil = centralizarFotoPerfil;
 window.abrirLoginAdmin = abrirLoginAdmin;
 window.fecharLoginAdmin = fecharLoginAdmin;
 window.modoUsuarioVisual = modoUsuarioVisual;
@@ -4449,6 +6501,32 @@ window.selecionarJogador = selecionarJogador;
 window.selecionarPosicao = selecionarPosicao;
 window.mudarFormacao = mudarFormacao;
 window.salvarBolaParada = salvarBolaParada;
+window.carregarSocialFeed = carregarSocialFeed;
+window.mudarOrdemSocial = mudarOrdemSocial;
+window.abrirConfirmacaoIdentidade = abrirConfirmacaoIdentidade;
+window.confirmarIdentidadeInicial = confirmarIdentidadeInicial;
+window.validarIdentidadeDigitada = validarIdentidadeDigitada;
+window.teclaIdentidade = teclaIdentidade;
+window.salvarNomeSocialLocal = salvarNomeSocialLocal;
+window.atualizarSocialCharCount = atualizarSocialCharCount;
+window.selecionarMidiaSocial = selecionarMidiaSocial;
+window.removerMidiaSocial = removerMidiaSocial;
+window.publicarSocialPost = publicarSocialPost;
+window.reagirSocial = reagirSocial;
+window.alternarComentariosSocial = alternarComentariosSocial;
+window.comentarSocial = comentarSocial;
+window.republicarSocial = republicarSocial;
+window.excluirSocialPost = excluirSocialPost;
+window.excluirSocialComentario = excluirSocialComentario;
+
+/* Sala de aula — controles públicos para os handlers do HTML */
+window.iniciarArrastoSala = iniciarArrastoSala;
+window.permitirDropSala = permitirDropSala;
+window.sairDropSala = sairDropSala;
+window.soltarSala = soltarSala;
+window.selecionarAlunoSala = selecionarAlunoSala;
+window.clicarCadeiraSala = clicarCadeiraSala;
+window.resetarSala = resetarSala;
 
 window.abrirWhatsApp = abrirWhatsApp;
 window.abrirGmail = abrirGmail;
@@ -4459,11 +6537,19 @@ window.salvarPowerConfig = salvarPowerConfig;
 window.carregarPowerConfig = carregarPowerConfig;
 window.carregarPowerConfigLocal = carregarPowerConfigLocal;
 window.restaurarPowerPadrao = restaurarPowerPadrao;
+window.alternarModoInformacoes = alternarModoInformacoes;
+window.aplicarPowerConfig = aplicarPowerConfig;
+window.powerPreview = powerPreview;
+
 
 /* =========================================================
    INÍCIO
    ========================================================= */
 renderizarDadosDemo();
+atualizarAvatarPerfil();
+prepararNomeSocialInput();
+if(!identidadeAtual()) abrirConfirmacaoIdentidade(false);
+else { void sincronizarMeuPerfilOnline(); }
 preencherPowerInputs(POWER_DEFAULTS);
 restaurarVisualNormal();
 iniciarThree();
@@ -4471,6 +6557,7 @@ iniciarDivineThree();
 window.powerThreeApply?.(powerConfig);
 iniciarAnimacoes();
 iniciarPowerInteractions();
+renderizarSala9B();
 restaurarSessao();
 
 if(estaDesbloqueado()){
