@@ -12,7 +12,9 @@
 
 <meta property="og:title" content="9º Ano B">
 <meta property="og:description" content="O site do 9º Ano B — agenda, interclasse, comunidade, provas e muito mais.">
-<meta property="og:image" content="https://fabiosormane.github.io/Turma_9b/capa.jpg">
+<meta property="og:image" content="https://fabiosormane.github.io/Turma_9b/capa-whatsapp.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:alt" content="Capa do 9º Ano B 2026">
 <meta property="og:image:width" content="1672">
 <meta property="og:image:height" content="941">
 <meta property="og:url" content="https://fabiosormane.github.io/Turma_9b/">
@@ -21,7 +23,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="9º Ano B">
 <meta name="twitter:description" content="O site do 9º Ano B — agenda, interclasse, comunidade, provas e muito mais.">
-<meta name="twitter:image" content="https://fabiosormane.github.io/Turma_9b/capa.jpg">
+<meta name="twitter:image" content="https://fabiosormane.github.io/Turma_9b/capa-whatsapp.jpg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -270,7 +272,7 @@ body.light .logo-card{background:rgba(255,255,255,.82);border-color:#ddd}
     list-style:none;
     margin-top:10px;
 }
-roster li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--line)}
+.roster li{break-inside:avoid;padding:7px 0;border-bottom:1px solid var(--line)}
 
 /* =========================================================
    SALA DO 9º B — MAPA DE ASSENTOS
@@ -941,10 +943,18 @@ body.admin-mode .classroom-person:hover{border-color:var(--divine-gold-soft);}
     border-radius:22px;background:var(--card);box-shadow:0 30px 90px rgba(0,0,0,.45);
 }
 .identity-kicker{color:var(--accent);font-size:10px;font-weight:900;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;}
+
+.account-v3-card{border-color:rgba(183,255,26,.18);box-shadow:0 30px 100px rgba(0,0,0,.5),0 0 45px rgba(183,255,26,.035);}
+.account-v3-label{display:block;margin:11px 0 6px;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:900;}
+.account-v3-footnote{margin-top:12px;color:var(--muted);font-size:10px;line-height:1.5;text-align:center;}
 .identity-card h3{font-family:"Space Grotesk",sans-serif;font-size:30px;letter-spacing:-.04em;}
 .identity-card p{color:var(--muted);line-height:1.6;font-size:13px;margin:8px 0 17px;}
 .identity-card input{width:100%;min-height:48px;padding:12px;border:1px solid var(--line);border-radius:11px;background:var(--bg2);color:var(--text);outline:none;}
 .identity-card input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 11%,transparent);}
+.identity-mode-switch{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 12px;}
+.identity-mode-btn{min-height:42px;border:1px solid var(--line);border-radius:11px;background:var(--bg2);color:var(--muted);font-weight:800;cursor:pointer;transition:.18s ease;}
+.identity-mode-btn.active{color:var(--text);border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 8%,transparent);}
+.identity-card input + input{margin-top:9px;}
 .identity-feedback{min-height:19px;font-size:12px;margin:8px 1px;color:var(--muted);}
 .identity-feedback.erro{color:#ff8585;}
 .identity-feedback.ok{color:var(--accent);}
@@ -1535,7 +1545,7 @@ body.admin-mode .header{
 body.admin-mode .nav button.active,
 body.admin-mode .nav button:hover{background:rgba(214,173,75,.08);border-color:rgba(214,173,75,.18);color:var(--divine-gold-pale)}
 body.admin-mode .main-btn{background:linear-gradient(180deg,#e1bd5d,#b6882e);border-color:#e1bd5d;color:#181105}
-body.admin-mode .ghost-btn,.body.admin-mode .icon-btn{border-color:rgba(214,173,75,.16);background:rgba(255,255,255,.018);color:var(--divine-gold-pale)}
+body.admin-mode .ghost-btn,body.admin-mode .icon-btn{border-color:rgba(214,173,75,.16);background:rgba(255,255,255,.018);color:var(--divine-gold-pale)}
 body.admin-mode .brand:after{content:" · ADMIN";font-family:"Cinzel",serif;font-size:8px;letter-spacing:.16em;color:var(--divine-gold-soft);vertical-align:middle;margin-left:5px}
 body.admin-mode .card,body.admin-mode .summary-card,body.admin-mode .materia-card,body.admin-mode .agenda-column,body.admin-mode .materia-detalhes,body.admin-mode .password-box,body.admin-mode .field-wrap{border-color:rgba(214,173,75,.12);box-shadow:0 22px 55px rgba(0,0,0,.28)}
 body.admin-mode .card:hover,body.admin-mode .summary-card:hover,body.admin-mode .materia-card:hover{border-color:rgba(241,217,138,.28);box-shadow:0 25px 65px rgba(0,0,0,.4),0 0 30px rgba(214,173,75,.05)}
@@ -3214,19 +3224,30 @@ button,a,input,select,textarea{
 
 
 <div class="identity-modal" id="identityModal" aria-modal="true" role="dialog">
-    <div class="identity-card">
-        <div class="identity-kicker">Primeiro acesso</div>
-        <h3>Confirme seu nome</h3>
-        <p>Seu nome será confirmado uma vez neste navegador. Depois disso, seus posts e comentários usarão automaticamente o nome confirmado, sem você precisar digitá-lo.</p>
-        <input id="identidadeNomeInput" type="text" maxlength="40" autocomplete="name" list="listaNomesTurma" placeholder="Digite seu nome" oninput="validarIdentidadeDigitada()" onkeydown="teclaIdentidade(event)">
+    <div class="identity-card account-v3-card">
+        <div class="identity-kicker">CONTA 9B · NOVO SISTEMA</div>
+        <h3 id="identityTitle">Crie seu acesso</h3>
+        <p id="identityDescription">Seu nome da turma será sua conta. Crie uma senha e use a mesma conta em qualquer dispositivo.</p>
+
+        <div class="identity-mode-switch">
+            <button type="button" class="identity-mode-btn active" id="identityModeCreate" onclick="mudarModoIdentidade('criar')">Primeiro acesso</button>
+            <button type="button" class="identity-mode-btn" id="identityModeLogin" onclick="mudarModoIdentidade('entrar')">Entrar</button>
+        </div>
+
+        <label class="account-v3-label" for="identidadeNomeInput">Nome da turma</label>
+        <input id="identidadeNomeInput" type="text" maxlength="40" autocomplete="username" list="listaNomesTurma" placeholder="Ex.: Fabio" oninput="validarIdentidadeDigitada()" onkeydown="teclaIdentidade(event)">
         <datalist id="listaNomesTurma">
             <option value="Amanda"></option><option value="Ana B."></option><option value="Arthur"></option><option value="Bruce"></option><option value="Camila"></option><option value="Cauã"></option><option value="Davi"></option><option value="Emily"></option><option value="Erick"></option><option value="Eva"></option><option value="Fabio"></option><option value="Guilherme"></option><option value="Joana"></option><option value="Julia"></option><option value="Junior"></option><option value="Kaio"></option><option value="Livia"></option><option value="Maria E."></option><option value="Maria E. A."></option><option value="Melissa"></option><option value="Nicolas"></option><option value="Paulo"></option><option value="Rodrigo"></option><option value="Sarah"></option><option value="Sofia"></option>
         </datalist>
-        <div class="identity-name-preview" id="identityPreview">Nome confirmado: <strong>—</strong></div>
-        <div class="identity-feedback" id="identityFeedback">Escolha seu nome da turma.</div>
+
+        <label class="account-v3-label" for="identidadeSenhaInput">Senha</label>
+        <input id="identidadeSenhaInput" type="password" minlength="6" maxlength="72" autocomplete="new-password" placeholder="Mínimo de 6 caracteres" oninput="validarIdentidadeDigitada()" onkeydown="teclaIdentidade(event)">
+        <div class="identity-name-preview" id="identityPreview">Conta: <strong>—</strong></div>
+        <div class="identity-feedback" id="identityFeedback">Escolha seu nome e crie uma senha.</div>
         <div class="identity-actions">
-            <button class="main-btn" id="identityConfirmBtn" onclick="confirmarIdentidadeInicial()">Confirmar meu nome</button>
+            <button class="main-btn" id="identityConfirmBtn" onclick="confirmarIdentidadeInicial()">Criar meu acesso</button>
         </div>
+        <div class="account-v3-footnote">A senha não é exibida nem salva no navegador. Cada dispositivo recebe uma sessão própria.</div>
     </div>
 </div>
 
@@ -3278,9 +3299,9 @@ button,a,input,select,textarea{
                 <button class="main-btn" onclick="salvarPerfilInfo()">Salvar perfil</button>
                 <button class="ghost-btn" onclick="limparPerfilInfo()">Limpar informações</button>
             </div>
-            <div class="profile-note">Sua conta fica vinculada a este dispositivo. Depois da primeira confirmação, você não precisa informar nome novamente.</div>
+            <div class="profile-note">Sua conta é protegida por senha. Depois de criada, você pode entrar nela em qualquer dispositivo.</div>
             <div class="profile-save-row" style="margin-top:10px">
-                <button class="ghost-btn" onclick="trocarContaDispositivo()">Trocar conta neste dispositivo</button>
+                <button class="ghost-btn" onclick="trocarContaDispositivo()">Sair da conta</button>
             </div>
         </section>
 
@@ -5879,11 +5900,53 @@ function iniciarDivineThree(){
 /* =========================================================
    COMUNIDADE 9B — FEED SOCIAL
    ========================================================= */
-const CHAVE_IDENTIDADE_SITE = "9B_identidade_site_v2";
+const CHAVE_IDENTIDADE_SITE = "9B_conta_nome_v3";
+const CHAVE_MODO_IDENTIDADE = "9B_conta_modo_v3";
+const CHAVE_SESSAO_CONTA = "9B_conta_sessao_v3";
+const CHAVE_CONTA_ID = "9B_conta_id_v3";
+localStorage.removeItem("9B_social_visitor_v1");
 let identidadeModalForcada = false;
+let modoIdentidadeAtual = localStorage.getItem(CHAVE_MODO_IDENTIDADE) === "entrar" ? "entrar" : "criar";
 
 function identidadeAtual(){
     return (localStorage.getItem(CHAVE_IDENTIDADE_SITE) || "").trim();
+}
+
+function setModoIdentidade(modo){
+    modoIdentidadeAtual = modo === "entrar" ? "entrar" : "criar";
+    localStorage.setItem(CHAVE_MODO_IDENTIDADE,modoIdentidadeAtual);
+}
+
+function mudarModoIdentidade(modo, limparNome=false){
+    setModoIdentidade(modo);
+    const title=qs("identityTitle");
+    const desc=qs("identityDescription");
+    const btn=qs("identityConfirmBtn");
+    const createBtn=qs("identityModeCreate");
+    const loginBtn=qs("identityModeLogin");
+    const senha=qs("identidadeSenhaInput");
+    const feedback=qs("identityFeedback");
+    if(createBtn) createBtn.classList.toggle("active",modoIdentidadeAtual === "criar");
+    if(loginBtn) loginBtn.classList.toggle("active",modoIdentidadeAtual === "entrar");
+    if(modoIdentidadeAtual === "entrar") {
+        if(title) title.textContent="Entre na sua conta";
+        if(desc) desc.textContent="Entre com seu nome e senha para abrir a mesma conta em qualquer dispositivo.";
+        if(btn) btn.textContent="Entrar na conta";
+        if(senha) { senha.autocomplete="current-password"; senha.placeholder="Digite sua senha"; }
+        if(feedback) feedback.textContent="Use a senha que você cadastrou nessa conta.";
+    } else {
+        if(title) title.textContent="Crie sua conta";
+        if(desc) desc.textContent="Seu nome da turma será sua conta. Crie uma senha e use a mesma conta em qualquer dispositivo.";
+        if(btn) btn.textContent="Criar meu acesso";
+        if(senha) { senha.autocomplete="new-password"; senha.placeholder="Crie uma senha com 6+ caracteres"; }
+        if(feedback) feedback.textContent="Escolha seu nome e crie uma senha.";
+    }
+    if(limparNome){
+        const input=qs("identidadeNomeInput");
+        if(input) input.value="";
+        if(senha) senha.value="";
+    }
+    validarIdentidadeDigitada();
 }
 
 function validarNomeIdentidade(valor){
@@ -5918,23 +5981,34 @@ function atualizarNomeSocialUI(){
 
 function validarIdentidadeDigitada(){
     const input=qs("identidadeNomeInput");
+    const senha=qs("identidadeSenhaInput");
     const feedback=qs("identityFeedback");
     const preview=qs("identityPreview");
     const nome=validarNomeIdentidade(input?.value||"");
-    if(preview) preview.innerHTML=`Nome confirmado: <strong>${esc(nome||"—")}</strong>`;
+    if(preview) preview.innerHTML=`Conta: <strong>${esc(nome||"—")}</strong>`;
     if(!feedback) return;
     if(!input?.value.trim()){
-        feedback.textContent="Escolha seu nome da turma.";
+        feedback.textContent = modoIdentidadeAtual === "entrar" ? "Digite o nome da conta." : "Escolha seu nome e crie uma senha.";
         feedback.className="identity-feedback";
         return;
     }
-    if(nome){
-        feedback.textContent = nome===input.value.trim() ? "Nome reconhecido." : `Vamos usar: ${nome}`;
-        feedback.className="identity-feedback ok";
-    }else{
+    if(!nome){
         feedback.textContent="Esse nome não foi reconhecido na lista da turma.";
         feedback.className="identity-feedback erro";
+        return;
     }
+    if(!senha?.value){
+        feedback.textContent = modoIdentidadeAtual === "entrar" ? "Digite sua senha." : "Crie uma senha com pelo menos 6 caracteres.";
+        feedback.className="identity-feedback";
+        return;
+    }
+    if(modoIdentidadeAtual === "criar" && senha.value.length < 6){
+        feedback.textContent="A senha precisa ter pelo menos 6 caracteres.";
+        feedback.className="identity-feedback erro";
+        return;
+    }
+    feedback.textContent = modoIdentidadeAtual === "entrar" ? "Pronto para entrar." : (nome===input.value.trim() ? "Nome reconhecido. Conta pronta para criação." : `Vamos usar: ${nome}`);
+    feedback.className="identity-feedback ok";
 }
 
 function abrirConfirmacaoIdentidade(troca=false){
@@ -5942,8 +6016,11 @@ function abrirConfirmacaoIdentidade(troca=false){
     if(!modal) return;
     identidadeModalForcada=!!troca;
     const input=qs("identidadeNomeInput");
-    if(input) input.value=troca ? identidadeAtual() : (identidadeAtual() || localStorage.getItem(CHAVE_SOCIAL_NOME) || "");
-    validarIdentidadeDigitada();
+    const senha=qs("identidadeSenhaInput");
+    setModoIdentidade(troca ? "entrar" : modoIdentidadeAtual);
+    if(input) input.value=troca ? "" : (identidadeAtual() || localStorage.getItem(CHAVE_SOCIAL_NOME) || "");
+    if(senha) senha.value="";
+    mudarModoIdentidade(modoIdentidadeAtual,false);
     modal.classList.add("show");
     setTimeout(()=>input?.focus(),80);
 }
@@ -5953,36 +6030,122 @@ function fecharConfirmacaoIdentidade(){
     if(modal && identidadeAtual()) modal.classList.remove("show");
 }
 
+async function criarContaOnline(nome, senha){
+    if(!sb) return {ok:false,reason:"sem_servidor"};
+    try{
+        const {data,error}=await sb.rpc("site_account_register_v3",{
+            p_display_name:String(nome).trim().slice(0,40),
+            p_password:String(senha)
+        });
+        if(error){
+            console.error("Falha no primeiro acesso da conta.",error);
+            return {ok:false,reason:"erro_servidor",error};
+        }
+        return data || {ok:false,reason:"resposta_invalida"};
+    }catch(error){
+        console.error(error);
+        return {ok:false,reason:"erro_rede",error};
+    }
+}
+
+async function entrarContaOnline(nome, senha){
+    if(!sb) return {ok:false,reason:"sem_servidor"};
+    try{
+        const {data,error}=await sb.rpc("site_account_login_v3",{
+            p_display_name:String(nome).trim().slice(0,40),
+            p_password:String(senha)
+        });
+        if(error){
+            console.error("Falha ao entrar na conta.",error);
+            return {ok:false,reason:"erro_servidor",error};
+        }
+        return data || {ok:false,reason:"resposta_invalida"};
+    }catch(error){
+        console.error(error);
+        return {ok:false,reason:"erro_rede",error};
+    }
+}
+
+async function validarSessaoContaOnline(){
+    const nome=identidadeAtual();
+    const token=localStorage.getItem(CHAVE_SESSAO_CONTA)||"";
+    const accountId=localStorage.getItem(CHAVE_CONTA_ID)||socialVisitorId||"";
+    if(!sb || !nome || !token || !accountId) return {ok:false,reason:"sessao_invalida"};
+    try{
+        const {data,error}=await sb.rpc("site_account_session_v3",{
+            p_account_id:String(accountId),
+            p_display_name:String(nome).trim().slice(0,40),
+            p_session_token:token
+        });
+        if(error){
+            console.error("Falha ao validar a sessão.",error);
+            return {ok:false,reason:"erro_servidor",error};
+        }
+        return data || {ok:false,reason:"sessao_invalida"};
+    }catch(error){
+        console.error(error);
+        return {ok:false,reason:"erro_rede",error};
+    }
+}
+
 async function confirmarIdentidadeInicial(){
     const input=qs("identidadeNomeInput");
+    const senhaInput=qs("identidadeSenhaInput");
     const feedback=qs("identityFeedback");
     const nome=validarNomeIdentidade(input?.value||"");
+    const senha=String(senhaInput?.value||"");
     if(!nome){
-        feedback?.classList.add("erro");
-        if(feedback) feedback.textContent="Confirme um nome válido da lista da turma.";
+        if(feedback) {feedback.textContent="Escolha um nome válido da lista da turma.";feedback.className="identity-feedback erro";}
+        return;
+    }
+    if(senha.length<6){
+        if(feedback) {feedback.textContent="A senha precisa ter pelo menos 6 caracteres.";feedback.className="identity-feedback erro";}
+        return;
+    }
+    if(!sb){
+        if(feedback) {feedback.textContent="O sistema de contas precisa estar conectado ao Supabase.";feedback.className="identity-feedback erro";}
         return;
     }
 
-    if(sb){
-        if(feedback){feedback.textContent="Verificando disponibilidade do nome...";feedback.className="identity-feedback";}
-        const reserva=await reivindicarNomeContaOnline(nome);
-        if(!reserva.ok){
-            if(feedback){
-                feedback.textContent = reserva.reason === "nome_em_uso"
-                    ? "Esse nome já está vinculado a outra conta."
-                    : "Não foi possível verificar esse nome agora.";
-                feedback.className="identity-feedback erro";
-            }
-            return;
+    if(feedback){feedback.textContent=modoIdentidadeAtual === "entrar" ? "Entrando..." : "Criando acesso...";feedback.className="identity-feedback";}
+
+    const resultado = modoIdentidadeAtual === "entrar"
+        ? await entrarContaOnline(nome,senha)
+        : await criarContaOnline(nome,senha);
+
+    if(!resultado.ok){
+        const mensagens={
+            nome_em_uso:"Esse nome já possui acesso. Use 'Entrar'.",
+            conta_ja_existe:"Esse nome já possui acesso. Use 'Entrar'.",
+            senha_incorreta:"Senha incorreta.",
+            senha_nao_cadastrada:"Essa conta ainda não possui senha.",
+            nome_invalido:"Esse nome não pertence à lista da turma.",
+            senha_curta:"A senha precisa ter pelo menos 6 caracteres.",
+            senha_longa:"A senha pode ter no máximo 72 caracteres.",
+            sessao_invalida:"Sua sessão terminou. Entre novamente.",
+            erro_servidor:`O Supabase recusou a operação${resultado.error?.message ? ": " + resultado.error.message : "."}`,
+            erro_interno:`Erro do banco: ${resultado.message || "verifique o SQL novo."}`,
+            erro_rede:"Não foi possível conectar ao servidor.",
+            sem_servidor:"O sistema de contas não está conectado ao Supabase."
+        };
+        if(feedback){
+            feedback.textContent=mensagens[resultado.reason] || (resultado.message ? `Erro: ${resultado.message}` : (resultado.error?.message ? `Erro: ${resultado.error.message}` : `Erro: ${resultado.reason || "desconhecido"}`));
+            feedback.className="identity-feedback erro";
         }
+        return;
     }
 
-    localStorage.setItem(CHAVE_IDENTIDADE_SITE,nome);
-    localStorage.setItem(CHAVE_SOCIAL_NOME,nome);
+    socialVisitorId=String(resultado.visitor_id||resultado.account_id||"");
+    if(socialVisitorId) localStorage.setItem(CHAVE_SOCIAL_VISITOR,socialVisitorId);
+    if(resultado.visitor_id || resultado.account_id) localStorage.setItem(CHAVE_CONTA_ID,String(resultado.visitor_id||resultado.account_id));
+    if(resultado.session_token) localStorage.setItem(CHAVE_SESSAO_CONTA,String(resultado.session_token));
+    localStorage.setItem(CHAVE_IDENTIDADE_SITE,resultado.display_name || nome);
+    localStorage.setItem(CHAVE_SOCIAL_NOME,resultado.display_name || nome);
     atualizarNomeSocialUI();
     fecharConfirmacaoIdentidade();
-    mostrarToast(`Identidade confirmada como ${nome}.`);
-    void sincronizarMeuPerfilOnline();
+    mostrarToast(`Conta ${resultado.display_name || nome} conectada.`);
+    await carregarMeuPerfilOnline();
+    await sincronizarMeuPerfilOnline();
 }
 
 function teclaIdentidade(event){
@@ -6114,9 +6277,10 @@ function salvarPerfilInfo(){
         instagram:(qs("profileInstagram")?.value||"").trim().slice(0,120),
         tiktok:(qs("profileTikTok")?.value||"").trim().slice(0,120),
         youtube:(qs("profileYoutube")?.value||"").trim().slice(0,160),
-        x:(qs("profileSocialX")?.value||"").trim().slice(0,120)
+        x:(qs("profileX")?.value||"").trim().slice(0,120)
     };
     localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify(info));
+    localStorage.setItem(CHAVE_PERFIL_DIRTY,"1");
     const status=qs("profileStatus");
     if(status) status.textContent="Informações do perfil salvas.";
     mostrarToast("Perfil atualizado.");
@@ -6125,6 +6289,7 @@ function salvarPerfilInfo(){
 
 function limparPerfilInfo(){
     localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify({bio:"",pronouns:"",instagram:"",tiktok:"",youtube:"",x:""}));
+    localStorage.setItem(CHAVE_PERFIL_DIRTY,"1");
     preencherInfoPerfil();
     const status=qs("profileStatus");
     if(status) status.textContent="Informações removidas.";
@@ -6133,6 +6298,7 @@ function limparPerfilInfo(){
 
 function removerFotoPerfil(){
     localStorage.removeItem(CHAVE_PERFIL_FOTO);
+    localStorage.setItem(CHAVE_PERFIL_DIRTY,"1");
     perfilCrop={x:0,y:0,zoom:1};
     localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify(perfilCrop));
     aplicarCropNosControles();
@@ -6165,6 +6331,7 @@ async function alterarFotoPerfil(event){
         const reader=new FileReader();
         reader.onload=()=>{
             localStorage.setItem(CHAVE_PERFIL_FOTO,reader.result);
+            localStorage.setItem(CHAVE_PERFIL_DIRTY,"1");
             perfilCrop={x:0,y:0,zoom:1};
             localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify(perfilCrop));
             aplicarCropNosControles();
@@ -6194,6 +6361,7 @@ function atualizarCropAPartirDosControles(){
 
 function salvarPosicaoFotoPerfil(){
     localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify(perfilCrop));
+    localStorage.setItem(CHAVE_PERFIL_DIRTY,"1");
     atualizarAvatarPerfil();
     const status=qs("profileStatus");
     if(status) status.textContent="Posição da foto salva.";
@@ -6246,57 +6414,43 @@ profileCropArea?.addEventListener("pointercancel",terminarArrasteFotoPerfil);
 
 window.addEventListener("resize",()=>requestAnimationFrame(atualizarImagemCrop));
 
-const CHAVE_SOCIAL_VISITOR = "9B_social_visitor_v1";
-const CHAVE_SOCIAL_NOME = "9B_social_nome_v1";
-let socialVisitorId = localStorage.getItem(CHAVE_SOCIAL_VISITOR);
-if(!socialVisitorId){
-    socialVisitorId = (crypto?.randomUUID ? crypto.randomUUID() : `9b-${Date.now()}-${Math.random().toString(36).slice(2)}`);
-    localStorage.setItem(CHAVE_SOCIAL_VISITOR,socialVisitorId);
-}
+const CHAVE_SOCIAL_VISITOR = "9B_conta_id_v3";
+const CHAVE_SOCIAL_NOME = "9B_conta_nome_social_v3";
+const CHAVE_PERFIL_DIRTY = "9B_perfil_dirty_v2";
+let socialVisitorId = localStorage.getItem(CHAVE_CONTA_ID) || null;
 let socialPosts=[];
 let socialComments=[];
 let socialProfiles={};
 
 async function reivindicarNomeContaOnline(nome){
-    const nomeLimpo=String(nome||'').trim();
-    if(!nomeLimpo || !socialVisitorId) return {ok:false,reason:'nome_invalido'};
-    if(!sb) return {ok:true,offline:true};
-    try{
-        const {data,error}=await sb.rpc('site_claim_name',{p_visitor_id:socialVisitorId,p_display_name:nomeLimpo.slice(0,40)});
-        if(error){
-            console.error('Falha ao reservar o nome da conta.',error);
-            return {ok:false,reason:'erro_servidor',error};
-        }
-        return data || {ok:false,reason:'resposta_invalida'};
-    }catch(error){
-        console.error(error);
-        return {ok:false,reason:'erro_rede',error};
-    }
+    return validarSessaoContaOnline();
 }
 
 async function garantirContaDispositivoOnline(){
-    const nome=identidadeAtual();
-    if(!nome) return {ok:false,reason:'sem_nome'};
-    return reivindicarNomeContaOnline(nome);
+    return validarSessaoContaOnline();
 }
 
 async function trocarContaDispositivo(){
-    if(!confirm('Trocar a conta deste dispositivo? A conta atual continuará existindo e o nome dela continuará reservado.')) return;
-
+    if(!confirm('Sair desta conta neste dispositivo? Seus dados continuam salvos e você poderá entrar novamente com nome e senha.')) return;
+    const token=localStorage.getItem(CHAVE_SESSAO_CONTA)||"";
+    if(sb && token){
+        try{ await sb.rpc("site_account_logout_v3",{p_session_token:token}); }catch(error){ console.warn(error); }
+    }
     localStorage.removeItem(CHAVE_IDENTIDADE_SITE);
     localStorage.removeItem(CHAVE_SOCIAL_NOME);
     localStorage.removeItem(CHAVE_PERFIL_FOTO);
     localStorage.removeItem(CHAVE_PERFIL_INFO);
     localStorage.removeItem(CHAVE_PERFIL_CROP);
-
-    socialVisitorId = (crypto?.randomUUID ? crypto.randomUUID() : `9b-${Date.now()}-${Math.random().toString(36).slice(2)}`);
-    localStorage.setItem(CHAVE_SOCIAL_VISITOR,socialVisitorId);
+    localStorage.removeItem(CHAVE_SESSAO_CONTA);
+    localStorage.removeItem(CHAVE_CONTA_ID);
+    localStorage.removeItem("9B_social_visitor_v1");
+    socialVisitorId=null;
     socialProfiles={};
-
+    setModoIdentidade('entrar');
     fecharPerfil();
     atualizarAvatarPerfil();
     prepararNomeSocialInput();
-    abrirConfirmacaoIdentidade(false);
+    abrirConfirmacaoIdentidade(true);
 }
 
 let socialStats={};
@@ -6329,14 +6483,19 @@ function normalizarLinkPerfil(valor,tipo){
     return v;
 }
 
-async function sincronizarMeuPerfilOnline(){
-    if(!sb || !socialVisitorId || !identidadeAtual()) return;
+function perfilTemDadosLocal(){
+    const info=lerInfoPerfil();
+    const foto=fotoPerfilAtual();
+    return !!(info.bio || info.pronouns || info.instagram || info.tiktok || info.youtube || info.x || (foto && foto!==AVATAR_PADRAO_PERFIL));
+}
+
+async function sincronizarMeuPerfilOnline({forcar=false}={}){
+    if(!sb || !socialVisitorId || !identidadeAtual()) return false;
     try{
-        const reserva=await reivindicarNomeContaOnline(identidadeAtual());
-        if(!reserva.ok){
-            console.warn('A conta deste dispositivo não possui mais o nome reservado.',reserva);
-            return;
-        }
+        const reserva=await validarSessaoContaOnline();
+        if(!reserva.ok) return false;
+        const dirty=localStorage.getItem(CHAVE_PERFIL_DIRTY)==='1';
+        if(!forcar && !dirty && !perfilTemDadosLocal()) return false;
         const info=lerInfoPerfil();
         const crop=lerCropPerfil();
         const foto=fotoPerfilAtual();
@@ -6345,60 +6504,62 @@ async function sincronizarMeuPerfilOnline(){
             if(foto.startsWith('data:image/')){
                 const blob=await fetch(foto).then(r=>r.blob());
                 const {error:uploadError}=await sb.storage.from('profile-media').upload(`${socialVisitorId}/avatar.jpg`,blob,{contentType:'image/jpeg',upsert:true,cacheControl:'31536000'});
-                if(!uploadError){
-                    avatar_url=sb.storage.from('profile-media').getPublicUrl(`${socialVisitorId}/avatar.jpg`).data.publicUrl;
-                }
+                if(!uploadError) avatar_url=sb.storage.from('profile-media').getPublicUrl(`${socialVisitorId}/avatar.jpg`).data.publicUrl+`?v=${Date.now()}`;
             }else if(/^https?:\/\//i.test(foto)){
                 avatar_url=foto;
             }
         }
-        const payload={
-            visitor_id:socialVisitorId,
-            display_name:identidadeAtual().slice(0,40),
-            bio:(info.bio||'').slice(0,180),
-            pronouns:(info.pronouns||'').slice(0,40),
-            instagram:(info.instagram||'').slice(0,120),
-            tiktok:(info.tiktok||'').slice(0,120),
-            youtube:(info.youtube||'').slice(0,160),
-            x:(info.x||'').slice(0,120),
-            avatar_url,
-            crop_x:crop.x,
-            crop_y:crop.y,
-            crop_zoom:crop.zoom,
-            updated_at:new Date().toISOString()
-        };
-        const {error}=await sb.from('site_profiles').upsert(payload,{onConflict:'visitor_id'});
-        if(error) console.warn('Não foi possível sincronizar o perfil online.',error);
-        else socialProfiles[String(socialVisitorId)]=payload;
-    }catch(error){
-        console.warn('Sincronização do perfil online falhou.',error);
-    }
+        const payload={visitor_id:socialVisitorId,display_name:identidadeAtual().slice(0,40),bio:(info.bio||'').slice(0,180),pronouns:(info.pronouns||'').slice(0,40),instagram:(info.instagram||'').slice(0,120),tiktok:(info.tiktok||'').slice(0,120),youtube:(info.youtube||'').slice(0,160),x:(info.x||'').slice(0,120),avatar_url,crop_x:crop.x,crop_y:crop.y,crop_zoom:crop.zoom};
+        const {data:syncData,error}=await sb.rpc('site_sync_profile',{
+            p_visitor_id: payload.visitor_id,
+            p_display_name: payload.display_name,
+            p_bio: payload.bio,
+            p_pronouns: payload.pronouns,
+            p_instagram: payload.instagram,
+            p_tiktok: payload.tiktok,
+            p_youtube: payload.youtube,
+            p_x: payload.x,
+            p_avatar_url: payload.avatar_url,
+            p_crop_x: payload.crop_x,
+            p_crop_y: payload.crop_y,
+            p_crop_zoom: payload.crop_zoom
+        });
+        if(error){ console.warn('Não foi possível sincronizar o perfil online.',error); return false; }
+        socialProfiles[String(socialVisitorId)]=syncData?.profile || payload;
+        localStorage.removeItem(CHAVE_PERFIL_DIRTY);
+        return true;
+    }catch(error){ console.warn('Sincronização do perfil online falhou.',error); return false; }
 }
 
 async function carregarMeuPerfilOnline(){
-    if(!sb || !socialVisitorId) return;
+    if(!sb || !socialVisitorId) return false;
     try{
-        const {data,error}=await sb.from('site_profiles').select('*').eq('visitor_id',socialVisitorId).maybeSingle();
-        if(error || !data) return;
+        const {data,error}=await sb.rpc('site_get_public_profile',{p_visitor_id:String(socialVisitorId)});
+        if(error || !data) return false;
         socialProfiles[String(socialVisitorId)]=data;
-        if(data.avatar_url) localStorage.setItem(CHAVE_PERFIL_FOTO,data.avatar_url);
-        else localStorage.removeItem(CHAVE_PERFIL_FOTO);
-        localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify({bio:data.bio||'',pronouns:data.pronouns||'',instagram:data.instagram||'',tiktok:data.tiktok||'',youtube:data.youtube||'',x:data.x||''}));
-        localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify({x:Number(data.crop_x)||0,y:Number(data.crop_y)||0,zoom:Number(data.crop_zoom)||1}));
-        perfilCrop=lerCropPerfil();
-        atualizarAvatarPerfil();
-        preencherInfoPerfil();
-    }catch(error){
-        console.warn('Não foi possível carregar seu perfil online.',error);
-    }
+        const temDadosOnline=!!(data.bio || data.pronouns || data.instagram || data.tiktok || data.youtube || data.x || data.avatar_url);
+        if(temDadosOnline){
+            if(data.avatar_url) localStorage.setItem(CHAVE_PERFIL_FOTO,data.avatar_url);
+            else localStorage.removeItem(CHAVE_PERFIL_FOTO);
+            localStorage.setItem(CHAVE_PERFIL_INFO,JSON.stringify({bio:data.bio||'',pronouns:data.pronouns||'',instagram:data.instagram||'',tiktok:data.tiktok||'',youtube:data.youtube||'',x:data.x||''}));
+            localStorage.setItem(CHAVE_PERFIL_CROP,JSON.stringify({x:Number(data.crop_x)||0,y:Number(data.crop_y)||0,zoom:Number(data.crop_zoom)||1}));
+            localStorage.removeItem(CHAVE_PERFIL_DIRTY);
+            perfilCrop=lerCropPerfil();
+            atualizarAvatarPerfil();
+            preencherInfoPerfil();
+        }else if(perfilTemDadosLocal()){
+            await sincronizarMeuPerfilOnline({forcar:true});
+        }
+        return true;
+    }catch(error){ console.warn('Não foi possível carregar seu perfil online.',error); return false; }
 }
 
 async function abrirPerfilPublico(visitorId){
     if(!visitorId) return;
     const id=String(visitorId);
     let perfil=socialProfiles[id] || null;
-    if(!perfil && sb){
-        const {data,error}=await sb.from('site_profiles').select('*').eq('visitor_id',id).maybeSingle();
+    if(sb){
+        const {data,error}=await sb.rpc('site_get_public_profile',{p_visitor_id:id});
         if(!error && data){perfil=data;socialProfiles[id]=data;}
     }
     if(!perfil){
@@ -6663,7 +6824,7 @@ async function carregarSocialFeed(forcar=false){
             ...socialComments.map(c=>c.visitor_id)
         ].filter(Boolean))];
         if(profileIds.length){
-            const {data:profiles,error:profilesError}=await sb.from("site_profiles").select("*").in("visitor_id",profileIds);
+            const {data:profiles,error:profilesError}=await sb.rpc('site_get_public_profiles',{p_visitor_ids:profileIds});
             socialProfiles={};
             if(!profilesError){(profiles||[]).forEach(profile=>{socialProfiles[String(profile.visitor_id)]=profile;});}
         }else{
@@ -6893,114 +7054,132 @@ function renderizarAdminSocialIndicadores(){}
 
 async function validarContaInicialNoServidor(){
     const nome=identidadeAtual();
-    if(!nome || !sb) return true;
-    const resultado=await garantirContaDispositivoOnline();
-    if(resultado.ok) return true;
+    const token=localStorage.getItem(CHAVE_SESSAO_CONTA)||"";
+    const accountId=localStorage.getItem(CHAVE_CONTA_ID)||"";
 
-    // O nome pode ter sido reservado por outra pessoa após perda/alteração do dispositivo.
+    if(!sb){
+        abrirConfirmacaoIdentidade(!nome);
+        return false;
+    }
+
+    if(!nome || !token || !accountId){
+        setModoIdentidade('entrar');
+        abrirConfirmacaoIdentidade(true);
+        return false;
+    }
+
+    socialVisitorId=accountId;
+    const resultado=await validarSessaoContaOnline();
+    if(resultado.ok){
+        await carregarMeuPerfilOnline();
+        return true;
+    }
+
     localStorage.removeItem(CHAVE_IDENTIDADE_SITE);
     localStorage.removeItem(CHAVE_SOCIAL_NOME);
-    mostrarToast('Este dispositivo precisa confirmar uma conta novamente.');
-    abrirConfirmacaoIdentidade(false);
+    localStorage.removeItem(CHAVE_SESSAO_CONTA);
+    localStorage.removeItem(CHAVE_CONTA_ID);
+    socialVisitorId=null;
+    setModoIdentidade('entrar');
+    mostrarToast('Sessão encerrada. Entre novamente com nome e senha.');
+    abrirConfirmacaoIdentidade(true);
     return false;
 }
 
+
 /* =========================================================
-   GLOBALS
+   COMPATIBILIDADE DOS EVENTOS INLINE
+   Este arquivo usa <script type="module">. Funções de módulos
+   não ficam automaticamente em window; os botões inline do HTML
+   precisam destes exports globais.
    ========================================================= */
-window.mostrarPagina = mostrarPagina;
-window.alternarTema = alternarTema;
-window.abrirPerfil = abrirPerfil;
-window.fecharPerfil = fecharPerfil;
-window.trocarContaDispositivo = trocarContaDispositivo;
-window.abrirPerfilPublico = abrirPerfilPublico;
-window.fecharPerfilPublico = fecharPerfilPublico;
-window.sincronizarMeuPerfilOnline = sincronizarMeuPerfilOnline;
-window.alterarFotoPerfil = alterarFotoPerfil;
-window.removerFotoPerfil = removerFotoPerfil;
-window.mudarAbaPerfil = mudarAbaPerfil;
-window.salvarPerfilInfo = salvarPerfilInfo;
-window.limparPerfilInfo = limparPerfilInfo;
-window.atualizarCropAPartirDosControles = atualizarCropAPartirDosControles;
-window.salvarPosicaoFotoPerfil = salvarPosicaoFotoPerfil;
-window.centralizarFotoPerfil = centralizarFotoPerfil;
-window.abrirLoginAdmin = abrirLoginAdmin;
-window.fecharLoginAdmin = fecharLoginAdmin;
-window.modoUsuarioVisual = modoUsuarioVisual;
-window.entrarModoAdminVisual = entrarModoAdminVisual;
-window.entrarAdmin = entrarAdmin;
-window.sairAdmin = sairAdmin;
-
-window.abrirMateria = abrirMateria;
-window.fecharMateria = fecharMateria;
-window.salvarMateria = salvarMateria;
-window.editarMateria = editarMateria;
-window.excluirMateria = excluirMateria;
-window.cancelarEdicaoMateria = cancelarEdicaoMateria;
-
-window.salvarEventoAgenda = salvarEventoAgenda;
-window.editarEventoAgenda = editarEventoAgenda;
-window.excluirEventoAgenda = excluirEventoAgenda;
-window.cancelarEdicaoAgenda = cancelarEdicaoAgenda;
-
-window.pedirSenha = pedirSenha;
-window.buscarNomeInterclasseDigitado = buscarNomeInterclasseDigitado;
-window.selecionarSugestaoNomeInterclasse = selecionarSugestaoNomeInterclasse;
-window.teclaNomeInterclasse = teclaNomeInterclasse;
-window.bloquearInterclasse = bloquearInterclasse;
-window.trocarNomeInterclasse = trocarNomeInterclasse;
-window.sincronizarInterclasseManual = sincronizarInterclasseManual;
-window.alternarTimeInterclasse = alternarTimeInterclasse;
-window.adicionarAluno = adicionarAluno;
-window.removerAluno = removerAluno;
-window.buscarAlunoDigitado = buscarAlunoDigitado;
-window.selecionarSugestaoAluno = selecionarSugestaoAluno;
-window.teclaBuscaAluno = teclaBuscaAluno;
-window.iniciarArraste = iniciarArraste;
-window.iniciarToqueJogador = iniciarToqueJogador;
-window.iniciarToquePosicao = iniciarToquePosicao;
-window.permitirDrop = permitirDrop;
-window.soltarNoCampo = soltarNoCampo;
-window.selecionarJogador = selecionarJogador;
-window.selecionarPosicao = selecionarPosicao;
-window.mudarFormacao = mudarFormacao;
-window.salvarBolaParada = salvarBolaParada;
-window.carregarSocialFeed = carregarSocialFeed;
-window.mudarOrdemSocial = mudarOrdemSocial;
-window.abrirConfirmacaoIdentidade = abrirConfirmacaoIdentidade;
-window.confirmarIdentidadeInicial = confirmarIdentidadeInicial;
-window.validarIdentidadeDigitada = validarIdentidadeDigitada;
-window.teclaIdentidade = teclaIdentidade;
-window.salvarNomeSocialLocal = salvarNomeSocialLocal;
-window.atualizarSocialCharCount = atualizarSocialCharCount;
-window.selecionarMidiaSocial = selecionarMidiaSocial;
-window.removerMidiaSocial = removerMidiaSocial;
-window.publicarSocialPost = publicarSocialPost;
-window.reagirSocial = reagirSocial;
-window.alternarComentariosSocial = alternarComentariosSocial;
-window.comentarSocial = comentarSocial;
-window.republicarSocial = republicarSocial;
-window.excluirSocialPost = excluirSocialPost;
-window.excluirSocialComentario = excluirSocialComentario;
-
-/* Sala de aula — controles públicos para os handlers do HTML */
-window.iniciarArrastoSala = iniciarArrastoSala;
-window.permitirDropSala = permitirDropSala;
-window.sairDropSala = sairDropSala;
-window.soltarSala = soltarSala;
-window.selecionarAlunoSala = selecionarAlunoSala;
-window.clicarCadeiraSala = clicarCadeiraSala;
-window.resetarSala = resetarSala;
-
-window.abrirWhatsApp = abrirWhatsApp;
-window.abrirGmail = abrirGmail;
 window.abrirDivineAba = abrirDivineAba;
+window.abrirGmail = abrirGmail;
+window.abrirLoginAdmin = abrirLoginAdmin;
+window.abrirMateria = abrirMateria;
+window.abrirPerfil = abrirPerfil;
+window.abrirPerfilPublico = abrirPerfilPublico;
+window.abrirWhatsApp = abrirWhatsApp;
+window.adicionarAluno = adicionarAluno;
+window.alterarFotoPerfil = alterarFotoPerfil;
+window.alternarComentariosSocial = alternarComentariosSocial;
+window.alternarModoInformacoes = alternarModoInformacoes;
+window.alternarTema = alternarTema;
+window.alternarTimeInterclasse = alternarTimeInterclasse;
+window.aplicarPowerConfig = aplicarPowerConfig;
 window.aplicarPresetDivino = aplicarPresetDivino;
-window.sincronizarEscalaTitulo = sincronizarEscalaTitulo;
-window.salvarPowerConfig = salvarPowerConfig;
+window.atualizarCropAPartirDosControles = atualizarCropAPartirDosControles;
+window.atualizarSocialCharCount = atualizarSocialCharCount;
+window.bloquearInterclasse = bloquearInterclasse;
+window.buscarAlunoDigitado = buscarAlunoDigitado;
+window.buscarNomeInterclasseDigitado = buscarNomeInterclasseDigitado;
+window.cancelarEdicaoAgenda = cancelarEdicaoAgenda;
+window.cancelarEdicaoMateria = cancelarEdicaoMateria;
 window.carregarPowerConfig = carregarPowerConfig;
 window.carregarPowerConfigLocal = carregarPowerConfigLocal;
+window.carregarSocialFeed = carregarSocialFeed;
+window.centralizarFotoPerfil = centralizarFotoPerfil;
+window.clicarCadeiraSala = clicarCadeiraSala;
+window.comentarSocial = comentarSocial;
+window.confirmarIdentidadeInicial = confirmarIdentidadeInicial;
+window.editarEventoAgenda = editarEventoAgenda;
+window.editarMateria = editarMateria;
+window.entrarAdmin = entrarAdmin;
+window.esc = esc;
+window.excluirEventoAgenda = excluirEventoAgenda;
+window.excluirMateria = excluirMateria;
+window.excluirSocialComentario = excluirSocialComentario;
+window.excluirSocialPost = excluirSocialPost;
+window.fecharLoginAdmin = fecharLoginAdmin;
+window.fecharMateria = fecharMateria;
+window.fecharPerfil = fecharPerfil;
+window.fecharPerfilPublico = fecharPerfilPublico;
+window.iniciarArraste = iniciarArraste;
+window.iniciarArrastoSala = iniciarArrastoSala;
+window.iniciarToqueJogador = iniciarToqueJogador;
+window.iniciarToquePosicao = iniciarToquePosicao;
+window.limparPerfilInfo = limparPerfilInfo;
+window.modoUsuarioVisual = modoUsuarioVisual;
+window.mostrarPagina = mostrarPagina;
+window.mudarAbaPerfil = mudarAbaPerfil;
+window.mudarFormacao = mudarFormacao;
+window.mudarModoIdentidade = mudarModoIdentidade;
+window.mudarOrdemSocial = mudarOrdemSocial;
+window.pedirSenha = pedirSenha;
+window.permitirDrop = permitirDrop;
+window.permitirDropSala = permitirDropSala;
+window.powerPreview = powerPreview;
+window.publicarSocialPost = publicarSocialPost;
+window.reagirSocial = reagirSocial;
+window.removerAluno = removerAluno;
+window.removerFotoPerfil = removerFotoPerfil;
+window.removerMidiaSocial = removerMidiaSocial;
+window.republicarSocial = republicarSocial;
+window.resetarSala = resetarSala;
 window.restaurarPowerPadrao = restaurarPowerPadrao;
+window.sairAdmin = sairAdmin;
+window.salvarBolaParada = salvarBolaParada;
+window.salvarEventoAgenda = salvarEventoAgenda;
+window.salvarMateria = salvarMateria;
+window.salvarPerfilInfo = salvarPerfilInfo;
+window.salvarPosicaoFotoPerfil = salvarPosicaoFotoPerfil;
+window.salvarPowerConfig = salvarPowerConfig;
+window.selecionarAlunoSala = selecionarAlunoSala;
+window.selecionarJogador = selecionarJogador;
+window.selecionarMidiaSocial = selecionarMidiaSocial;
+window.selecionarPosicao = selecionarPosicao;
+window.selecionarSugestaoAluno = selecionarSugestaoAluno;
+window.selecionarSugestaoNomeInterclasse = selecionarSugestaoNomeInterclasse;
+window.sincronizarEscalaTitulo = sincronizarEscalaTitulo;
+window.sincronizarInterclasseManual = sincronizarInterclasseManual;
+window.soltarNoCampo = soltarNoCampo;
+window.soltarSala = soltarSala;
+window.teclaBuscaAluno = teclaBuscaAluno;
+window.teclaIdentidade = teclaIdentidade;
+window.teclaNomeInterclasse = teclaNomeInterclasse;
+window.trocarContaDispositivo = trocarContaDispositivo;
+window.trocarNomeInterclasse = trocarNomeInterclasse;
+window.validarIdentidadeDigitada = validarIdentidadeDigitada;
 
 /* =========================================================
    INÍCIO
@@ -7009,8 +7188,10 @@ renderizarDadosDemo();
 atualizarAvatarPerfil();
 prepararNomeSocialInput();
 aplicarNomeAdminVisualGlobal();
-if(!identidadeAtual()) abrirConfirmacaoIdentidade(false);
-else {
+if(!identidadeAtual() || !localStorage.getItem(CHAVE_SESSAO_CONTA) || !localStorage.getItem(CHAVE_CONTA_ID)){
+    setModoIdentidade('criar');
+    abrirConfirmacaoIdentidade(false);
+}else {
     void validarContaInicialNoServidor();
 }
 preencherPowerInputs(POWER_DEFAULTS);
